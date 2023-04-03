@@ -8,3 +8,6 @@ Este grupo está conformado por:
 6. Rodolfo Seguel  
 7. Hernán Cornejo
 8. ICGM Cristián Cárdenas
+9. Tomás Manriquez
+10. Sebastián Paredes
+11. Matías Martinez
