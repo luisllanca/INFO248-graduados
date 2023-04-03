@@ -10,4 +10,8 @@ Este grupo está conformado por:
 8. ICGM Cristián Cárdenas
 9. Tomás Manriquez
 10. Sebastián Paredes
-11. Matías Martinez
+11. Matías Martinez  
+  
+  
+  
+## [Link de primera versión de la arquitectura](https://docs.google.com/document/d/1ofz-5r6KL__B43xaDMccg2fA5wPkNCBAw3nR-aEFGr0/edit?usp=sharing)
