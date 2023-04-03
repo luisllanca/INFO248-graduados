@@ -15,3 +15,4 @@ Este grupo está conformado por:
   
   
 ## [Link de primera versión de la arquitectura](https://docs.google.com/document/d/1ofz-5r6KL__B43xaDMccg2fA5wPkNCBAw3nR-aEFGr0/edit?usp=sharing)
+## [Discord del proyecto de graduados](https://discord.gg/GAxNfxkA)
