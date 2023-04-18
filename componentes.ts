@@ -24,6 +24,12 @@ class Estudiante extends Usuario{
     subirComprobante(): void{
 
     }
+    visualizarComprobante(): void{
+
+    }
+    eliminarComprobante(): void{
+
+    }
 }
   
 class Comprobante {
@@ -40,12 +46,7 @@ class Comprobante {
     editarMonto(monto: number): void{
 
     }
-    visualizarComprobante(): void{
 
-    }
-    eliminarComprobante(): void{
-
-    }
 }
 
 class Becas{    
