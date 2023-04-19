@@ -1,0 +1,65 @@
+@startuml
+
+class Sistema{
+  +registrarse(): Boolean
+  +loguearse(): Boolean
+  +desloguearse(): void
+}
+class Usuario {
+  -user: string
+  -email: string
+  -password: string
+  +cambiarDatosPersonales(): Boolean
+  +visualizarPerfilPersonal(): void
+  
+}
+
+class Estudiante {
+  -nombre: string
+  -rut: string
+  -comprobantes: Comprobante[]
+  -becas: Beca[]
+  +verListaComprobantes(): Comprobante[]
+  +subirComprobante(): void
+  +especificarMonto(monto: double): Boolean
+  +editarMonto(monto: double): Boolean
+  +visualizarComprobante(id: int): Comprobante
+  +eliminarComprobante(): Boolean
+}
+
+class Comprobante {
+  -id: int
+  -fecha: date
+  -monto: double
+  -image: image
+}
+
+class Gestion {
+  +verMatriculasEstudiantes(): void
+  +revisarComprobantesEstudiantes(): void
+  +verDatosEstudiantes(): void
+  +verDatosEstudiante(): void
+  +filtrarEstudiantes(): void
+  +revisarHistorialPagos(Estudiante: estudiante): void
+  +eliminarBecaEstudiante(Estudinate: estudiante): Boolean
+  +asignarBeca(Estudiante: estudiante): Boolean
+  +eliminarBeca(Estudiante: estudiante): Boolean
+  +verBecasAsignadas(Estudiante: estudiante): void
+}
+
+
+class Beca {
+  -tipo: string
+  -monto: double
+  -fechaAsignacion: date
+  -fechaExpiracion: date
+}
+Sistema *-- Usuario
+Beca --- Gestion
+Usuario <|-- Estudiante
+Usuario <|-- Gestion
+Estudiante *-- Comprobante
+Estudiante *-- Beca
+Gestion --- Estudiante
+
+@enduml
