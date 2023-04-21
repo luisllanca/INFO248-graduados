@@ -7,52 +7,69 @@ actor Estudiante
 actor Gestion
 
 rectangle {
-    usecase registrarse
-    usecase subirComprobante
-    /' usecase "Registrarse" as registrarse
-    usecase "Loguearse" as loguearse
-    usecase "Desloguearse" as desloguearse
-    usecase "Cambiar Datos Personales" as cambiarDatosPersonales
-    usecase "Visualizar Perfil" as visualizarPerfil
-    usecase "Subir Comprobante" as subirComprobante
     usecase "Especificar Monto" as especificarMonto
     usecase "Editar Monto" as editarMonto
     usecase "Visualizar Comprobante" as visualizarComprobante
-    usecase "Eliminar Comprobante" as eliminarComprobante
+}
+
+rectangle {
     usecase "Asignar Beca" as asignarBeca
     usecase "Eliminar Beca" as eliminarBeca
     usecase "Ver Beca Asignada" as verBecaAsignada
+}
+
+rectangle {
+    usecase "Subir Comprobante" as subirComprobante
+    usecase "Eliminar Comprobante" as eliminarComprobante
+}
+
+rectangle {
     usecase "Ver Matriculas Estudiantes" as verMatriculasEstudiantes
-    usecase "Revisar Comprobantes Estudiantes" as revisarComprobantesEstudiantes
+    usecase "Revisar Comprobantes de un Estudiante" as revisarComprobantesEstudiantes
     usecase "Ver Datos Estudiantes" as verDatosEstudiantes
     usecase "Asignar Beca Estudiante" as asignarBecaEstudiante
     usecase "Filtrar Estudiantes" as filtrarEstudiantes
     usecase "Revisar Historial Pagos" as revisarHistorialPagos
-    usecase "Eliminar Beca Estudiante" as eliminarBecaEstudiante '/
-
+    usecase "Eliminar Beca Estudiante" as eliminarBecaEstudiante
 }
 
+rectangle {
+    usecase "Cambiar Datos Personales" as cambiarDatosPersonales
+    usecase "Visualizar Perfil" as visualizarPerfil
+    usecase "Registrarse" as registrarse
+    usecase "Loguearse" as loguearse
+    usecase "Desloguearse" as desloguearse
+}
+
+
+
 Usuario --> registrarse
-Usuario --> subirComprobante
-/' Usuario --> registrarse
 Usuario --> loguearse
 Usuario --> desloguearse
-Estudiante --> cambiarDatosPersonales
-Estudiante --> visualizarPerfil
+Usuario --> visualizarPerfil
+Usuario --> cambiarDatosPersonales
+
 Estudiante --> subirComprobante
+Estudiante --> eliminarComprobante
+
 Comprobante --> especificarMonto
 Comprobante --> editarMonto
 Comprobante --> visualizarComprobante
-Comprobante --> eliminarComprobante
+
 Becas --> asignarBeca
 Becas --> eliminarBeca
 Becas --> verBecaAsignada
+
 Gestion --> verMatriculasEstudiantes
 Gestion --> revisarComprobantesEstudiantes
 Gestion --> verDatosEstudiantes
 Gestion --> asignarBecaEstudiante
 Gestion --> filtrarEstudiantes
 Gestion --> revisarHistorialPagos
-Gestion --> eliminarBecaEstudiante '/
+Gestion --> eliminarBecaEstudiante
+
+Gestion --> Usuario
+Estudiante --> Usuario
+
 
 @enduml
