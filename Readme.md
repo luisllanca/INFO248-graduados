@@ -1,7 +1,7 @@
 ## Intrucciones ejecución
 
 1. Instalar modulos con `npm install`
-2. Copiar y pegarel archivo .template.env, y luego renombrar a `.env`
+2. Copiar y pegarel archivo template.env, y luego renombrar a `.env`
 3. Para Correr el proyecto escribir `npm run dev`
 -- Funcionalidad filtar estudiante (retorna la informacion del estudiante)
 4. ir a la ruta http://localhost:8080/gestion/estudiantes/1
