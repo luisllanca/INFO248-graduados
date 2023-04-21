@@ -3,7 +3,8 @@ export const data = [
     id: 1,
     nombre: "user1",
     email: "user1@test.com",
-    rut: "12345",
+    password: "12345",
+    rut: "20202214-1",
     carrera: "Ing civil informatica",
     comprobante: [
       {
@@ -46,7 +47,8 @@ export const data = [
     id: 2,
     nombre: "user2",
     email: "user2@test.com",
-    rut: "12345",
+    password: "12345",
+    rut: "20202214-1",
     carrera: "Ing civil informatica",
     comprobante: [
       {
@@ -83,7 +85,8 @@ export const data = [
     id: 3,
     nombre: "user3",
     email: "user3@test.com",
-    rut: "12345",
+    password: "12345",
+    rut: "20202214-1",
     carrera: "Ing civil informatica",
     comprobante: [
       {
@@ -120,7 +123,8 @@ export const data = [
     id: 4,
     nombre: "user4",
     email: "user4@test.com",
-    rut: "12345",
+    password: "12345",
+    rut: "20202214-1",
     carrera: "Ing civil informatica",
     comprobante: [
       {
@@ -157,7 +161,8 @@ export const data = [
     id: 5,
     nombre: "user5",
     email: "user5@test.com",
-    rut: "12345",
+    password: "12345",
+    rut: "20202214-1",
     carrera: "Ing civil informatica",
     comprobante: [
       {
@@ -194,7 +199,8 @@ export const data = [
     id: 6,
     nombre: "user6",
     email: "user6@test.com",
-    rut: "12345",
+    password: "12345",
+    rut: "20202214-1",
     carrera: "Ing civil informatica",
     comprobante: [
       {
@@ -231,7 +237,8 @@ export const data = [
     id: 7,
     nombre: "user7",
     email: "user7@test.com",
-    rut: "12345",
+    password: "12345",
+    rut: "20202214-1",
     carrera: "Ing civil informatica",
     comprobante: [
       {
@@ -268,7 +275,8 @@ export const data = [
     id: 8,
     nombre: "user8",
     email: "user8@test.com",
-    rut: "12345",
+    password: "12345",
+    rut: "20202214-1",
     carrera: "Ing civil informatica",
     comprobante: [
       {
@@ -305,7 +313,8 @@ export const data = [
     id: 9,
     nombre: "user9",
     email: "user9@test.com",
-    rut: "12345",
+    password: "12345",
+    rut: "20202214-1",
     carrera: "Ing civil informatica",
     comprobante: [
       {
@@ -342,7 +351,8 @@ export const data = [
     id: 10,
     nombre: "user10",
     email: "user10@test.com",
-    rut: "12345",
+    password: "12345",
+    rut: "20202214-1",
     carrera: "Ing civil informatica",
     comprobante: [
       {
@@ -379,7 +389,8 @@ export const data = [
     id: 11,
     nombre: "user11",
     email: "user11@test.com",
-    rut: "12345",
+    password: "12345",
+    rut: "20202214-1",
     carrera: "Ing civil informatica",
     comprobante: [
       {

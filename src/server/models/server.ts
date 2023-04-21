@@ -14,18 +14,23 @@ class Server {
     this.app = express();
     this.port = process.env.PORT || "9000";
     this.estudiantes = this.createEstudiante();
-    this.gestion = new Gestion(this.estudiantes);
+    this.gestion = new Gestion(
+      "gestion@em.cl",
+      "123soygestion",
+      this.estudiantes
+    );
     this.middlewares();
     this.routes();
   }
 
-  createEstudiante() {
-    const est = [];
+  createEstudiante(): Array<Estudiante> {
+    const est: Array<Estudiante> = [];
     for (let i = 0; i < data.length; i++) {
       const estudiante1 = new Estudiante(
         data[i].id,
         data[i].nombre,
         data[i].email,
+        data[i].password,
         data[i].rut,
         data[i].carrera,
         data[i].comprobante,

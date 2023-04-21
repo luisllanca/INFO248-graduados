@@ -1,25 +1,31 @@
 import { Comprobante } from "./Comprobante";
 import { Beca } from "./Beca";
-export class Estudiante {
+import { Usuario } from "./Usuario";
+export class Estudiante extends Usuario {
   id: number;
   nombre: string;
   email: string;
+  password: string;
   rut: string;
   carrera: string;
   comprobantes: Comprobante[];
   becas: Beca[];
+
   constructor(
     id: number,
     nombre: string,
     email: string,
+    password: string,
     rut: string,
     carrera: string,
     comprobantes: Comprobante[],
     becas: Beca[]
   ) {
+    super(email, password);
     this.id = id;
     this.nombre = nombre;
     this.email = email;
+    this.password = password;
     this.rut = rut;
     this.carrera = carrera;
     this.comprobantes = comprobantes;
@@ -48,5 +54,14 @@ export class Estudiante {
   }
   verComprobantes() {
     return console.log("Mostrando comprobantes");
+  }
+  registrarse() {
+    super.registrarse();
+  }
+  logearse() {
+    super.logearse();
+  }
+  desloguearse() {
+    super.desloguearse();
   }
 }
