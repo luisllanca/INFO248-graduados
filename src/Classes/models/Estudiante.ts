@@ -34,7 +34,8 @@ export class Estudiante extends Usuario {
   visualizarPerfilPersonal() {
     return console.log("Mostrando datos");
   }
-  cambiarDatosPersonales() {
+  cambiarDatosPersonales(password: string) {
+    this.password = password;
     return console.log("Datos actualizados correctamente");
   }
   subirComprobante() {
