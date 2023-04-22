@@ -10,18 +10,21 @@ export const data = [
       {
         id: 1,
         fecha: "2020-01-01",
+        tipo: "matricula",
         monto: "100000",
         img: "src/a/imagen.png",
       },
       {
         id: 2,
         fecha: "2020-01-02",
+        tipo: "arancel",
         monto: "150000",
         img: "src/a/imagen.png",
       },
       {
         id: 3,
         fecha: "2020-01-03",
+        tipo: "arancel",
         monto: "250000",
         img: "src/a/imagen.png",
       },
@@ -54,12 +57,14 @@ export const data = [
       {
         id: 1,
         fecha: "2020-01-01",
+        tipo: "matricula",
         monto: "130000",
         img: "src/a/imagen.png",
       },
       {
         id: 2,
         fecha: "2020-01-04",
+        tipo: "arancel",
         monto: "160000",
         img: "src/a/imagen.png",
       },
@@ -92,12 +97,14 @@ export const data = [
       {
         id: 1,
         fecha: "2020-01-10",
+        tipo: "matricula",
         monto: "140000",
         img: "src/a/imagen.png",
       },
       {
         id: 2,
         fecha: "2020-01-11",
+        tipo: "arancel",
         monto: "150000",
         img: "src/a/imagen.png",
       },
@@ -130,12 +137,14 @@ export const data = [
       {
         id: 1,
         fecha: "2020-01-12",
+        tipo: "matricula",
         monto: "120000",
         img: "src/a/imagen.png",
       },
       {
         id: 2,
         fecha: "2020-01-13",
+        tipo: "arancel",
         monto: "180000",
         img: "src/a/imagen.png",
       },
@@ -168,12 +177,14 @@ export const data = [
       {
         id: 1,
         fecha: "2020-01-01",
+        tipo: "matricula",
         monto: "100000",
         img: "src/a/imagen.png",
       },
       {
         id: 2,
         fecha: "2020-01-03",
+        tipo: "arancel",
         monto: "150000",
         img: "src/a/imagen.png",
       },
@@ -206,12 +217,14 @@ export const data = [
       {
         id: 1,
         fecha: "2020-01-03",
+        tipo: "matricula",
         monto: "100000",
         img: "src/a/imagen.png",
       },
       {
         id: 2,
         fecha: "2020-01-05",
+        tipo: "arancel",
         monto: "130000",
         img: "src/a/imagen.png",
       },
@@ -244,12 +257,14 @@ export const data = [
       {
         id: 1,
         fecha: "2020-01-12",
+        tipo: "matricula",
         monto: "100000",
         img: "src/a/imagen.png",
       },
       {
         id: 2,
         fecha: "2020-01-13",
+        tipo: "arancel",
         monto: "130000",
         img: "src/a/imagen.png",
       },
@@ -282,12 +297,14 @@ export const data = [
       {
         id: 1,
         fecha: "2020-01-12",
+        tipo: "matricula",
         monto: "100000",
         img: "src/a/imagen.png",
       },
       {
         id: 2,
         fecha: "2020-01-13",
+        tipo: "arancel",
         monto: "130000",
         img: "src/a/imagen.png",
       },
@@ -320,12 +337,14 @@ export const data = [
       {
         id: 1,
         fecha: "2020-01-12",
+        tipo: "matricula",
         monto: "100000",
         img: "src/a/imagen.png",
       },
       {
         id: 2,
         fecha: "2020-01-13",
+        tipo: "arancel",
         monto: "130000",
         img: "src/a/imagen.png",
       },
@@ -358,12 +377,14 @@ export const data = [
       {
         id: 1,
         fecha: "2020-01-12",
+        tipo: "matricula",
         monto: "100000",
         img: "src/a/imagen.png",
       },
       {
         id: 2,
         fecha: "2020-01-13",
+        tipo: "arancel",
         monto: "130000",
         img: "src/a/imagen.png",
       },
@@ -396,12 +417,14 @@ export const data = [
       {
         id: 1,
         fecha: "2020-01-12",
+        tipo: "matricula",
         monto: "100000",
         img: "src/a/imagen.png",
       },
       {
         id: 2,
         fecha: "2020-01-13",
+        tipo: "arancel",
         monto: "130000",
         img: "src/a/imagen.png",
       },

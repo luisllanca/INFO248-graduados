@@ -58,7 +58,7 @@ class Server {
       (req: Request, res: Response) => {
         const { id } = req.params;
         res.json({
-          Comprobantes: this.gestion.revisarComprobantesEstudiantes(+id),
+          Comprobantes: this.gestion.revisarComprobantesEstudiante(+id),
         });
       }
     );

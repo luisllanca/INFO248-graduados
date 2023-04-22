@@ -9,7 +9,7 @@ export class Usuario {
     return console.log("Registro exitoso");
   }
   logearse() {
-    return console.log("Inicio de sesion conn exito");
+    return console.log("Inicio de sesion con exito");
   }
   desloguearse() {
     return console.log("Sesion cerrada");
