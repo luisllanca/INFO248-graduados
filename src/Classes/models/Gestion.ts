@@ -1,16 +1,12 @@
 import { Estudiante } from "./Estudiante";
 import { Usuario } from "./Usuario";
-
 export class Gestion extends Usuario {
   email: string;
   password: string;
   estudiantes: Estudiante[];
 
-  constructor(email: string, 
-    password: string, 
-    estudiante: Estudiante[]
-    ) {
-    super(email,password);
+  constructor(email: string, password: string, estudiante: Estudiante[]) {
+    super(email, password);
     this.email = email;
     this.password = password;
     this.estudiantes = estudiante;
@@ -24,13 +20,17 @@ export class Gestion extends Usuario {
   desloguearse() {
     super.desloguearse();
   }
-  crearEstudiante(id: number,
+  crearEstudiante(
+    id: number,
     nombre: string,
     email: string,
     password: string,
     rut: string,
-    carrera: string) {
-    this.estudiantes.push(new Estudiante(id,nombre,email,password,rut,carrera,[],[]));
+    carrera: string
+  ) {
+    this.estudiantes.push(
+      new Estudiante(id, nombre, email, password, rut, carrera, [], [])
+    );
     return console.log("Estudiante creado");
   }
   verMatriculasEstudiantes(id: number) {
@@ -38,9 +38,9 @@ export class Gestion extends Usuario {
     const estudiant = this.estudiantes?.find(
       (estudiante) => estudiante.id === id
     );
-    if(estudiant && estudiant.becas) {
+    if (estudiant && estudiant.becas) {
       for (let i = 0; i < estudiant.becas.length; i++) {
-        if(estudiant.becas[i].tipo == "matricula"){
+        if (estudiant.becas[i].tipo == "matricula") {
           matriculas.push(estudiant.becas[i].fechaAsi);
         }
       }
@@ -61,7 +61,7 @@ export class Gestion extends Usuario {
     const estudiant = this.estudiantes?.filter(
       (estudiante) => estudiante.id === id
     );
-    if(estudiant){
+    if (estudiant) {
       return console.log("Asignando beca a estudiante");
     }
     return null;
@@ -76,14 +76,16 @@ export class Gestion extends Usuario {
     return null;
   }
   revisarHistorialPagos(id: number) {
-    const pagos: Array<String> = [];
+    const pagos: Array<Array<String>> = [];
     const estudiant = this.estudiantes?.find(
       (estudiante) => estudiante.id === id
     );
-    console.log(estudiant);
     if (estudiant && estudiant.comprobantes) {
       for (let i = 0; i < estudiant.comprobantes.length; i++) {
-        pagos.push(estudiant.comprobantes[i].fecha);
+        let fechasP: Array<String> = [];
+        fechasP.push(estudiant.comprobantes[i].tipo);
+        fechasP.push(estudiant.comprobantes[i].fecha);
+        pagos.push(fechasP);
       }
       return pagos;
     }
@@ -95,7 +97,7 @@ export class Gestion extends Usuario {
     );
     if (estudiant && estudiant.becas) {
       const bec = estudiant.becas?.filter((beca) => beca.id === idBeca);
-      if(bec){
+      if (bec) {
         return console.log("Beca eliminada con exito");
       }
     }
