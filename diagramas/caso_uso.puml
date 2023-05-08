@@ -7,20 +7,10 @@ actor Estudiante
 actor Gestion
 
 rectangle {
-    usecase "Especificar Monto" as especificarMonto
-    usecase "Editar Monto" as editarMonto
-    usecase "Visualizar Comprobante" as visualizarComprobante
-}
-
-rectangle {
-    usecase "Asignar Beca" as asignarBeca
-    usecase "Eliminar Beca" as eliminarBeca
-    usecase "Ver Beca Asignada" as verBecaAsignada
-}
-
-rectangle {
     usecase "Subir Comprobante" as subirComprobante
     usecase "Eliminar Comprobante" as eliminarComprobante
+    usecase "Ver Beca Asignada" as verBecaAsignada
+    usecase "Visualizar Comprobante" as visualizarComprobante
 }
 
 rectangle {
@@ -37,8 +27,8 @@ rectangle {
     usecase "Cambiar Datos Personales" as cambiarDatosPersonales
     usecase "Visualizar Perfil" as visualizarPerfil
     usecase "Registrarse" as registrarse
-    usecase "Loguearse" as loguearse
-    usecase "Desloguearse" as desloguearse
+    usecase "Login" as loguearse
+    usecase "Logout" as desloguearse
 }
 
 
@@ -47,29 +37,22 @@ Usuario --> registrarse
 Usuario --> loguearse
 Usuario --> desloguearse
 Usuario --> visualizarPerfil
-Usuario --> cambiarDatosPersonales
+visualizarPerfil ..> cambiarDatosPersonales
 
 Estudiante --> subirComprobante
 Estudiante --> eliminarComprobante
+Estudiante --> visualizarComprobante
 
-Comprobante --> especificarMonto
-Comprobante --> editarMonto
-Comprobante --> visualizarComprobante
-
-Becas --> asignarBeca
-Becas --> eliminarBeca
-Becas --> verBecaAsignada
-
+Estudiante --> verBecaAsignada
 Gestion --> verMatriculasEstudiantes
-Gestion --> revisarComprobantesEstudiantes
+revisarHistorialPagos ..> revisarComprobantesEstudiantes
 Gestion --> verDatosEstudiantes
 Gestion --> asignarBecaEstudiante
 Gestion --> filtrarEstudiantes
 Gestion --> revisarHistorialPagos
 Gestion --> eliminarBecaEstudiante
 
-Gestion --> Usuario
-Estudiante --> Usuario
-
+Estudiante --|> Usuario
+Gestion --|> Usuario
 
 @enduml
