@@ -1,10 +1,8 @@
 @startuml
 
-class Sistema{
-  +registrarse(): Boolean
-  +loguearse(): Boolean
-  +desloguearse(): void
-}
+' +registrarse(): Boolean
+  ' +loguearse(): Boolean
+  ' +desloguearse(): void
 class Usuario {
   -user: string
   -email: string
@@ -15,6 +13,7 @@ class Usuario {
 }
 
 class Estudiante {
+  -id: number
   -nombre: string
   -rut: string
   -comprobantes: Comprobante[]
@@ -23,15 +22,22 @@ class Estudiante {
   +subirComprobante(): void
   +especificarMonto(monto: double): Boolean
   +editarMonto(monto: double): Boolean
-  +visualizarComprobante(id: int): Comprobante
+  +visualizarComprobante(id: number): Comprobante
   +eliminarComprobante(): Boolean
 }
 
 class Comprobante {
-  -id: int
-  -fecha: date
-  -monto: double
-  -image: image
+  -id: number
+  -fecha: string
+  -monto: number
+  -img: string
+
+  +getFecha(): string
+  +setFecha(string: fecha): void
+  +getMonto(): number
+  +setMonto(number: monto): void
+  +getImg(): string
+  +setImg(string: img): void
 }
 
 class Gestion {
@@ -40,26 +46,35 @@ class Gestion {
   +verDatosEstudiantes(): void
   +verDatosEstudiante(): void
   +filtrarEstudiantes(): void
-  +revisarHistorialPagos(Estudiante: estudiante): void
-  +eliminarBecaEstudiante(Estudinate: estudiante): Boolean
-  +asignarBeca(Estudiante: estudiante): Boolean
-  +eliminarBeca(Estudiante: estudiante): Boolean
-  +verBecasAsignadas(Estudiante: estudiante): void
+  +revisarHistorialPagos(estudiante: Estudiante): void
+  +eliminarBecaEstudiante(estudinate: Estudiante): Boolean
+  +asignarBeca(estudiante: Estudiante): Boolean
+  +eliminarBeca(estudiante: Estudiante): Boolean
+  +verBecasAsignadas(estudiante: Estudiante): void
 }
 
 
 class Beca {
+  -id: number
   -tipo: string
-  -monto: double
-  -fechaAsignacion: date
-  -fechaExpiracion: date
+  -monto: number
+  -fechaAsi: string
+  -fechaExp: string
+
+  +getTipo(): string
+  +setTipo(string: tipo): void
+  +getMonto(): number
+  +setMonto(number: monto): void
+  +getFechaAsi(): string
+  +setFechaAsi(string: fechaAsi): void
+  +getfechaExp(): string
+  +setFechaExp(string: fechaExp): void
 }
-Sistema *-- Usuario
-Beca --- Gestion
+
 Usuario <|-- Estudiante
 Usuario <|-- Gestion
-Estudiante *-- Comprobante
-Estudiante *-- Beca
+Estudiante "1" *-- "N" Comprobante
+Estudiante "1" *-- "N" Beca
 Gestion --- Estudiante
 
 @enduml
