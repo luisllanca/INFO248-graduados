@@ -1,15 +1,23 @@
 @startuml
 
-' +registrarse(): Boolean
-  ' +loguearse(): Boolean
-  ' +desloguearse(): void
+
+class Autenticacion {
+  +verificarDatos(): Boolean
+  +registrarse(): Boolean
+  +loguearse(): Boolean
+  +desloguearse(): void
+}
+
+class Alertas {
+  +enviarAlerta(): void
+}
+
 class Usuario {
   -user: string
   -email: string
   -password: string
   +cambiarDatosPersonales(): Boolean
   +visualizarPerfilPersonal(): void
-  
 }
 
 class Estudiante {
@@ -71,10 +79,12 @@ class Beca {
   +setFechaExp(string: fechaExp): void
 }
 
+Autenticacion "N" --- "1" Usuario
+Alertas "N" --- "1" Usuario
 Usuario <|-- Estudiante
 Usuario <|-- Gestion
 Estudiante "1" *-- "N" Comprobante
 Estudiante "1" *-- "N" Beca
-Gestion --- Estudiante
+Gestion "N" --- "N" Estudiante
 
 @enduml
