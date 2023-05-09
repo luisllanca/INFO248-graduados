@@ -5,13 +5,12 @@ export class Usuario {
     this.email = email;
     this.password = password;
   }
-  registrarse() {
-    return console.log("Registro exitoso");
+
+  visualizarPerfilPersonal() {
+    return console.log("Mostrando datos");
   }
-  logearse() {
-    return console.log("Inicio de sesion con exito");
-  }
-  desloguearse() {
-    return console.log("Sesion cerrada");
+  cambiarDatosPersonales(password: string) {
+    this.password = password;
+    return console.log("Datos actualizados correctamente");
   }
 }

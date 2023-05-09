@@ -32,11 +32,10 @@ export class Estudiante extends Usuario {
     this.becas = becas;
   }
   visualizarPerfilPersonal() {
-    return console.log("Mostrando datos");
+    super.visualizarPerfilPersonal();
   }
   cambiarDatosPersonales(password: string) {
-    this.password = password;
-    return console.log("Datos actualizados correctamente");
+    super.cambiarDatosPersonales(password);
   }
   subirComprobante() {
     return console.log("Conmprobante subido correctamente");
@@ -55,14 +54,5 @@ export class Estudiante extends Usuario {
   }
   verComprobantes() {
     return console.log("Mostrando comprobantes");
-  }
-  registrarse() {
-    super.registrarse();
-  }
-  logearse() {
-    super.logearse();
-  }
-  desloguearse() {
-    super.desloguearse();
   }
 }

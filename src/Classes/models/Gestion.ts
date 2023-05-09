@@ -11,14 +11,11 @@ export class Gestion extends Usuario {
     this.password = password;
     this.estudiantes = estudiante;
   }
-  registrarse() {
-    super.registrarse();
+  visualizarPerfilPersonal() {
+    super.visualizarPerfilPersonal();
   }
-  logearse() {
-    super.logearse();
-  }
-  desloguearse() {
-    super.desloguearse();
+  cambiarDatosPersonales(password: string) {
+    super.cambiarDatosPersonales(password);
   }
   crearEstudiante(
     id: number,
