@@ -1,7 +1,7 @@
 import express, { Application } from "express";
 import cors from "cors";
-import rutas from "../../routes/GestionRoutes";
-
+import rutasGestion from "../../routes/GestionRoutes";
+import rutasUsuario from "../../routes/UsuarioRoutes";
 class Server {
   private app: Application;
   private port: string;
@@ -19,7 +19,8 @@ class Server {
   }
 
   routes() {
-    this.app.use("/gestion", rutas);
+    this.app.use("/gestion", rutasGestion);
+    this.app.use("/user", rutasUsuario);
   }
 
   listen() {

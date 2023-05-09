@@ -3,25 +3,28 @@ import { Gestion } from "../Classes/models/Gestion";
 import { inicializarData } from "../seed/inicializarData";
 
 const gestion = new Gestion("gesiton@mail.com", "123456", inicializarData());
-const rutas = Router();
+const rutasGestion = Router();
 
-rutas.get("/estudiantes/:id", (req: Request, res: Response) => {
+rutasGestion.get("/estudiantes/:id", (req: Request, res: Response) => {
   const { id } = req.params;
   res.json({
     Estudiantes: gestion.filtrarEstudiantes(+id),
   });
 });
-rutas.get("/estudiantes/:id/comprobantes", (req: Request, res: Response) => {
-  const { id } = req.params;
-  res.json({
-    Comprobantes: gestion.revisarComprobantesEstudiante(+id),
-  });
-});
-rutas.get("/estudiantes/:id/pagos", (req: Request, res: Response) => {
+rutasGestion.get(
+  "/estudiantes/:id/comprobantes",
+  (req: Request, res: Response) => {
+    const { id } = req.params;
+    res.json({
+      Comprobantes: gestion.revisarComprobantesEstudiante(+id),
+    });
+  }
+);
+rutasGestion.get("/estudiantes/:id/pagos", (req: Request, res: Response) => {
   const { id } = req.params;
   res.json({
     Pagos: gestion.revisarHistorialPagos(+id),
   });
 });
 
-export default rutas;
+export default rutasGestion;

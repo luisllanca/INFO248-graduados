@@ -15,6 +15,7 @@ export class Gestion extends Usuario {
     super.visualizarPerfilPersonal();
   }
   cambiarDatosPersonales(password: string) {
+    console.log(password);
     super.cambiarDatosPersonales(password);
   }
   crearEstudiante(
@@ -98,7 +99,6 @@ export class Gestion extends Usuario {
         return console.log("Beca eliminada con exito");
       }
     }
-
     return null;
   }
 }

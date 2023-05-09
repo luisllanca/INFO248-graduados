@@ -5,12 +5,11 @@ export class Usuario {
     this.email = email;
     this.password = password;
   }
-
   visualizarPerfilPersonal() {
     return console.log("Mostrando datos");
   }
   cambiarDatosPersonales(password: string) {
     this.password = password;
-    return console.log("Datos actualizados correctamente");
+    return console.log(password);
   }
 }

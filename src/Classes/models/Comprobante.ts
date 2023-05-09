@@ -4,39 +4,44 @@ export class Comprobante {
   tipo: string;
   monto: number;
   img: string;
-  constructor(id: number, fecha: string, tipo: string, monto: number, foto: string) {
+  constructor(
+    id: number,
+    fecha: string,
+    tipo: string,
+    monto: number,
+    foto: string
+  ) {
     this.id = id;
     this.fecha = fecha;
     this.tipo = tipo;
     this.monto = monto;
     this.img = foto;
   }
-
-  getFecha(){
+  getFecha() {
     return this.fecha;
   }
-  setFecha(fecha: string){
+  setFecha(fecha: string) {
     this.fecha = fecha;
   }
 
-  getTipo(){
+  getTipo() {
     return this.tipo;
   }
-  setTipo(tipo: string){
+  setTipo(tipo: string) {
     this.tipo = tipo;
   }
 
-  getMonto(){
+  getMonto() {
     return this.monto;
   }
-  setMonto(monto: number){
+  setMonto(monto: number) {
     this.monto = monto;
   }
 
-  getImg(){
+  getImg() {
     return this.img;
   }
-  setImg(img: string){
+  setImg(img: string) {
     this.img = img;
   }
 }
