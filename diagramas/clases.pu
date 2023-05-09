@@ -51,9 +51,8 @@ class Comprobante {
 class Gestion {
   +verMatriculasEstudiantes(): void
   +revisarComprobantesEstudiantes(): void
-  +verDatosEstudiantes(): void
-  +verDatosEstudiante(): void
-  +filtrarEstudiantes(): void
+  +filtrarEstudiantes(): Estudiante[]
+  +filtrarEstudiante(): Estudiante
   +revisarHistorialPagos(estudiante: Estudiante): void
   +eliminarBecaEstudiante(estudinate: Estudiante): Boolean
   +asignarBeca(estudiante: Estudiante): Boolean
