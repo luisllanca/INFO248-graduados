@@ -1,0 +1,89 @@
+@startuml
+
+
+class Autenticacion {
+  +verificarDatos(): Boolean
+  +registrarse(): Boolean
+  +loguearse(): Boolean
+  +desloguearse(): void
+}
+
+class Alertas {
+  +enviarAlerta(): void
+}
+
+class Usuario {
+  -user: string
+  -email: string
+  -password: string
+  +cambiarDatosPersonales(): Boolean
+  +visualizarPerfilPersonal(): void
+}
+
+class Estudiante {
+  -id: number
+  -nombre: string
+  -rut: string
+  -comprobantes: Comprobante[]
+  -becas: Beca[]
+  +verListaComprobantes(): Comprobante[]
+  +subirComprobante(): void
+  +especificarMonto(monto: double): Boolean
+  +editarMonto(monto: double): Boolean
+  +visualizarComprobante(id: number): Comprobante
+  +eliminarComprobante(): Boolean
+}
+
+class Comprobante {
+  -id: number
+  -fecha: string
+  -monto: number
+  -img: string
+
+  +getFecha(): string
+  +setFecha(string: fecha): void
+  +getMonto(): number
+  +setMonto(number: monto): void
+  +getImg(): string
+  +setImg(string: img): void
+}
+
+class Gestion {
+  +verMatriculasEstudiantes(): void
+  +revisarComprobantesEstudiantes(): void
+  +filtrarEstudiantes(): Estudiante[]
+  +filtrarEstudiante(): Estudiante
+  +revisarHistorialPagos(estudiante: Estudiante): void
+  +eliminarBecaEstudiante(estudinate: Estudiante): Boolean
+  +asignarBeca(estudiante: Estudiante): Boolean
+  +eliminarBeca(estudiante: Estudiante): Boolean
+  +verBecasAsignadas(estudiante: Estudiante): void
+}
+
+
+class Beca {
+  -id: number
+  -tipo: string
+  -monto: number
+  -fechaAsi: string
+  -fechaExp: string
+
+  +getTipo(): string
+  +setTipo(string: tipo): void
+  +getMonto(): number
+  +setMonto(number: monto): void
+  +getFechaAsi(): string
+  +setFechaAsi(string: fechaAsi): void
+  +getfechaExp(): string
+  +setFechaExp(string: fechaExp): void
+}
+
+Autenticacion "N" --- "1" Usuario
+Alertas "N" --- "1" Usuario
+Usuario <|-- Estudiante
+Usuario <|-- Gestion
+Estudiante "1" *-- "N" Comprobante
+Estudiante "1" *-- "N" Beca
+Gestion "N" --- "N" Estudiante
+
+@enduml
