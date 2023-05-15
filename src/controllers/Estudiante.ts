@@ -1,7 +1,7 @@
 import { Comprobante } from "./Comprobante";
 import { Beca } from "./Beca";
 import { Usuario } from "./Usuario";
-export class Estudiante extends Usuario {
+export class Estudiante implements Usuario {
   id: number;
   nombre: string;
   email: string;
@@ -21,7 +21,6 @@ export class Estudiante extends Usuario {
     comprobantes: Comprobante[],
     becas: Beca[]
   ) {
-    super(email, password);
     this.id = id;
     this.nombre = nombre;
     this.email = email;
@@ -32,10 +31,10 @@ export class Estudiante extends Usuario {
     this.becas = becas;
   }
   visualizarPerfilPersonal() {
-    super.visualizarPerfilPersonal();
+    console.log("visualizar");
   }
   cambiarDatosPersonales(password: string) {
-    super.cambiarDatosPersonales(password);
+    console.log("cambiar datos", password);
   }
   subirComprobante() {
     return console.log("Conmprobante subido correctamente");

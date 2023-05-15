@@ -6,11 +6,10 @@ import {
   CreationOptional,
 } from "sequelize";
 
-import dbEst from "./connectionEstudiante";
+import db from "./connection";
 import { Gestion } from "../controllers/Gestion";
-import { Estudiante } from "../controllers/Estudiante";
 
-const ModeloGestion = dbEst.define<Gestion>(
+const ModeloGestion = db.define<Gestion>(
   "gestion",
   {
     id: {
@@ -34,10 +33,6 @@ const ModeloGestion = dbEst.define<Gestion>(
     rut: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    estudiantes: {
-      type: Array<Estudiante>,
-      allowNull: true,
     },
   },
   { paranoid: true }

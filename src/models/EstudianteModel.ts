@@ -6,12 +6,12 @@ import {
   CreationOptional,
 } from "sequelize";
 
-import dbEst from "./connectionEstudiante";
+import db from "./connection";
 import { Estudiante } from "../controllers/Estudiante";
 import { Comprobante } from "../controllers/Comprobante";
 import { Beca } from "../controllers/Beca";
 
-const ModeloEstudiante = dbEst.define<Estudiante>(
+const ModeloEstudiante = db.define<Estudiante>(
   "estudiantes",
   {
     id: {

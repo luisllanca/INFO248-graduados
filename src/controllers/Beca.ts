@@ -19,31 +19,31 @@ export class Beca {
     this.fechaExp = fechaExpiracion;
   }
 
-  getTipo(){
+  getTipo() {
     return this.tipo;
   }
-  setTipo(tipo: string){
+  setTipo(tipo: string) {
     this.tipo = tipo;
   }
 
-  getMonto(){
+  getMonto() {
     return this.monto;
   }
-  setMonto(monto: number){
+  setMonto(monto: number) {
     this.monto = monto;
   }
 
-  getFechaAsi(){
+  getFechaAsi() {
     return this.fechaAsi;
   }
-  setFechaAsi(fechaAsi: string){
+  setFechaAsi(fechaAsi: string) {
     this.fechaAsi = fechaAsi;
   }
 
-  getFechaExp(){
+  getFechaExp() {
     return this.fechaExp;
   }
-  setFechaExp(fechaExp: string){
+  setFechaExp(fechaExp: string) {
     this.fechaExp = fechaExp;
   }
 }
