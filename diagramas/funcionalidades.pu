@@ -1,4 +1,0 @@
-@startuml
-Gestion -> Estudiante: verDatosEstudiante()
-Estudiante -> Gestion: devolverDatosPersonales()
-@enduml
