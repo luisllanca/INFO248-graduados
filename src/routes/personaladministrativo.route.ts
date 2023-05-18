@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { Gestion } from "../controllers/Gestion";
+import { Gestion } from "../controllers/personaladministrativo.controller";
 import { inicializarData } from "../seed/inicializarData";
 
 const gestion = new Gestion("gesiton@mail.com", "123456", inicializarData());

@@ -7,7 +7,7 @@ import {
 } from "sequelize";
 
 import db from "./connection";
-import { Gestion } from "../controllers/Gestion";
+import { Gestion } from "../controllers/personaladministrativo.controller";
 
 const ModeloGestion = db.define<Gestion>(
   "gestion",

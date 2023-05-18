@@ -1,7 +1,7 @@
 import express, { Application } from "express";
 import cors from "cors";
-import rutasGestion from "../../routes/GestionRoutes";
-import rutasUsuario from "../../routes/UsuarioRoutes";
+import rutasGestion from "../../routes/personaladministrativo.route";
+import rutasUsuario from "../../routes/usuario.route";
 class Server {
   private app: Application;
   private port: string;

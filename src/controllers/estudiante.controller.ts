@@ -1,6 +1,6 @@
-import { Comprobante } from "./Comprobante";
-import { Beca } from "./Beca";
-import { Usuario } from "./Usuario";
+import { Comprobante } from "./comprobante.controller";
+import { Beca } from "./beca.controller";
+import { Usuario } from "./usuario.controller";
 export class Estudiante implements Usuario {
   id: number;
   nombre: string;

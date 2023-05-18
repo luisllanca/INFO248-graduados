@@ -1,7 +1,7 @@
-import { Estudiante } from "./Estudiante";
-import { Usuario } from "./Usuario";
+import { Estudiante } from "./estudiante.controller";
+import { Usuario } from "./usuario.controller";
 
-export class Gestion implements Usuario {
+export class PersonalAdministrativo implements Usuario {
   email: string;
   password: string;
   estudiantes: Estudiante[];

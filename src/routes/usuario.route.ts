@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { Estudiante } from "../controllers/Estudiante";
+import { Estudiante } from "../controllers/estudiante.controller";
 import { inicializarData } from "../seed/inicializarData";
 
 const estudiantes: Array<Estudiante> = inicializarData();

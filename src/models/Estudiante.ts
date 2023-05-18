@@ -7,9 +7,9 @@ import {
 } from "sequelize";
 
 import db from "./connection";
-import { Estudiante } from "../controllers/Estudiante";
-import { Comprobante } from "../controllers/Comprobante";
-import { Beca } from "../controllers/Beca";
+import { Estudiante } from "../controllers/estudiante.controller";
+import { Comprobante } from "../controllers/comprobante.controller";
+import { Beca } from "../controllers/beca.controller";
 
 const ModeloEstudiante = db.define<Estudiante>(
   "estudiantes",
