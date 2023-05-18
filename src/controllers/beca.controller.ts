@@ -6,20 +6,20 @@ export class ServiciosBecas{
   }
 
   getBecas = async (req: Request, res: Response) => {
-    const comprobante = await Beca.findAll();
+    const beca = await Beca.findAll();
     res.json({
-      comprobante,
+      beca,
     });
   };
   
   getBeca = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const comprobante = await Beca.findByPk(id);
-    if (comprobante) {
-      res.json(comprobante);
+    const beca = await Beca.findByPk(id);
+    if (beca) {
+      res.json(beca);
     } else {
       res.status(404).json({
-        msg: `no existe un comprobante con el id ${id}`,
+        msg: `no existe un beca con el id ${id}`,
       });
     }
   };
@@ -28,18 +28,18 @@ export class ServiciosBecas{
   
   deleteBeca = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const comprobante = await Beca.findByPk(id);
+    const beca = await Beca.findByPk(id);
   
-    if (!comprobante) {
+    if (!beca) {
       return res.status(404).json({
         msg: `The user with id: ${id} not exists`,
       });
     }
     try {
-      await comprobante.destroy();
+      await beca.destroy();
   
       res.json({
-        msg: "comprobante eliminado",
+        msg: "beca eliminado",
         id,
       });
     } catch (error: any) {

@@ -6,20 +6,20 @@ export class ServiciosEstudiantes{
   }
 
   getEstudiantes = async (req: Request, res: Response) => {
-    const comprobante = await Estudiante.findAll();
+    const estudiante = await Estudiante.findAll();
     res.json({
-      comprobante,
+      estudiante,
     });
   };
   
   getEstudiante = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const comprobante = await Estudiante.findByPk(id);
-    if (comprobante) {
-      res.json(comprobante);
+    const estudiante = await Estudiante.findByPk(id);
+    if (estudiante) {
+      res.json(estudiante);
     } else {
       res.status(404).json({
-        msg: `no existe un comprobante con el id ${id}`,
+        msg: `no existe un estudiante con el id ${id}`,
       });
     }
   };
@@ -28,18 +28,18 @@ export class ServiciosEstudiantes{
   
   deleteEstudiante = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const comprobante = await Estudiante.findByPk(id);
+    const estudiante = await Estudiante.findByPk(id);
   
-    if (!comprobante) {
+    if (!estudiante) {
       return res.status(404).json({
         msg: `The user with id: ${id} not exists`,
       });
     }
     try {
-      await comprobante.destroy();
+      await estudiante.destroy();
   
       res.json({
-        msg: "comprobante eliminado",
+        msg: "estudiante eliminado",
         id,
       });
     } catch (error: any) {

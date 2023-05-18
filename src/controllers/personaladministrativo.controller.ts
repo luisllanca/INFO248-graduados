@@ -6,20 +6,20 @@ export class ServiciosPersonalAdministrativos{
   }
 
   getPersonalAdministrativos = async (req: Request, res: Response) => {
-    const comprobante = await PersonalAdministrativo.findAll();
+    const personaladministrativo = await PersonalAdministrativo.findAll();
     res.json({
-      comprobante,
+      personaladministrativo,
     });
   };
   
   getPersonalAdministrativo = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const comprobante = await PersonalAdministrativo.findByPk(id);
-    if (comprobante) {
-      res.json(comprobante);
+    const personaladministrativo = await PersonalAdministrativo.findByPk(id);
+    if (personaladministrativo) {
+      res.json(personaladministrativo);
     } else {
       res.status(404).json({
-        msg: `no existe un comprobante con el id ${id}`,
+        msg: `no existe un personaladministrativo con el id ${id}`,
       });
     }
   };
@@ -28,18 +28,18 @@ export class ServiciosPersonalAdministrativos{
   
   deletePersonalAdministrativo = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const comprobante = await PersonalAdministrativo.findByPk(id);
+    const personaladministrativo = await PersonalAdministrativo.findByPk(id);
   
-    if (!comprobante) {
+    if (!personaladministrativo) {
       return res.status(404).json({
         msg: `The user with id: ${id} not exists`,
       });
     }
     try {
-      await comprobante.destroy();
+      await personaladministrativo.destroy();
   
       res.json({
-        msg: "comprobante eliminado",
+        msg: "personaladministrativo eliminado",
         id,
       });
     } catch (error: any) {
