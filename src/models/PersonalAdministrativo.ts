@@ -1,41 +1,19 @@
-import {
-  Model,
-  DataTypes,
-  InferAttributes,
-  InferCreationAttributes,
-  CreationOptional,
-} from "sequelize";
-
+import { DataType, DataTypes } from "sequelize";
 import db from "./connection";
-import { Gestion } from "../controllers/personaladministrativo.controller";
 
-const ModeloGestion = db.define<Gestion>(
-  "gestion",
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
+const PersonalAdministrativo = db.define('PersonalAdministrativo',{
+    id: { 
+        type: DataTypes.INTEGER, 
+        primaryKey: true,
+        autoIncrement: true
     },
-    nombre: {
-      type: DataTypes.STRING,
-      allowNull: false,
+    cargo: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        
     },
-    email: {
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: false,
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    rut: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  },
-  { paranoid: true }
-);
 
-export default ModeloGestion;
+
+},{ paranoid: true} )
+
+export default PersonalAdministrativo;

@@ -1,103 +1,53 @@
-import { Estudiante } from "./estudiante.controller";
-import { Usuario } from "./usuario.controller";
+import { Request, Response } from "express";
+import PersonalAdministrativo from "../models/PersonalAdministrativo";
+// import bcrypt from "bcryptjs";
+export class ServiciosPersonalAdministrativos{
+  constructor(){
+  }
 
-export class PersonalAdministrativo implements Usuario {
-  email: string;
-  password: string;
-  estudiantes: Estudiante[];
-
-  constructor(email: string, password: string, estudiante: Estudiante[]) {
-    this.email = email;
-    this.password = password;
-    this.estudiantes = estudiante;
-  }
-  visualizarPerfilPersonal() {
-    console.log("visualizar");
-  }
-  cambiarDatosPersonales(password: string) {
-    console.log(password);
-  }
-  crearEstudiante(
-    id: number,
-    nombre: string,
-    email: string,
-    password: string,
-    rut: string,
-    carrera: string
-  ) {
-    this.estudiantes.push(
-      new Estudiante(id, nombre, email, password, rut, carrera, [], [])
-    );
-    return console.log("Estudiante creado");
-  }
-  verMatriculasEstudiantes(id: number) {
-    const matriculas: Array<String> = [];
-    const estudiant = this.estudiantes?.find(
-      (estudiante) => estudiante.id === id
-    );
-    if (estudiant && estudiant.becas) {
-      for (let i = 0; i < estudiant.becas.length; i++) {
-        if (estudiant.becas[i].tipo == "matricula") {
-          matriculas.push(estudiant.becas[i].fechaAsi);
-        }
-      }
-      return matriculas;
+  getPersonalAdministrativos = async (req: Request, res: Response) => {
+    const comprobante = await PersonalAdministrativo.findAll();
+    res.json({
+      comprobante,
+    });
+  };
+  
+  getPersonalAdministrativo = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const comprobante = await PersonalAdministrativo.findByPk(id);
+    if (comprobante) {
+      res.json(comprobante);
+    } else {
+      res.status(404).json({
+        msg: `no existe un comprobante con el id ${id}`,
+      });
     }
-    return null;
+  };
+  putPersonalAdministrativo = async (req: Request, res: Response) => {
   }
-  revisarComprobantesEstudiante(id: number) {
-    const estudiant = this.estudiantes?.find(
-      (estudiante) => estudiante.id === id
-    );
-    if (estudiant && estudiant.comprobantes) {
-      return estudiant.comprobantes;
+  
+  deletePersonalAdministrativo = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const comprobante = await PersonalAdministrativo.findByPk(id);
+  
+    if (!comprobante) {
+      return res.status(404).json({
+        msg: `The user with id: ${id} not exists`,
+      });
     }
-    return null;
-  }
-  asignarBecaEstudiante(id: number) {
-    const estudiant = this.estudiantes?.filter(
-      (estudiante) => estudiante.id === id
-    );
-    if (estudiant) {
-      return console.log("Asignando beca a estudiante");
+    try {
+      await comprobante.destroy();
+  
+      res.json({
+        msg: "comprobante eliminado",
+        id,
+      });
+    } catch (error: any) {
+      console.log(error);
+      res.status(500).json({
+        msg: "Hable con el administrador",
+      });
     }
-    return null;
-  }
-  filtrarEstudiantes(id: number) {
-    const estudiant = this.estudiantes?.filter(
-      (estudiante) => estudiante.id === id
-    );
-    if (estudiant) {
-      return this.estudiantes?.filter((estudiante) => estudiante.id === id);
-    }
-    return null;
-  }
-  revisarHistorialPagos(id: number) {
-    const pagos: Array<Array<String>> = [];
-    const estudiant = this.estudiantes?.find(
-      (estudiante) => estudiante.id === id
-    );
-    if (estudiant && estudiant.comprobantes) {
-      for (let i = 0; i < estudiant.comprobantes.length; i++) {
-        let fechasP: Array<String> = [];
-        fechasP.push(estudiant.comprobantes[i].tipo);
-        fechasP.push(estudiant.comprobantes[i].fecha);
-        pagos.push(fechasP);
-      }
-      return pagos;
-    }
-    return null;
-  }
-  eliminarBecaEstudiante(idEst: number, idBeca: number) {
-    const estudiant = this.estudiantes?.find(
-      (estudiante) => estudiante.id === idEst
-    );
-    if (estudiant && estudiant.becas) {
-      const bec = estudiant.becas?.filter((beca) => beca.id === idBeca);
-      if (bec) {
-        return console.log("Beca eliminada con exito");
-      }
-    }
-    return null;
-  }
+  };
 }
+

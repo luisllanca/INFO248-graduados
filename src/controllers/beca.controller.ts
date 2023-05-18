@@ -1,49 +1,53 @@
-export class Beca {
-  id: number;
-  tipo: string;
-  monto: number;
-  fechaAsi: string;
-  fechaExp: string;
-
-  constructor(
-    id: number,
-    tipo: string,
-    monto: number,
-    fechaAsignacion: string,
-    fechaExpiracion: string
-  ) {
-    this.id = id;
-    this.tipo = tipo;
-    this.monto = monto;
-    this.fechaAsi = fechaAsignacion;
-    this.fechaExp = fechaExpiracion;
+import { Request, Response } from "express";
+import Beca from "../models/Beca";
+// import bcrypt from "bcryptjs";
+export class ServiciosBecas{
+  constructor(){
   }
 
-  getTipo() {
-    return this.tipo;
+  getBecas = async (req: Request, res: Response) => {
+    const comprobante = await Beca.findAll();
+    res.json({
+      comprobante,
+    });
+  };
+  
+  getBeca = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const comprobante = await Beca.findByPk(id);
+    if (comprobante) {
+      res.json(comprobante);
+    } else {
+      res.status(404).json({
+        msg: `no existe un comprobante con el id ${id}`,
+      });
+    }
+  };
+  putBeca = async (req: Request, res: Response) => {
   }
-  setTipo(tipo: string) {
-    this.tipo = tipo;
-  }
-
-  getMonto() {
-    return this.monto;
-  }
-  setMonto(monto: number) {
-    this.monto = monto;
-  }
-
-  getFechaAsi() {
-    return this.fechaAsi;
-  }
-  setFechaAsi(fechaAsi: string) {
-    this.fechaAsi = fechaAsi;
-  }
-
-  getFechaExp() {
-    return this.fechaExp;
-  }
-  setFechaExp(fechaExp: string) {
-    this.fechaExp = fechaExp;
-  }
+  
+  deleteBeca = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const comprobante = await Beca.findByPk(id);
+  
+    if (!comprobante) {
+      return res.status(404).json({
+        msg: `The user with id: ${id} not exists`,
+      });
+    }
+    try {
+      await comprobante.destroy();
+  
+      res.json({
+        msg: "comprobante eliminado",
+        id,
+      });
+    } catch (error: any) {
+      console.log(error);
+      res.status(500).json({
+        msg: "Hable con el administrador",
+      });
+    }
+  };
 }
+

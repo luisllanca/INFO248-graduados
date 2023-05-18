@@ -1,30 +1,16 @@
-import { Router, Request, Response } from "express";
-import { Gestion } from "../controllers/personaladministrativo.controller";
-import { inicializarData } from "../seed/inicializarData";
+//Crear rutas más adelante.
+import { Router } from "express";
+import { ServiciosPersonalAdministrativos} from "../controllers/personaladministrativo.controller";
 
-const gestion = new Gestion("gesiton@mail.com", "123456", inicializarData());
-const rutasGestion = Router();
+const personaladministrativo = Router();
+const serviciosPersonalAdministrativo = new ServiciosPersonalAdministrativos();
+personaladministrativo.get("/", serviciosPersonalAdministrativo.getPersonalAdministrativos);
 
-rutasGestion.get("/estudiantes/:id", (req: Request, res: Response) => {
-  const { id } = req.params;
-  res.json({
-    Estudiantes: gestion.filtrarEstudiantes(+id),
-  });
-});
-rutasGestion.get(
-  "/estudiantes/:id/comprobantes",
-  (req: Request, res: Response) => {
-    const { id } = req.params;
-    res.json({
-      Comprobantes: gestion.revisarComprobantesEstudiante(+id),
-    });
-  }
-);
-rutasGestion.get("/estudiantes/:id/pagos", (req: Request, res: Response) => {
-  const { id } = req.params;
-  res.json({
-    Pagos: gestion.revisarHistorialPagos(+id),
-  });
-});
+personaladministrativo.get("/:id", serviciosPersonalAdministrativo.getPersonalAdministrativo);
 
-export default rutasGestion;
+personaladministrativo.post()
+
+personaladministrativo.put("/:id", serviciosPersonalAdministrativo.putPersonalAdministrativo);
+personaladministrativo.delete("/:id", serviciosPersonalAdministrativo.deletePersonalAdministrativo);
+
+export default personaladministrativo;

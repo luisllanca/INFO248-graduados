@@ -1,22 +1,15 @@
-import { Router, Request, Response } from "express";
-import { Estudiante } from "../controllers/estudiante.controller";
-import { inicializarData } from "../seed/inicializarData";
+import { Router } from "express";
+import { ServiciosUsuarios} from "../controllers/usuario.controller";
 
-const estudiantes: Array<Estudiante> = inicializarData();
-const rutasUsuarios = Router();
+const usuario = Router();
+const serviciosUsuario = new ServiciosUsuarios();
+usuario.get("/", serviciosUsuario.getUsuarios);
 
-rutasUsuarios.get(
-  "/estudiantes/:id/change-password/:pass",
-  (req: Request, res: Response) => {
-    const { id, pass } = req.params;
-    const est = estudiantes?.find((estudiante) => estudiante.id === +id);
-    if (!est || est.password == pass) {
-      res.status(200).json({ message: "Error en cambio de contraseña" });
-    } else {
-      est.cambiarDatosPersonales(pass);
-      res.status(200).json({ est });
-    }
-  }
-);
+usuario.get("/:id", serviciosUsuario.getUsuario);
 
-export default rutasUsuarios;
+usuario.post()
+
+usuario.put("/:id", serviciosUsuario.putUsuario);
+usuario.delete("/:id", serviciosUsuario.deleteUsuario);
+
+export default usuario;
