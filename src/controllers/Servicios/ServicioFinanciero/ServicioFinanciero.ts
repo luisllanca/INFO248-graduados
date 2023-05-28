@@ -1,4 +1,4 @@
-import type { Estudiante } from "../Usuario/Estudiante";
+import type { Estudiante } from "../../Usuario/Usuario/Estudiante";
 
 export class ServicioFinanciero {
     getPagosTotales(est : Estudiante) {

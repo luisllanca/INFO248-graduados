@@ -1,5 +1,5 @@
-import type { Estudiante } from "../Usuario/Estudiante";
-import { Comprobante } from "./Comprobante";
+import type { Estudiante } from "../../Usuario/Usuario/Estudiante";
+import { Comprobante } from "../ServicioFinanciero/Comprobante";
 export class ServiciosEstudiante {
 
     subirComprobante(est: Estudiante, id: number, monto: number, fecha: string, img: string, tipo: string) {

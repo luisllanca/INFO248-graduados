@@ -1,4 +1,4 @@
-import { ServicioEncriptacion } from "../Seguridad/ServicioEncriptacion";
+import { ServicioEncriptacion } from "../../Seguridad/ServicioSeguridad/ServicioEncriptacion";
 
 export class ServicioCuenta{
     registrarse(id : number){

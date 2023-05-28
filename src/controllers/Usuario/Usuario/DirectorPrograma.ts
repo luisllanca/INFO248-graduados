@@ -1,7 +1,7 @@
 import { PersonalAdministrativo } from "./PersonalAdministrativo";
-import { ServiciosVisualizacion } from "../Servicios/ServiciosVisualizacion";
+import { ServiciosVisualizacion } from "../../Servicios/ServicioVisualizacion/ServiciosVisualizacion";
 import { Estudiante } from "../Usuario/Estudiante";
-import { FiltradoEstudiante } from "../Servicios/FiltradoEstudiante";
+import { FiltradoEstudiante } from "../../Servicios/ServicioVisualizacion/FiltradoEstudiante";
 
 export class DirectorPrograma extends PersonalAdministrativo implements ServiciosVisualizacion, FiltradoEstudiante{
     constructor(id: number, nombre: string, apellido: string, email: string, password: string, cargo: string, estudiantes: Estudiante[]) {

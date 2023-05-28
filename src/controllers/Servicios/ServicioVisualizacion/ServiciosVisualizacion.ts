@@ -1,4 +1,4 @@
-import { Estudiante } from "../Usuario/Estudiante";
+import { Estudiante } from "../../Usuario/Usuario/Estudiante"
 
 export interface ServiciosVisualizacion {
     verMatriculasEstudiante(estudiante: Estudiante): void
