@@ -1,3 +1,4 @@
+import { BuilderComprobante } from "./BuilderComprobante";
 import { Comprobante } from "./Comprobante";
 
 export class ServiciosComprobantes {
@@ -10,10 +11,15 @@ export class ServiciosComprobantes {
     getComprobante(id: number){
         return console.log("Retornando comprobante " + id);
     }
-    
-    generarComprobante(id: number, monto: number, fecha: string, img: string, tipo: string){
-        console.log("Generando comprobante...")
-        const comp = new Comprobante(id,monto,fecha,img,tipo);
+
+    makeComprobante(builder : BuilderComprobante,id: number, monto: number, fecha: string, img: string, tipo: string) {
+        builder.reset();
+        builder.setId(id);
+        builder.setMonto(monto);
+        builder.setFecha(fecha);
+        builder.setImg(img);
+        builder.setTipo(tipo);
+        const comp = builder.Build();
         this.comprobantes.push(comp);
     }
 
@@ -24,6 +30,7 @@ export class ServiciosComprobantes {
 
     modificarComprobante(id: number, monto: number, fecha: string, img: string, tipo: string){
         this.eliminarComprobante(id);
-        this.generarComprobante(id,monto,fecha,img,tipo);
+        const builder = new BuilderComprobante()
+        this.makeComprobante(builder,id,monto,fecha,img,tipo);
     }
 }
