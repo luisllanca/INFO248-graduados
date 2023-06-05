@@ -1,5 +1,6 @@
 import { Usuario } from "./Usuario";
 import { Estudiante } from "./Estudiante";
+import EstudianteModel from "../../models/Estudiante/EstudianteModel";
 
 export class PersonalAdministrativo extends Usuario {
   cargo: string;
@@ -37,6 +38,33 @@ export class PersonalAdministrativo extends Usuario {
   getEstudiantes() {
     return this.estudiantes;
   }
+
+  async obtenerEstudiantes(): Promise<{}> {
+    try {
+      const estudiantes = await EstudianteModel.findAll({
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
+  
+      return estudiantes;
+    } catch (err) {
+      return JSON.stringify(err);
+    }
+  }
+
+  async filtrarEstudiante(id: Identifier | undefined): Promise<{}> {
+    try {
+      const estudiante = await EstudianteModel.findByPk(id, {
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
+      if (!estudiante) {
+        throw new Error("Estudiante no encontrado");
+      }
+      return estudiante;
+    } catch (error) {
+      return JSON.stringify(error);
+    }
+  }
+
   setEstudiantes(estudiantes: Estudiante[]) {
     this.estudiantes = estudiantes;
   }

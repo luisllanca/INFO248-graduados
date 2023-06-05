@@ -1,11 +1,14 @@
 import { Router, Request, Response } from "express";
 // import { PersonalAdminisitrativo } from "../controllers/Usuario/PersonalAdministrativo";
 // import { inicializarData } from "../seed/inicializarData";
-import EstudianteController from "../models/Estudiante/EstudianteController";
-import ComprobanteController from "../models/Comprobante/ComprobanteController";
+import { ServiciosEstudiante } from "../controllers/Servicios/ServicioEstudiante/ServiciosEstudiante";
+import { ServiciosComprobantes } from "../controllers/Servicios/ServicioFinanciero/ServiciosComprobante";
+import { ServicioFinanciero } from "../controllers/Servicios/ServicioFinanciero/ServicioFinanciero";
 const rutasPersonalAdminisitrativo = Router();
-const estudiante = new EstudianteController();
-const comprobante = new ComprobanteController();
+const estudiante = new ServiciosEstudiante();
+const comprobante = new ServiciosComprobantes();
+const financiero = new ServicioFinanciero();
+
 
 rutasPersonalAdminisitrativo.get(
   "/estudiantes",
@@ -69,7 +72,7 @@ rutasPersonalAdminisitrativo.get(
   async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const comprobantes = await comprobante.HistorialPagos(+id);
+      const comprobantes = await financiero.HistorialPagos(+id);
       const response = await JSON.parse(JSON.stringify(comprobantes));
       if (comprobantes == "{}") {
         res.status(500).json({ mensaje: "Error al filtrar comprobantes" });

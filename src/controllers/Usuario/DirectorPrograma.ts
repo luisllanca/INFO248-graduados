@@ -2,6 +2,8 @@ import { PersonalAdministrativo } from "./PersonalAdministrativo";
 import { ServiciosVisualizacion } from "../Servicios/ServicioVisualizacion/ServiciosVisualizacion";
 import { Estudiante } from "../Usuario/Estudiante";
 import { FiltradoEstudiante } from "../Servicios/ServicioVisualizacion/FiltradoEstudiante";
+import EstudianteModel from "../../models/Estudiante/EstudianteModel";
+import { Identifier } from "sequelize";
 
 export class DirectorPrograma
   extends PersonalAdministrativo
@@ -23,6 +25,19 @@ export class DirectorPrograma
     console.log("Visualizando matrículas de estudiantes...");
   }
 
+  async obtenerEstudiantes(): Promise<{}> {
+    try {
+      const estudiantes = await EstudianteModel.findAll({
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
+  
+      return estudiantes;
+    } catch (err) {
+      return JSON.stringify(err);
+    }
+  }
+  
+
   revisarComprobantesEstudiante(estudiante: Estudiante) {
     console.log("Visualizando comprobantes de estudiante...");
   }
@@ -33,6 +48,20 @@ export class DirectorPrograma
 
   verBecasAsignadas(estudiante: Estudiante) {
     console.log("Visualizar becas asignadas a estudiante...");
+  }
+
+  async filtrarEstudiante(id: Identifier | undefined): Promise<{}> {
+    try {
+      const estudiante = await EstudianteModel.findByPk(id, {
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
+      if (!estudiante) {
+        throw new Error("Estudiante no encontrado");
+      }
+      return estudiante;
+    } catch (error) {
+      return JSON.stringify(error);
+    }
   }
 
   filtrarPorNombre(nombre: string): Estudiante[] {
@@ -52,3 +81,4 @@ export class DirectorPrograma
     return [];
   }
 }
+
