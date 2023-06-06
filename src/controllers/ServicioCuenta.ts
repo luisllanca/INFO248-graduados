@@ -1,6 +1,6 @@
-import { ServicioEncriptacion } from "../../../clases_negocio/ServicioSeguridad/ServicioEncriptacion";
-import EstudianteModel from "../../../models/EstudianteModel";
-import UsuarioModel from "../../../models/UsuarioModel";
+import { ServicioEncriptacion } from "../clases_negocio/ServicioSeguridad/ServicioEncriptacion";
+import EstudianteModel from "../models/EstudianteModel";
+import UsuarioModel from "../models/UsuarioModel";
 export class ServicioCuenta {
   registrarse(id: number) {
     console.log("Registrandose...");

@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
 // import { PersonalAdminisitrativo } from "../controllers/Usuario/PersonalAdministrativo";
 // import { inicializarData } from "../seed/inicializarData";
-import { ServiciosEstudiante } from "../controllers/Servicios/ServicioEstudiante/ServiciosEstudiante";
-import { ServiciosComprobantes } from "../controllers/Servicios/ServicioFinanciero/ServiciosComprobante";
-import { ServicioFinanciero } from "../controllers/Servicios/ServicioFinanciero/ServicioFinanciero";
+import { ServiciosEstudiante } from "../controllers/ServiciosEstudiante";
+import { ServiciosComprobantes } from "../controllers/ServiciosComprobante";
+import { ServicioFinanciero } from "../controllers/ServicioFinanciero";
 const rutasPersonalAdminisitrativo = Router();
 const estudiante = new ServiciosEstudiante();
 const comprobante = new ServiciosComprobantes();

@@ -1,4 +1,4 @@
-import { Beca } from "./Beca";
+import { Beca } from "../clases_negocio/Beca";
 
 export class ServiciosBecas{
     becas: Beca[];

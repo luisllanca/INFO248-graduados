@@ -1,4 +1,4 @@
-import type { Estudiante } from "../../../clases_negocio/Usuario/Estudiante";
+import type { Estudiante } from "../Usuario/Estudiante";
 
 export class ServicioAlertas {
   generarAlerta() {

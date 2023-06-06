@@ -1,7 +1,7 @@
 import { Identifier } from "sequelize";
-import EstudianteModel from "../../../models/EstudianteModel";
-import type { Estudiante } from "../../../clases_negocio/Usuario/Estudiante";
-import { Comprobante } from "../../clases_negocio/Comprobante";
+import EstudianteModel from "../models/EstudianteModel";
+import type { Estudiante } from "../clases_negocio/Usuario/Estudiante";
+import { Comprobante } from "../clases_negocio/Comprobante";
 export class ServiciosEstudiante {
   subirComprobante(
     est: Estudiante,

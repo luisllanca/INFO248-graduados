@@ -1,7 +1,7 @@
 import { PersonalAdministrativo } from "./PersonalAdministrativo";
-import { ServiciosVisualizacion } from "../../controllers/Servicios/ServicioVisualizacion/ServiciosVisualizacion";
+import { ServiciosVisualizacion } from "../../clases_negocio/ServicioVisualizacion/ServiciosVisualizacion";
 import { Estudiante } from "./Estudiante";
-import { FiltradoEstudiante } from "../../controllers/Servicios/ServicioVisualizacion/FiltradoEstudiante";
+import { FiltradoEstudiante } from "../../clases_negocio/ServicioVisualizacion/FiltradoEstudiante";
 import EstudianteModel from "../../models/EstudianteModel";
 import { Identifier } from "sequelize";
 

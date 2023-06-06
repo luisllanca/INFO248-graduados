@@ -1,5 +1,5 @@
 import { DataType, DataTypes } from "sequelize";
-import db from "../models/connection";
+import db from "./connection";
 
 const Comprobante = db.define('Comprobante',{
     id: {

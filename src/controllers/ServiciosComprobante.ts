@@ -1,6 +1,6 @@
-import ComprobanteModel from "../../../models/ComprobanteModel";
-import { BuilderComprobante } from "../../clases_negocio/BuilderComprobante";
-import { Comprobante } from "../../clases_negocio/Comprobante";
+import ComprobanteModel from "../models/ComprobanteModel";
+import { BuilderComprobante } from "../clases_negocio/BuilderComprobante";
+import { Comprobante } from "../clases_negocio/Comprobante";
 
 export class ServiciosComprobantes {
     //comprobantes: Comprobante[];

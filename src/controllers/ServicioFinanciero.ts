@@ -1,5 +1,5 @@
-import ComprobanteModel from "../../../models/ComprobanteModel";
-import type { Estudiante } from "../../../clases_negocio/Usuario/Estudiante";
+import ComprobanteModel from "../models/ComprobanteModel";
+import type { Estudiante } from "../clases_negocio/Usuario/Estudiante";
 
 export class ServicioFinanciero {
   getPagosTotales(est: Estudiante) {

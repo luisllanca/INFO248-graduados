@@ -1,7 +1,7 @@
-import type { Comprobante } from "../../controllers/Servicios/ServicioFinanciero/Comprobante";
-import type { Beca } from "../../controllers/Servicios/ServicioFinanciero/Beca";
+import type { Comprobante } from "../../clases_negocio/Comprobante";
+import type { Beca } from "../../clases_negocio/Beca";
 import { Usuario } from "./Usuario";
-import { ServicioCuenta } from "../../controllers/Servicios/ServicioCuenta/ServicioCuenta";
+import { ServicioCuenta } from "../../controllers/ServicioCuenta";
 export class Estudiante extends Usuario {
   rut: string;
   carrera: string;
