@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { ServicioCuenta } from "../controllers/Servicios/ServicioCuenta/ServicioCuenta";
-import EstudianteModel from "../models/Estudiante/EstudianteModel";
+import EstudianteModel from "../models/EstudianteModel";
 
 const servicio = new ServicioCuenta();
 const rutasUsuarios = Router();
