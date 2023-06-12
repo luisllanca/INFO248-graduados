@@ -17,7 +17,7 @@ export class ServicioCuenta {
     try {
       // Buscar el estudiante en la base de datos por su ID
 
-      const estudiante = await EstudianteModel.findByPk(id, {
+      const estudiante = await EstudianteModel.findByPk(id++, {
         include: [
           {
             model: UsuarioModel,
