@@ -54,6 +54,17 @@ export class ServicioCuenta {
   
   async registrarUsuario(nombre: string, apellido: string, password: string, email: string) {
     try {
+
+      // Verificar si el usuario ya existe en la base de datos
+      const usuarioExistente = await UsuarioModel.findOne({
+        where: { email: email },
+      });
+
+      if (usuarioExistente) {
+        console.log("El usuario ya está registrado");
+        return null;
+      }
+
       const usuario = await UsuarioModel.create({
         nombre,
         apellido,

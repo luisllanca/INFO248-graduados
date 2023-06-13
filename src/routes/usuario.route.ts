@@ -25,11 +25,17 @@ rutasUsuarios.post("/registrar", async (req: Request, res: Response) => {
   try {
     const { nombre, apellido, password, email } = req.body;
     const usuario = await servicio.registrarUsuario(nombre, apellido, password, email);
-
-    res.json({
-      mensaje: "Usuario registrado correctamente",
-      usuario,
-    });
+    if (usuario) {
+      return res.status(201).json({
+        mensaje: "Usuario registrado correctamente",
+        usuario,
+      });
+    } else {
+      return res.status(400).json({
+        mensaje: "El usuario ya está registrado",
+      });
+    }
+    
   } catch (error) {
     console.error("Error al registrar usuario:", error);
     res.status(500).json({ mensaje: "Error al registrar usuario" });
