@@ -46,6 +46,13 @@ const SignUp: FC<SomeComponentProps> = ({ history }) => {
           className="row d-flex justify-content-center align-items-center"
           style={{ height: "100vh" }}
         >
+          <div className="position-absolute top-0 end-0 p-3">
+          <img
+            src="http://informatica.uach.cl/wp-content/uploads/2020/02/cropped-escudo-transparente.png"
+            alt="Descripción de la imagen"
+            style={{ width: "100px" }}
+          />
+        </div>
           <div className="card mb-3 mt-3 rounded" style={{ maxWidth: "500px" }}>
             <div className="col-md-12">
               <div className="card-body">

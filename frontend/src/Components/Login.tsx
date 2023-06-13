@@ -64,6 +64,14 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
           className="row d-flex justify-content-center align-items-center"
           style={{ height: "100vh" }}
         >
+          <div className="position-absolute top-0 end-0 p-3">
+          <img
+            src="http://informatica.uach.cl/wp-content/uploads/2020/02/cropped-escudo-transparente.png"
+            alt="Descripción de la imagen"
+            style={{ width: "100px" }}
+          />
+        </div>
+          
           <div className="card mb-3" style={{ maxWidth: "320px" }}>
             <div className="col-md-12">
               <div className="card-body">
@@ -77,7 +85,7 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
                       type="email"
                       className="form-control shadow-none"
                       id="exampleFormControlInput1"
-                      {...register("email", { required: "Email is required!" })}
+                      {...register("email", { required: "¡Se requiere un correo!" })}
                     />
                     {errors.email && (
                       <p className="text-danger" style={{ fontSize: 14 }}>
@@ -92,7 +100,7 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
                       className="form-control shadow-none"
                       id="exampleFormControlInput2"
                       {...register("password", {
-                        required: "Password is required!",
+                        required: "¡Se requiere una contraseña!",
                       })}
                     />
                     {errors.password && (
