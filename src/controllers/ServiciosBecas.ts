@@ -1,10 +1,9 @@
 
 import BecaModel from "../models/BecaModel";
-import { Router, Request, Response } from "express";
+import { Request, Response } from "express";
 
 export class ServiciosBecas{
   constructor(){
-
   }
 
   async getBecas(req: Request, res: Response){
@@ -24,7 +23,7 @@ export class ServiciosBecas{
   };
 
   async getBecaId(req: Request, res: Response){
-    console.log(req.params);
+    // console.log(req.params);
     try {
       const id = req.params.id;
       const becas = await BecaModel.findByPk(parseInt(id), {
@@ -39,5 +38,77 @@ export class ServiciosBecas{
         res.status(500).json({ mensaje: "Error al obtener beca por id" });
     }
   };
+//Corregir esta, validar
+  async createBeca(req: Request, res: Response){
+    try {
+      // const {tipo, monto, fechaAsi, fechaExp, descripcion} = req.body;
+      const becas = await BecaModel.create(req.body);
+      console.log(becas);
+      res.json({
+        Becas: becas,
+      });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ mensaje: "Error al crear la beca" });
+    }
+  };
 
+  async deleteBecaId(req: Request, res: Response){
+    // console.log(req.params);
+    try {
+      const id = req.params.id;
+      const beca = await BecaModel.findByPk(parseInt(id), {
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
+      console.log(beca);
+      if(!beca){
+        res.json({
+          ok: false,
+        });
+      }
+      await BecaModel.destroy({
+        where: {id: id}
+      });
+      res.json({
+        ok: true,
+        Beca: beca,
+      });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ 
+          ok: false,
+          mensaje: "Error al buscar beca por id" 
+        });
+    }
+  };
+// Corregir 
+  async updateBecaById(req: Request, res: Response){
+    // console.log(req.params);
+    try {
+      const id = req.params.id;
+      const beca = await BecaModel.findByPk(parseInt(id), {
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
+      console.log(beca);
+      if(!beca){
+        res.json({
+          ok: false,
+        });
+      }
+      await BecaModel.update(
+        req.body,
+        { where: { id: id } }
+      );
+      res.json({
+        ok: true,
+        Beca: beca,
+      });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ 
+          ok: false,
+          mensaje: "Error al buscar beca por id" 
+        });
+    }
+  };
 }
