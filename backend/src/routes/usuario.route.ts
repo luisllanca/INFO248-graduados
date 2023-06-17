@@ -24,7 +24,12 @@ rutasUsuarios.get(
 rutasUsuarios.post("/registrar", async (req: Request, res: Response) => {
   try {
     const { nombre, apellido, password, email } = req.body;
-    const usuario = await servicio.registrarUsuario(nombre, apellido, password, email);
+    const usuario = await servicio.registrarUsuario(
+      nombre,
+      apellido,
+      password,
+      email
+    );
     if (usuario) {
       return res.status(201).json({
         mensaje: "Usuario registrado correctamente",
@@ -35,10 +40,29 @@ rutasUsuarios.post("/registrar", async (req: Request, res: Response) => {
         mensaje: "El usuario ya está registrado",
       });
     }
-    
   } catch (error) {
     console.error("Error al registrar usuario:", error);
     res.status(500).json({ mensaje: "Error al registrar usuario" });
+  }
+});
+
+rutasUsuarios.post("/login", async (req: Request, res: Response) => {
+  try {
+    const { password, email } = req.body;
+    const usuario = await servicio.loguearse(password, email);
+    if (usuario) {
+      return res.status(201).json({
+        mensaje: "Usuario logeado correctamente",
+        usuario,
+      });
+    } else {
+      return res.status(400).json({
+        mensaje: "El usuario no existe",
+      });
+    }
+  } catch (error) {
+    console.error("Error al logear usuario:", error);
+    res.status(500).json({ mensaje: "Error al logear usuario" });
   }
 });
 

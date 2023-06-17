@@ -1,7 +1,7 @@
 import { PersonalAdministrativo } from "./PersonalAdministrativo";
-import { ServiciosVisualizacion } from "../../clases_negocio/ServicioVisualizacion/ServiciosVisualizacion";
+import { ServiciosVisualizacion } from "../ServicioVisualizacion/ServiciosVisualizacion";
 import { Estudiante } from "./Estudiante";
-import { FiltradoEstudiante } from "../../clases_negocio/ServicioVisualizacion/FiltradoEstudiante";
+import { FiltradoEstudiante } from "../ServicioVisualizacion/FiltradoEstudiante";
 import EstudianteModel from "../../models/EstudianteModel";
 import { Identifier } from "sequelize";
 
@@ -30,13 +30,12 @@ export class DirectorPrograma
       const estudiantes = await EstudianteModel.findAll({
         attributes: { exclude: ["createdAt", "updatedAt"] },
       });
-  
+
       return estudiantes;
     } catch (err) {
       return JSON.stringify(err);
     }
   }
-  
 
   revisarComprobantesEstudiante(estudiante: Estudiante) {
     console.log("Visualizando comprobantes de estudiante...");
@@ -81,4 +80,3 @@ export class DirectorPrograma
     return [];
   }
 }
-

@@ -3,9 +3,23 @@ import EstudianteModel from "../models/EstudianteModel";
 import UsuarioModel from "../models/UsuarioModel";
 
 export class ServicioCuenta {
-  
-  loguearse(id: number) {
-    console.log("Login...");
+  async loguearse(password: string, email: string) {
+    try {
+      // Verificar si el usuario ya existe en la base de datos
+      const usuarioExistente = await UsuarioModel.findOne({
+        where: { email: email, password: password },
+      });
+
+      if (!usuarioExistente) {
+        console.log("El usuario no existe");
+        return null;
+      } else {
+        return usuarioExistente;
+        console.log("Usuario logeado:", usuarioExistente);
+      }
+    } catch (error) {
+      console.error("Error al logear usuario:", error);
+    }
   }
 
   desloguearse(id: number) {
@@ -51,10 +65,14 @@ export class ServicioCuenta {
       console.error("Error al cambiar la contraseña:", error);
     }
   }
-  
-  async registrarUsuario(nombre: string, apellido: string, password: string, email: string) {
-    try {
 
+  async registrarUsuario(
+    nombre: string,
+    apellido: string,
+    password: string,
+    email: string
+  ) {
+    try {
       // Verificar si el usuario ya existe en la base de datos
       const usuarioExistente = await UsuarioModel.findOne({
         where: { email: email },
@@ -71,14 +89,11 @@ export class ServicioCuenta {
         password,
         email,
       });
-  
+
       console.log("Usuario registrado:", usuario.toJSON());
       return usuario;
     } catch (error) {
       console.error("Error al registrar usuario:", error);
     }
   }
-  
-
-} 
-
+}

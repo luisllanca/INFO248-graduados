@@ -15,13 +15,14 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
   } = useForm();
 
   const login = (data: any) => {
+    console.log(data);
     let params = {
       email: data.email,
       password: data.password,
     };
     axios
-      .post("http://localhost:4000/api/login", params)
-      .then(function (response) {
+      .post("http://localhost:8080/user/login", params)
+      .then(function(response) {
         //   IF EMAIL ALREADY EXISTS
         if (response.data.success === false) {
           toast.error(response.data.error, {
@@ -52,7 +53,7 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
         }
       })
 
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
   };
@@ -65,7 +66,7 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
           style={{ height: "100vh" }}
         >
           <LogoImage />
-          
+
           <div className="card mb-3" style={{ maxWidth: "320px" }}>
             <div className="col-md-12">
               <div className="card-body">
@@ -79,7 +80,9 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
                       type="email"
                       className="form-control shadow-none"
                       id="exampleFormControlInput1"
-                      {...register("email", { required: "¡Se requiere un correo!" })}
+                      {...register("email", {
+                        required: "¡Se requiere un correo!",
+                      })}
                     />
                     {errors.email && (
                       <p className="text-danger" style={{ fontSize: 14 }}>

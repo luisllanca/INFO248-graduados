@@ -1,9 +1,9 @@
 import { PersonalAdministrativo } from "./PersonalAdministrativo";
 import { ServiciosEdicion } from "../../controllers/ServiciosEdicion";
-import { ServiciosVisualizacion } from "../../clases_negocio/ServicioVisualizacion/ServiciosVisualizacion";
+import { ServiciosVisualizacion } from "../ServicioVisualizacion/ServiciosVisualizacion";
 import type { Estudiante } from "./Estudiante";
-import type { Beca } from "../../clases_negocio/Beca";
-import { FiltradoEstudiante } from "../../clases_negocio/ServicioVisualizacion/FiltradoEstudiante";
+import type { Beca } from "../Beca";
+import { FiltradoEstudiante } from "../ServicioVisualizacion/FiltradoEstudiante";
 
 export class Secretaria
   extends PersonalAdministrativo
