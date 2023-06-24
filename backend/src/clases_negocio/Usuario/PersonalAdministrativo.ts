@@ -1,7 +1,7 @@
 import { Usuario } from "./Usuario";
 import { Estudiante } from "./Estudiante";
 import EstudianteModel from "../../models/EstudianteModel";
-
+import { Identifier } from "sequelize";
 export class PersonalAdministrativo extends Usuario {
   cargo: string;
   estudiantes: Estudiante[];
@@ -44,7 +44,7 @@ export class PersonalAdministrativo extends Usuario {
       const estudiantes = await EstudianteModel.findAll({
         attributes: { exclude: ["createdAt", "updatedAt"] },
       });
-  
+
       return estudiantes;
     } catch (err) {
       return JSON.stringify(err);

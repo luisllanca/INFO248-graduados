@@ -9,7 +9,6 @@ const estudiante = new ServiciosEstudiante();
 const comprobante = new ServiciosComprobantes();
 const financiero = new ServicioFinanciero();
 
-
 rutasPersonalAdminisitrativo.get(
   "/estudiantes",
   async (req: Request, res: Response) => {
@@ -51,7 +50,7 @@ rutasPersonalAdminisitrativo.get(
   async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const comprobantes = await comprobante.sacarComprobante(+id);
+      const comprobantes = await comprobante.getComprobante(+id);
       const response = await JSON.parse(JSON.stringify(comprobantes));
       if (comprobantes == "{}") {
         res.status(500).json({ mensaje: "Error al filtrar comprobantes" });

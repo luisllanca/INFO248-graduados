@@ -2,7 +2,14 @@ import { DataTypes, Model } from "sequelize";
 import db from "./connection";
 import EstudianteModel from "./EstudianteModel";
 
-export default class ComprobanteModel extends Model {}
+export default class ComprobanteModel extends Model {
+  public id!: number;
+  public fecha!: Date;
+  public tipo!: string;
+  public monto!: number;
+  public img!: string;
+  public estudiante!: EstudianteModel;
+}
 
 ComprobanteModel.init(
   {
@@ -35,5 +42,6 @@ ComprobanteModel.init(
   {
     sequelize: db,
     tableName: "comprobantes",
+    timestamps: false,
   }
 );
