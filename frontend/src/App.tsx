@@ -7,11 +7,15 @@ import RestrictedRoute from "./Auth/RestrictedRoute";
 import PrivateRoute from "./Auth/PrivateRoute";
 import Home from "./Components/Home";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import Comprobantes from "./Components/Comprobantes";
+import SubirComprobante from "./Components/SubirComprobante";
 function App() {
   return (
       <BrowserRouter>
       <Switch>
         <PrivateRoute exact path="/" component={Home}/>
+        <PrivateRoute exact path="/comprobantes" component={Comprobantes}/>
+        <PrivateRoute exact path="/subirComprobante" component={SubirComprobante}/>
         <RestrictedRoute exact path="/login" component={Login} />
         <Route exact path="/register" component={SignUp} />
         </Switch>

@@ -1,31 +1,55 @@
-import React, { FC } from "react";
+import React, { useState, useEffect, FC } from 'react'
 import { RouteComponentProps } from "react-router-dom";
 import CustomizedTable from "./CustomizedTable"
 import "./home.css";
-import axios from "axios";
+import perfilImage from "../images/perfil.png";
 
 const user =
     localStorage.getItem("user") !== "undefined"
       ? JSON.parse(localStorage.getItem("user")!)
       : localStorage.clear();
 
-if(user) {
-  axios.get(`http://localhost:8080/estudiante/${user.id}`)
-  .then(function(response) {
-    const est = response.data.Estudiante;
-    localStorage.setItem("est", JSON.stringify(est));
-  })
-  .catch(function(error) {
-    console.log(error);
-  });
-}
-
 type SomeComponentProps = RouteComponentProps;
 const Home: FC<SomeComponentProps> = ({ history }) => {
+
   const logout = () => {
     localStorage.clear();
     history.push("/login");
   };
+
+  const histComp = () => {
+    history.push("/Comprobantes");
+  }
+
+  const subirComp = () => {
+    history.push("/subirComprobante");
+  }
+
+  const [est, setEst] = useState<any>();
+
+  useEffect(() => {
+    const fetchEstData = async () => {
+      const data = await fetch(`http://localhost:8080/estudiante/${user.id}`)
+        .then((res) => res.json());
+      setEst(data.Estudiante);
+      localStorage.setItem("est", JSON.stringify(data.Estudiante));
+
+      
+    }
+  
+    fetchEstData();
+  
+  }, [])
+
+  const comps =
+  localStorage.getItem("comps") !== "undefined"
+    ? JSON.parse(localStorage.getItem("comps")!)
+    : localStorage.clear();
+
+  if(comps) {
+    console.log(comps);
+  }
+
   return (
     <>
       <div
@@ -45,13 +69,29 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
           </button>
         </div>
       </div>
-      <div className="container">
-        <div
-          // className="row d-flex justify-content-center align-items-center text-center"
-          style={{ height: "100vh" }}
-        >
-          <p className="muted display-6">Hola {user.nombre}👋</p>
-          <CustomizedTable/>
+      <div className="contenedor">
+        <div className="perfil">
+          <div className="img_perfil"><img src={perfilImage} alt="Foto de perfil" width="162" height="162"/> </div>
+          
+          {/* <div
+            // className="row d-flex justify-content-center align-items-center text-center"
+          >
+            <p className="nombre_user muted display-6">Hola {user.nombre}👋</p>
+          </div>*/}
+
+          <div className="datos_perfil">
+            <p>{user.nombre} {user.apellido}</p>
+            {est && <p>{est.programa} en {est.carrera}</p>}
+          </div>
+        </div>
+
+        <div className="datos_financieros">
+          <button type="submit" className="butn" onClick={histComp}>
+            Historial de comprobantes
+          </button>
+          <button type="submit" className="butn" onClick={subirComp}>
+            Subir comprobante
+          </button>
         </div>
 
       </div>

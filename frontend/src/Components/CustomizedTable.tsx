@@ -20,23 +20,11 @@ const StyledTableCell = withStyles((theme: Theme) =>
   }),
 )(TableCell);
 
-const StyledTableHead = withStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-      },
-    },
-  }),
-)(TableHead);
-
-
 const useStyles = makeStyles({
   table: {
-    minWidth: 700,
+    minWidth: 500,
   },
 });
-
 
 function getFecha(fecha : string) {
   var info = fecha.split('-');
@@ -49,10 +37,9 @@ function getTotal(comps: any[]) {
   return `$${total}`;
 }
 
-const estudiante =
-    localStorage.getItem("est") !== "undefined"
-      ? JSON.parse(localStorage.getItem("est")!)
-      : localStorage.clear();
+const estudiante = localStorage.getItem("est") !== "undefined"
+  ? JSON.parse(localStorage.getItem("est")!)
+  : localStorage.clear();
 
 const CustomizedTable = () => {
     const classes = useStyles();
@@ -65,6 +52,7 @@ const CustomizedTable = () => {
         const data = await fetch(`http://localhost:8080/estudiante/${estudiante.id}/comprobantes`)
           .then((res) => res.json());
         setComps(data.Comps);
+        localStorage.setItem("comps", JSON.stringify(data.Comps));
       }
     
       fetchCompsData();
@@ -84,8 +72,8 @@ const CustomizedTable = () => {
         </TableHead>
         <TableBody>
           {comps.map((comp) => (
-            <TableRow key={comp.id}>
-              <TableCell>{comp.id}</TableCell>
+            <TableRow key={++c}>
+              <TableCell>{c}</TableCell>
               <TableCell align="right">{getFecha(comp.fecha)}</TableCell>
               <TableCell align="right">{comp.tipo}</TableCell>
               <TableCell align="right">${comp.monto}</TableCell>
