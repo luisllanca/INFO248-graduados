@@ -73,21 +73,13 @@ export class ServiciosComprobantes {
     //this.comprobantes.push(comp);
   }
 
-  eliminarComprobante(id: number) {
-    console.log("Eliminando comprobante...");
-    //this.comprobantes.splice(id, 1);
-  }
-
-  modificarComprobante(
-    id: number,
-    monto: number,
-    fecha: string,
-    img: string,
-    tipo: string
-  ) {
-    this.eliminarComprobante(id);
-    const builder = new BuilderComprobante();
-    this.makeComprobante(builder, id, monto, fecha, img, tipo);
+  async eliminarComprobante(id: Identifier) {
+    try {
+      const count = await ComprobanteModel.destroy({ where: { id: id } });
+      console.log("Comprobante eliminado correctamente");
+    } catch (error) {
+      throw new Error("Error al eliminar comprobante");
+    }
   }
 }
 

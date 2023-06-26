@@ -7,6 +7,14 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import { Button } from '@material-ui/core';
+import axios from 'axios';
+import { ToastContainer, toast, Flip } from "react-toastify";
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -19,6 +27,7 @@ const StyledTableCell = withStyles((theme: Theme) =>
     },
   }),
 )(TableCell);
+
 
 const useStyles = makeStyles({
   table: {
@@ -44,6 +53,57 @@ const estudiante = localStorage.getItem("est") !== "undefined"
 const CustomizedTable = () => {
     const classes = useStyles();
     let c = 0;
+
+    const [state, setState] = useState(false);
+    const [compActual, setCompActual] = useState<any>();
+  
+    const handleClickOpen = (comp: any) => {
+      setState(true);
+      setCompActual(comp);
+      // console.log(comp);
+    };
+
+    const handleClose = (aceptar: boolean) => {
+      setState(false);
+      console.log(compActual.id);
+      console.log(aceptar);
+
+      if(aceptar) {
+        axios
+      .delete(`http://localhost:8080/estudiante/eliminarComprobante/${compActual.id}`)
+      .then(function(response) {
+        if (response.data.success === false) {
+          toast.error(response.data.error, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: 0,
+            toastId: "my_toast",
+          });
+        } else {
+          toast.success("Comprobante eliminado exitosamente", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: 0,
+            toastId: "my_toast",
+          });
+          window.location.reload();
+          // history.push("/comprobantes");
+        }
+      })
+
+      .catch(function(error) {
+        console.log(error);
+      });
+      }
+    };
     
     const [comps, setComps] = useState<Array<any>>([]);
 
@@ -60,6 +120,28 @@ const CustomizedTable = () => {
     }, [])
 
     return (
+      <div>
+          <Dialog
+      open={state}
+    onClose={handleClose}
+    aria-labelledby="responsive-dialog-title"
+    >
+    <DialogTitle id="responsive-dialog-title">
+      {"Borrar comprobante"}
+    </DialogTitle>
+    <DialogContent>
+      <DialogContentText>¿Está seguro que desea borrar este comprobante?</DialogContentText>
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={() => handleClose(true)} className="btn btn-success">
+        Aceptar
+      </Button>
+      <Button onClick={() => handleClose(false)} className="btn btn-danger">
+        Cancelar
+      </Button>
+    </DialogActions>
+    </Dialog>
+
       <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="spanning table">
         <TableHead>
@@ -68,6 +150,7 @@ const CustomizedTable = () => {
             <StyledTableCell align="right">Fecha</StyledTableCell>
             <StyledTableCell align="right">Tipo</StyledTableCell>
             <StyledTableCell align="right">Monto</StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -77,6 +160,7 @@ const CustomizedTable = () => {
               <TableCell align="right">{getFecha(comp.fecha)}</TableCell>
               <TableCell align="right">{comp.tipo}</TableCell>
               <TableCell align="right">${comp.monto}</TableCell>
+              <TableCell align="center" className='borrar' onClick={() => handleClickOpen(comp)}>Borrar</TableCell>
             </TableRow>
           ))}
           <TableRow>
@@ -87,6 +171,7 @@ const CustomizedTable = () => {
         </TableBody>
       </Table>
     </TableContainer>
+      </div>
     );
 }
 

@@ -72,4 +72,25 @@ rutasEstudiante.post(
     }
   }
 );
+
+rutasEstudiante.delete(
+  "/eliminarComprobante/:id",
+  async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      console.log(id);
+
+      const comprobant = await comprobante.eliminarComprobante(
+        id
+      );
+      res.json({
+        Comprobante: `Comprobante ${id} eliminado correctamente`,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ mensaje: "Error al eliminar comprobante" });
+    }
+  }
+);
+
 export default rutasEstudiante;

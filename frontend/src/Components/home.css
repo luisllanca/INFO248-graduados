@@ -19,6 +19,10 @@
     cursor: pointer;
 }
 
+.borrar {
+    cursor: pointer;
+}
+
 .img_perfil {
     border: 3px solid #5e5e5e;
     display: inline-block;

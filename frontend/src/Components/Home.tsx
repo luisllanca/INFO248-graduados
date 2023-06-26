@@ -1,6 +1,5 @@
 import React, { useState, useEffect, FC } from 'react'
 import { RouteComponentProps } from "react-router-dom";
-import CustomizedTable from "./CustomizedTable"
 import "./home.css";
 import perfilImage from "../images/perfil.png";
 
@@ -19,11 +18,11 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
 
   const histComp = () => {
     history.push("/Comprobantes");
-  }
+  };
 
   const subirComp = () => {
     history.push("/subirComprobante");
-  }
+  };
 
   const [est, setEst] = useState<any>();
 
