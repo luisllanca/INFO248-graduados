@@ -2,12 +2,54 @@
 import { Router, Request, Response } from "express";
 // import { PersonalAdminisitrativo } from "../controllers/Usuario/PersonalAdministrativo";
 // import { inicializarData } from "../seed/inicializarData";
+import EstudianteModel from "../models/EstudianteModel";
+import UsuarioModel from "../models/UsuarioModel";
 import { ServiciosEstudiante } from "../controllers/ServiciosEstudiante";
 import { ServiciosComprobantes } from "../controllers/ServiciosComprobante";
 
 const rutasEstudiante = Router();
 const estudiante = new ServiciosEstudiante();
 const comprobante = new ServiciosComprobantes();
+
+rutasEstudiante.get(
+  "/:idUser",
+  async (req: Request, res: Response) => {
+    try {
+      const {idUser} = req.params;
+      console.log(idUser);
+
+      const est = await estudiante.obtenerUsuario(idUser);
+
+      res.json({
+        Estudiante: est,
+      });
+    }
+    catch(error) {
+      console.error(error);
+      res.status(500).json({ mensaje: "Error al obtener estudiante" });
+    }
+  }
+);
+
+rutasEstudiante.get(
+  "/:id/comprobantes",
+  async (req: Request, res: Response) => {
+    try {
+      const {id} = req.params;
+      console.log(id);
+
+      const comp = await estudiante.verComprobantes(id);
+
+      res.json({
+        Comps: comp,
+      });
+    }
+    catch(error) {
+      console.error(error);
+      res.status(500).json({ mensaje: "Error al obtener estudiante" });
+    }
+  }
+);
 
 rutasEstudiante.post(
   "/subirComprobante",
@@ -22,7 +64,7 @@ rutasEstudiante.post(
         img
       ); //falta subir comprobante
       res.json({
-        Comrpobante: "Subido exitosamente",
+        Comprobante: "Subido exitosamente",
       });
     } catch (error) {
       console.error(error);

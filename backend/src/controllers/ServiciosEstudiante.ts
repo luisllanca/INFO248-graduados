@@ -2,6 +2,9 @@ import { Identifier } from "sequelize";
 import EstudianteModel from "../models/EstudianteModel";
 import type { Estudiante } from "../clases_negocio/Usuario/Estudiante";
 import { Comprobante } from "../clases_negocio/Comprobante";
+import UsuarioModel from "../models/UsuarioModel";
+import ComprobanteModel from "../models/ComprobanteModel";
+
 export class ServiciosEstudiante {
   subirComprobante(
     est: Estudiante,
@@ -16,9 +19,14 @@ export class ServiciosEstudiante {
     comps.push(comp);
     est.setComprobantes(comps);
   }
-  verComprobantes(est: Estudiante) {
-    console.log("Visualizando comprobantes...");
-    return est.comprobantes;
+  async verComprobantes(id: Identifier) {
+    const est = await this.obtenerEstudiante(id);
+    if(est){
+      const comprobante = await ComprobanteModel.findAll({
+        where: { id_estudiante: id },
+      });
+      return comprobante;
+    }
   }
   especificarMonto(idComp: number, monto: number) {
     console.log(
@@ -50,6 +58,38 @@ export class ServiciosEstudiante {
       });
   
       return estudiantes;
+    } catch (err) {
+      return JSON.stringify(err);
+    }
+  }
+
+  async obtenerEstudiante(id: Identifier) {
+    try {
+      const estudiante = await EstudianteModel.findOne({
+        where: { id: id },
+      });
+  
+      if(estudiante){
+        return estudiante;
+      } else {
+        console.log("Estudiante no encontrado")
+      }
+    } catch (err) {
+      return JSON.stringify(err);
+    }
+  }
+
+  async obtenerUsuario(idUser: Identifier) {
+    try {
+      const estudiante = await EstudianteModel.findOne({
+        where: { id_usuario: idUser },
+      });
+  
+      if(estudiante){
+        return estudiante;
+      } else {
+        console.log("Estudiante no encontrado")
+      }
     } catch (err) {
       return JSON.stringify(err);
     }

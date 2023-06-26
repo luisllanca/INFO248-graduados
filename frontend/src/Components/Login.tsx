@@ -47,6 +47,8 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
             toastId: "my_toast",
           });
           localStorage.setItem("auth", response.data.token);
+          localStorage.setItem("user", JSON.stringify(response.data.usuario));
+          //console.log(JSON.stringify(response.data.usuario));
           setTimeout(() => {
             history.push("/");
           }, 3000);
