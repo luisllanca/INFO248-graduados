@@ -79,7 +79,7 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
           </div>*/}
 
           <div className="datos_perfil">
-            <p>{user.nombre} {user.apellido}</p>
+            {user && <p>{user.nombre} {user.apellido}</p>}
             {est && <p>{est.programa} en {est.carrera}</p>}
           </div>
         </div>
