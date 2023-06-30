@@ -52,17 +52,17 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
     console.log(comps);
   }
 
-  function getTotal(comps: any[]) {
-    let total = 0;
-    comps.forEach(comp => total += comp.monto);
-    return `$${total}`;
-  }
+  // function getTotal(comps: any[]) {
+  //   let total = 0;
+  //   comps.forEach(comp => total += comp.monto);
+  //   return `$${total}`;
+  // }
 
-  function getTotalcomps(comps: any[]) {
-    let total = 0;
-    comps.forEach(comp => total += 1);
-    return `${total}`;
-  }
+  // function getTotalcomps(comps: any[]) {
+  //   let total = 0;
+  //   comps.forEach(comp => total += 1);
+  //   return `${total}`;
+  // }
   return (
     <>
       <div className="grid">
@@ -86,11 +86,11 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
           <div className='estadofin'>Resumen Financiero</div>
           <div className='resumen3'>
             <div className='resumen1'>Monto total abonado: </div>
-            <div className='datocuadro'>{getTotal(comps)}</div>
+            <div className='datocuadro'>xd</div>
           </div>
           <div className='resumen3'>
             <div className='resumen1'>Total comprobantes ingresados:</div>
-            <div className='datocuadro'>{getTotalcomps(comps)}</div>
+            <div className='datocuadro'>xd</div>
           </div>
         </div>
         <div className="botones">
