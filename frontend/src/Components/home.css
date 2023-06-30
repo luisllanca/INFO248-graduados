@@ -217,3 +217,26 @@
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-align: center;
 }
+
+.logout {
+  text-align: center;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e8833a;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+  height: 30px;
+  font-size: 18px;
+  margin-right: 150px;
+}
+
+.logout-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 50px;
+}

@@ -84,6 +84,7 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
       <div className="grid">
         <button type="submit" className="sisgeg" onClick={home}>SISGEG</button>
         <div className="eslogan">Sistema seguimiento escuela graduados</div>
+        <div className='logout-container'><button type='submit' className='logout' onClick={logout}>Cerrar Sesion</button></div>
         <LogoImage />
       </div>
       <div className='title'>Subir comprobante</div>

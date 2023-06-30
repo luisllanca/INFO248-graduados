@@ -68,6 +68,7 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
       <div className="grid">
         <button type="submit" className="sisgeg" onClick={inicio}>SISGEG</button>
         <div className="eslogan">Sistema seguimiento escuela graduados</div>
+        <div className='logout-container'><button type='submit' className='logout' onClick={logout}>Cerrar Sesion</button></div>
         <LogoImage />
       </div>
       <div className="griddatos">
