@@ -2,7 +2,6 @@ import React, { useState, useEffect, FC } from 'react'
 import { RouteComponentProps } from "react-router-dom";
 import CustomizedTable from "./CustomizedTable"
 import "./home.css";
-import LogoImage from "./LogoImage";
 
 const estudiante = localStorage.getItem("est") !== "undefined"
   ? JSON.parse(localStorage.getItem("est")!)
@@ -26,18 +25,34 @@ const Comprobantes: FC<SomeComponentProps> = ({ history }) => {
 
   return (
     <>
-      <div className="grid">
-        <button type="submit" className="sisgeg" onClick={home}>SISGEG</button>
-        <div className="eslogan">Sistema seguimiento escuela graduados</div>
-        <LogoImage />
-      </div>
-      <div className='title'>Historial de comprobantes</div>
-      <div className='gridtablacomprobantes'>
-        <div className='containerTabla'>{estudiante && <CustomizedTable/>}</div>
-        <div className='contenedor-botones3'>
-          <button type="submit" className='ingresar_button' onClick={subirComp}>Ir a Subir comprobante</button>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          paddingLeft: 50,
+          paddingRight: 50,
+        }}
+      >
+        <div>
+          <h1 className="m-1">Historial de comprobantes</h1>
+          <button type="submit" className="butn" onClick={home}>
+            Volver
+          </button>
+        </div>
+        <div>
+          <button type="submit" className="butn" onClick={logout}>
+            Logout
+          </button>
         </div>
       </div>
+      <div className="contenedor">
+        {estudiante && <CustomizedTable/>}
+        
+        <button type="submit" className="butn" onClick={subirComp}>
+            Subir comprobante
+          </button>
+      </div>
+
     </>
   );
 };

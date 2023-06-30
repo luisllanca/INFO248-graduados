@@ -6,7 +6,6 @@ import { ToastContainer, toast, Flip } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { RouteComponentProps } from "react-router";
 import LogoImage from "./LogoImage";
-import perfilImage from "../images/perfil.png";
 import "./Login.css"; // Agregamos el archivo CSS personalizado
 
 type SomeComponentProps = RouteComponentProps;
@@ -65,22 +64,24 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
   };
 
   return (
-    <><div className="grid">
-      <div className="sisgeg">SISGEG</div>
-      <div className="eslogan">Sistema seguimiento escuela graduados</div>
-      <LogoImage />
-    </div>
-    <div className="login">
-      <div className="iniciosesion">Iniciar Sesión</div>
-      <div className="logo_img">
-        <div className="contenedor-circulo">
-          <img src={perfilImage} alt="Foto de perfil" width="162" height="162" />
-        </div>
-      </div>
-      <form autoComplete="off" onSubmit={handleSubmit(login)}>
+    <>
+      <div className="container">
+        <div
+          className="row d-flex justify-content-center align-items-center login-container"
+          style={{ height: "100vh" }}
+        >
+          <LogoImage />
+
+          <div className="card mb-3 login-card">
+            <div className="col-md-12">
+              <div className="card-body">
+                <h3 className="card-title text-center text-secondary mt-3">
+                  Inicio de Sesión
+                </h3>
+                <form autoComplete="off" onSubmit={handleSubmit(login)}>
                   <div className="mb-3 mt-4">
+                    <label className="form-label text-dark">Correo</label>
                     <input
-                      placeholder="Correo"
                       type="email"
                       className="form-control shadow-none"
                       id="exampleFormControlInput1"
@@ -95,8 +96,8 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
                     )}
                   </div>
                   <div className="mb-3">
+                    <label className="form-label text-dark">Contraseña</label>
                     <input
-                      placeholder="Contraseña"
                       type="password"
                       className="form-control shadow-none"
                       id="exampleFormControlInput2"
@@ -111,14 +112,12 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
                     )}
                   </div>
                   <div className="text-center mt-4">
-                    <div className="contenedor-botones">
-                      <button
-                        className="ingresar_button"
-                        type="submit"
-                      >
-                        Ingresar
-                      </button>
-                    </div>
+                    <button
+                      className="btn btn-outline-primary text-center shadow-none mb-3 login-button"
+                      type="submit"
+                    >
+                      Enviar
+                    </button>
                     <p className="card-text pb-2 text-dark">
                       ¿No posees una cuenta?{" "}
                       <Link
@@ -130,7 +129,23 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
                     </p>
                   </div>
                 </form>
-    </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover
+        limit={1}
+        transition={Flip}
+      />
     </>
   );
 };

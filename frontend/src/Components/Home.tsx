@@ -1,12 +1,14 @@
 import React, { useState, useEffect, FC } from 'react'
 import { RouteComponentProps } from "react-router-dom";
+import CustomizedTable from "./CustomizedTable"
 import "./home.css";
 import perfilImage from "../images/perfil.png";
+import LogoImage from "./LogoImage";
 
 const user =
-    localStorage.getItem("user") !== "undefined"
-      ? JSON.parse(localStorage.getItem("user")!)
-      : localStorage.clear();
+  localStorage.getItem("user") !== "undefined"
+    ? JSON.parse(localStorage.getItem("user")!)
+    : localStorage.clear();
 
 type SomeComponentProps = RouteComponentProps;
 const Home: FC<SomeComponentProps> = ({ history }) => {
@@ -15,14 +17,17 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
     localStorage.clear();
     history.push("/login");
   };
+  const inicio = () => {
+    history.push("/")
+  };
 
   const histComp = () => {
     history.push("/Comprobantes");
-  };
+  }
 
   const subirComp = () => {
     history.push("/subirComprobante");
-  };
+  }
 
   const [est, setEst] = useState<any>();
 
@@ -32,67 +37,66 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
         .then((res) => res.json());
       setEst(data.Estudiante);
       localStorage.setItem("est", JSON.stringify(data.Estudiante));
-
-      
     }
-  
+
     fetchEstData();
-  
+
   }, [])
 
   const comps =
-  localStorage.getItem("comps") !== "undefined"
-    ? JSON.parse(localStorage.getItem("comps")!)
-    : localStorage.clear();
+    localStorage.getItem("comps") !== "undefined"
+      ? JSON.parse(localStorage.getItem("comps")!)
+      : localStorage.clear();
 
-  if(comps) {
+  if (comps) {
     console.log(comps);
   }
 
+  function getTotal(comps: any[]) {
+    let total = 0;
+    comps.forEach(comp => total += comp.monto);
+    return `$${total}`;
+  }
+
+  function getTotalcomps(comps: any[]) {
+    let total = 0;
+    comps.forEach(comp => total += 1);
+    return `${total}`;
+  }
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          paddingLeft: 50,
-          paddingRight: 50,
-        }}
-      >
-        <div>
-          <h3 className="m-3">Inicio</h3>
+      <div className="grid">
+        <button type="submit" className="sisgeg" onClick={inicio}>SISGEG</button>
+        <div className="eslogan">Sistema seguimiento escuela graduados</div>
+        <LogoImage />
+      </div>
+      <div className="griddatos">
+        <div className="contenedor-cuadrado">
+          <img src={perfilImage} alt="Foto perfil" />
         </div>
-        <div>
-          <button type="submit" className="butn" onClick={logout}>
-            Logout
-          </button>
+        <div className="datos">
+          <div>{user.nombre} {user.apellido}</div>
+          {est && <div>{est.programa} en {est.carrera}</div>}
         </div>
       </div>
-      <div className="contenedor">
-        <div className="perfil">
-          <div className="img_perfil"><img src={perfilImage} alt="Foto de perfil" width="162" height="162"/> </div>
-          
-          {/* <div
-            // className="row d-flex justify-content-center align-items-center text-center"
-          >
-            <p className="nombre_user muted display-6">Hola {user.nombre}👋</p>
-          </div>*/}
-
-          <div className="datos_perfil">
-            {user && <p>{user.nombre} {user.apellido}</p>}
-            {est && <p>{est.programa} en {est.carrera}</p>}
+      <div className="linea"></div>
+      <div className="gridresumen">
+        <div className="resumen">
+          <div className='estadofin'>Resumen Financiero</div>
+          <div className='resumen3'>
+            <div className='resumen1'>Monto total abonado: </div>
+            <div className='datocuadro'>{getTotal(comps)}</div>
+          </div>
+          <div className='resumen3'>
+            <div className='resumen1'>Total comprobantes ingresados:</div>
+            <div className='datocuadro'>{getTotalcomps(comps)}</div>
           </div>
         </div>
-
-        <div className="datos_financieros">
-          <button type="submit" className="butn" onClick={histComp}>
-            Historial de comprobantes
-          </button>
-          <button type="submit" className="butn" onClick={subirComp}>
-            Subir comprobante
-          </button>
+        <div className="botones">
+          <div className='estadofin'>Estado Financiero</div>
+          <div className='contenedor-botones'><button type="submit" className="boton" onClick={histComp}>Historial de comprobantes</button></div>
+          <div className='contenedor-botones'><button type="submit" className="boton" onClick={subirComp}>Subir comprobante</button></div>
         </div>
-
       </div>
     </>
   );

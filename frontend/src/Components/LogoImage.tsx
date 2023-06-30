@@ -6,7 +6,11 @@ const LogoImage = () => {
       <img
         src="http://informatica.uach.cl/wp-content/uploads/2020/02/cropped-escudo-transparente.png"
         alt="Descripción de la imagen"
-        style={{ width: "100px" }}
+        style={{ 
+          width: "130px",
+          marginRight: "15px",
+          marginTop: "5px", 
+        }}
       />
     </div>
   );

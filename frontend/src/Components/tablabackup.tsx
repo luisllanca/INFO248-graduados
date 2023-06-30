@@ -19,12 +19,11 @@ import { ToastContainer, toast, Flip } from "react-toastify";
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     head: {
-      fontSize: 18,
-      backgroundColor: "transparent",
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
     },
     body: {
-      fontSize: 30,
-      textAlign: "center",
+      fontSize: 14,
     },
   }),
 )(TableCell);
@@ -32,7 +31,7 @@ const StyledTableCell = withStyles((theme: Theme) =>
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 1000,
+    minWidth: 500,
   },
 });
 
@@ -147,26 +146,26 @@ const CustomizedTable = () => {
       <Table className={classes.table} aria-label="spanning table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align='center'>N° de comprobante</StyledTableCell>
-            <StyledTableCell align="center">Fecha</StyledTableCell>
-            <StyledTableCell align="center">Tipo</StyledTableCell>
+            <StyledTableCell>N° de comprobante</StyledTableCell>
+            <StyledTableCell align="right">Fecha</StyledTableCell>
+            <StyledTableCell align="right">Tipo</StyledTableCell>
             <StyledTableCell align="right">Monto</StyledTableCell>
-            <StyledTableCell align="center"></StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {comps.map((comp) => (
             <TableRow key={++c}>
-              <TableCell align='center'>{c}</TableCell>
-              <TableCell align="center">{getFecha(comp.fecha)}</TableCell>
-              <TableCell align="center">{comp.tipo}</TableCell>
+              <TableCell>{c}</TableCell>
+              <TableCell align="right">{getFecha(comp.fecha)}</TableCell>
+              <TableCell align="right">{comp.tipo}</TableCell>
               <TableCell align="right">${comp.monto}</TableCell>
               <TableCell align="center" className='borrar' onClick={() => handleClickOpen(comp)}>Borrar</TableCell>
             </TableRow>
           ))}
           <TableRow>
             <TableCell colSpan={2} />
-            <TableCell align="center"><b>Total</b></TableCell>
+            <TableCell align="right"><b>Total</b></TableCell>
             <TableCell align="right"><b>{getTotal(comps)}</b></TableCell>
           </TableRow>
         </TableBody>
