@@ -5,7 +5,7 @@ import { Router, Request, Response } from "express";
 import EstudianteModel from "../models/EstudianteModel";
 import UsuarioModel from "../models/UsuarioModel";
 import { ServiciosEstudiante } from "../controllers/ServiciosEstudiante";
-import { ServiciosComprobantes } from "../controllers/ServiciosComprobante";
+import { ServiciosComprobantes } from "../controllers/ServiciosComprobanteANTIGUO";
 
 const rutasEstudiante = Router();
 const estudiante = new ServiciosEstudiante();

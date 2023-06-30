@@ -47,6 +47,5 @@ BecaModel.init(
   {
     sequelize: db,
     tableName: "becas",
-    timestamps: false,
   }
 );

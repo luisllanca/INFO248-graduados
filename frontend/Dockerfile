@@ -8,11 +8,10 @@ WORKDIR /app
 COPY package.json package-lock.json /app/
 
 # Instala las dependencias
-RUN npm ci --production
+RUN npm install
 
 # Copia el código fuente
-COPY public /app/public
-COPY src /app/src
+COPY . /app
 
 # Construye el proyecto
 RUN npm run build

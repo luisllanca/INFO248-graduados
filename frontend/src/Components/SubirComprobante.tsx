@@ -90,7 +90,7 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
       <div className='title'>Subir comprobante</div>
       <div className='gridcomprobante'>
         <div className='draganddrop'>hola</div>
-        <form autoComplete="off" onSubmit={handleSubmit(subirComp)}>
+        <form autoComplete="off" onClick={handleSubmit(subirComp)}>
           <div className='gridmonto'>
             <div className="select">
               <input

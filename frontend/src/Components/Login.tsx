@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from "react";
+import React, { FC, useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -13,7 +13,7 @@ import "./Login.css"; // Agregamos el archivo CSS personalizado
 type SomeComponentProps = RouteComponentProps;
 
 const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [est, setEst] = useState<any>();
   const {
     register,
     handleSubmit,

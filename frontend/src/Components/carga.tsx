@@ -16,6 +16,7 @@ const user = userString ? JSON.parse(userString) : null;
 
 type SomeComponentProps = RouteComponentProps;
 const carga: FC<SomeComponentProps> = ({ history }) => {
+    const [est, setEst] = useState<any>();
     useEffect(() => {
         setTimeout(() => {
           history.push("/"); // Reemplaza con la URL de la página a la que deseas redirigir

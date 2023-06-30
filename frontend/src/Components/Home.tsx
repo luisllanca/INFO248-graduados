@@ -14,6 +14,10 @@ import UserContext from './UserContext';
 const userString = localStorage.getItem("user");
 const user = userString ? JSON.parse(userString) : null;
 
+// const estString = localStorage.getItem("est");
+// const est = estString ? JSON.parse(estString) : null;
+
+
 type SomeComponentProps = RouteComponentProps;
 const Home: FC<SomeComponentProps> = ({ history }) => {
 
@@ -32,7 +36,6 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
   const subirComp = () => {
     history.push("/subirComprobante");
   }
-
   const [est, setEst] = useState<any>();
 
   useEffect(() => {
@@ -54,6 +57,9 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
 
   if (comps) {
     console.log(comps);
+  }
+  if (!localStorage.getItem("est")){
+      location.reload();
   }
 
   // function getTotal(comps: any[]) {

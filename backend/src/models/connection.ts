@@ -6,11 +6,11 @@ dotenv.config();
 const dbGest = new Sequelize(
   process.env.NAMEDB || "egresados",
   process.env.USERDB || "root",
-  process.env.PASSWORD || "",
+  process.env.PASSWORD || "benja123",
   {
-    host: "localhost",
+    host: process.env.HOSTDB || "localhost",
     dialect: "mysql",
-    port: Number(process.env.PORTDB) || 3306,
+    port: Number(process.env.PORTDB),
   }
 );
 

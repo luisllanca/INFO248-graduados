@@ -20,6 +20,6 @@ Todas estas funcionalidades estan unidas con la base de datos, por ende, es impo
 # Base de datos
 1. Importar el archivo que se encuentra en database a su base de datos.
 ## Para desplegar en Docker
-1. Simplemente hay que descomentar el `template.env`.
+1. Simplemente hay que descomentar el `template.env`, si esta descomentado seguir al siguiente paso.
 2. Ejecutar el comando `docker-compose up --build`.
 3. Realizar pasos desde el 4 hasta el 7 de las Instrucciones de ejecución.

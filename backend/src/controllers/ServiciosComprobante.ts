@@ -1,86 +1,152 @@
+
 import ComprobanteModel from "../models/ComprobanteModel";
 import EstudianteModel from "../models/EstudianteModel";
-import { BuilderComprobante } from "../clases_negocio/BuilderComprobante";
-import { Comprobante } from "../clases_negocio/Comprobante";
-import { Identifier } from "sequelize";
-import moment from "moment-timezone";
+import { Request, Response } from "express";
+
 export class ServiciosComprobantes {
-  //comprobantes: Comprobante[];
 
-  //constructor(comprobantes: Comprobante[]){
-  //    this.comprobantes = comprobantes;
-  //}
-
-  async getComprobante(id: Number | undefined): Promise<{}> {
-    try {
-      const comprobante = await ComprobanteModel.findAll({
-        where: { id_estudiante: id },
-        attributes: { exclude: ["createdAt", "updatedAt"] },
-      });
-      if (!comprobante) {
-        throw new Error("Comprobante no encontrado");
-      }
-      return comprobante;
-    } catch (error) {
-      return JSON.stringify(error);
-    }
+  constructor(){
   }
 
-  async subirComprobante(
-    id: Identifier | number,
-    tipo: string,
-    monto: number,
-    img: string
-  ) {
+  async getComprobantes(req: Request, res: Response){
     try {
-      const estudiante = await EstudianteModel.findByPk(id);
-      if (!estudiante) {
-        throw new Error("Estudiante no encontrado");
+      const comprobantes = await ComprobanteModel.findAll({
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
+      console.log(comprobantes);
+      // const response = await JSON.parse(JSON.stringify(comprobantes));
+      res.json({
+        ok: true,
+        msg: "Comprobantes obtenidos con exito",
+        Comprobantes: comprobantes,
+      });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ 
+            ok: false,
+            msg: "Error al obtener los comprobantes" 
+        });
+    }
+  };
+
+  async getComprobanteId(req: Request, res: Response){
+    // console.log(req.params);
+    try {
+      const id = req.params.id;
+      const comprobantes = await ComprobanteModel.findByPk(parseInt(id), {
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
+      console.log(comprobantes);
+      res.json({
+        ok: true,
+        Comprobantes: comprobantes,
+      });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ 
+            ok: false, 
+            msg: "Error al obtener comprobante por id" 
+        });
+    }
+  };
+
+//Corregir esta, validar
+  async createComprobante(req: Request, res: Response){
+    try {
+      const {monto, tipo, img, id_estudiante} = req.body;
+
+      const estudiante = await EstudianteModel.findByPk(id_estudiante);
+      if(!estudiante){
+        res.json({
+          ok: false,
+          msg: "Estudiante no encontrado"
+        });
+        return;
       }
       const fechaActual = new Date();
-
-      // Configura la hora en Santiago de Chile (UTC-4)
       fechaActual.setUTCHours(fechaActual.getUTCHours() - 4);
-      const comprobante = ComprobanteModel.build({
+      const comprobante = await ComprobanteModel.create({
         fecha: fechaActual,
         tipo: tipo,
         monto: monto,
         img: img,
-        id_estudiante: id,
+        id_estudiante: id_estudiante
       });
-      await comprobante.save();
-      console.log("Comprobante guardado correctamente");
+      // console.log(comprobantes);
+      res.json({
+        ok: true,
+        msg: "Comprobante creado",
+        Comprobantes: comprobante,
+      });
     } catch (error) {
-      throw new Error("Error al subir el comprobante");
+        console.error(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error al crear el comprobante" 
+        });
     }
-  }
+  };
 
-  makeComprobante(
-    builder: BuilderComprobante,
-    id: number,
-    monto: number,
-    fecha: string,
-    img: string,
-    tipo: string
-  ) {
-    builder.reset();
-    builder.setId(id);
-    builder.setMonto(monto);
-    builder.setFecha(fecha);
-    builder.setImg(img);
-    builder.setTipo(tipo);
-    const comp = builder.Build();
-    //this.comprobantes.push(comp);
-  }
-
-  async eliminarComprobante(id: Identifier) {
+  async deleteComprobanteId(req: Request, res: Response){
     try {
-      const count = await ComprobanteModel.destroy({ where: { id: id } });
-      console.log("Comprobante eliminado correctamente");
+      const id = req.params.id;
+      const comprobante = await ComprobanteModel.findByPk(parseInt(id), {
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
+      console.log(comprobante);
+      if(!comprobante){
+        res.json({
+          ok: false,
+          msg: "Comprobante no encontrado"
+        });
+        return;
+      }
+      await ComprobanteModel.destroy({
+        where: {id: id}
+      });
+      res.json({
+        ok: true,
+        msg: "Comprobante borrado con exito",
+        Comprobante: comprobante,
+      });
     } catch (error) {
-      throw new Error("Error al eliminar comprobante");
+        console.error(error);
+        res.status(500).json({ 
+          ok: false,
+          msg: "Error" 
+        });
     }
-  }
+  };
+// Corregir 
+  async updateComprobanteById(req: Request, res: Response){
+    // console.log(req.params);
+    try {
+      const id = req.params.id;
+      const comprobante = await ComprobanteModel.findByPk(parseInt(id), {
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
+      console.log(comprobante);
+      if(!comprobante){
+        res.json({
+          ok: false,
+          msg:"Error al buscar comprobante por id" 
+        });
+      }
+      await ComprobanteModel.update(
+        req.body,
+        { where: { id: id } }
+      );
+      res.json({
+        ok: true,
+        msg: "Comprobante actualizado",
+        Comprobante: comprobante,
+      });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ 
+          ok: false,
+          msg: "Error" 
+        });
+    }
+  };
 }
-
-export default ServiciosComprobantes;
