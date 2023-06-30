@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -7,11 +7,13 @@ import "react-toastify/dist/ReactToastify.min.css";
 import { RouteComponentProps } from "react-router";
 import LogoImage from "./LogoImage";
 import perfilImage from "../images/perfil.png";
+import UserContext from "./UserContext";
 import "./Login.css"; // Agregamos el archivo CSS personalizado
 
 type SomeComponentProps = RouteComponentProps;
 
 const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
+  const [currentUser, setCurrentUser] = useState(null);
   const {
     register,
     handleSubmit,
@@ -50,22 +52,26 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
             progress: 0,
             toastId: "my_toast",
           });
+          // 
+          // // console.log(currentUser);
           localStorage.setItem("auth", response.data.token);
           localStorage.setItem("user", JSON.stringify(response.data.usuario));
-          //console.log(JSON.stringify(response.data.usuario));
+          // console.log(JSON.stringify(response.data.usuario));
           setTimeout(() => {
-            history.push("/");
-          }, 3000);
+            history.push("/carga");
+          }, 1000);
         }
+        
       })
-
+      
       .catch(function(error) {
         console.log(error);
       });
   };
 
   return (
-    <><div className="grid">
+    <>
+    <div className="grid">
       <div className="sisgeg">SISGEG</div>
       <div className="eslogan">Sistema seguimiento escuela graduados</div>
       <LogoImage />

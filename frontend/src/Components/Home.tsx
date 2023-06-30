@@ -1,14 +1,18 @@
-import React, { useState, useEffect, FC } from 'react'
+import React, { useState, useEffect, FC, useContext } from 'react'
 import { RouteComponentProps } from "react-router-dom";
 import CustomizedTable from "./CustomizedTable"
 import "./home.css";
 import perfilImage from "../images/perfil.png";
 import LogoImage from "./LogoImage";
+import UserContext from './UserContext';
 
-const user =
-  localStorage.getItem("user") !== "undefined"
-    ? JSON.parse(localStorage.getItem("user")!)
-    : localStorage.clear();
+// const user =
+//   localStorage.getItem("user") !== "undefined"
+//     ? JSON.parse(localStorage.getItem("user")!)
+//     : localStorage.clear();
+
+const userString = localStorage.getItem("user");
+const user = userString ? JSON.parse(userString) : null;
 
 type SomeComponentProps = RouteComponentProps;
 const Home: FC<SomeComponentProps> = ({ history }) => {
