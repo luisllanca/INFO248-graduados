@@ -15,7 +15,7 @@ export class ServiciosComprobantes {
       });
       console.log(comprobantes);
       // const response = await JSON.parse(JSON.stringify(comprobantes));
-      res.json({
+      res.status(200).json({
         ok: true,
         msg: "Comprobantes obtenidos con exito",
         Comprobantes: comprobantes,
@@ -37,7 +37,7 @@ export class ServiciosComprobantes {
         attributes: { exclude: ["createdAt", "updatedAt"] },
       });
       console.log(comprobantes);
-      res.json({
+      res.status(200).json({
         ok: true,
         Comprobantes: comprobantes,
       });
@@ -55,7 +55,7 @@ export class ServiciosComprobantes {
       const id_estudiante = req.params.id;
       const estudiante = await EstudianteModel.findByPk(id_estudiante);
       if(!estudiante){
-        res.json({
+        res.status(404).json({
           ok: false,
           msg: "Estudiante no encontrado"
         });
@@ -65,7 +65,7 @@ export class ServiciosComprobantes {
         where: { id_estudiante: id_estudiante },
       });
       // console.log(comprobantes);
-      res.json({
+      res.status(200).json({
         ok: true,
         msg: "Comprobantes obtenidos de estudiante con exito",
         Comprobantes: comprobante,

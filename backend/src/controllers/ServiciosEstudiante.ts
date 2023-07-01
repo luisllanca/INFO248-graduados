@@ -14,7 +14,7 @@ export class ServiciosEstudiantes {
       });
     //   console.log(estudiantes);
       // const response = await JSON.parse(JSON.stringify(estudiantes));
-      res.json({
+      res.status(200).json({
         ok: true,
         msg: "Estudiantes obtenidos con exito",
         Estudiantes: estudiantes,
@@ -36,7 +36,7 @@ export class ServiciosEstudiantes {
         attributes: { exclude: ["createdAt", "updatedAt"] },
       });
     //   console.log(estudiantes);
-      res.json({
+      res.status(200).json({
         ok: true,
         Estudiantes: estudiantes,
       });

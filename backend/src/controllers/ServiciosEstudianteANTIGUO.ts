@@ -25,6 +25,7 @@ export class ServiciosEstudiante {
       const comprobante = await ComprobanteModel.findAll({
         where: { id_estudiante: id },
       });
+      console.log(comprobante);
       return comprobante;
     }
   }

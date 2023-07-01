@@ -11,9 +11,9 @@ export class ServiciosBecas{
       const becas = await BecaModel.findAll({
         attributes: { exclude: ["createdAt", "updatedAt"] },
       });
-      console.log(becas);
+      // console.log(becas);
       // const response = await JSON.parse(JSON.stringify(becas));
-      res.json({
+      res.status(200).json({
         ok: true,
         Becas: becas,
       });
@@ -21,7 +21,7 @@ export class ServiciosBecas{
         console.error(error);
         res.status(500).json({ 
           ok:false,
-          mensaje: "Error al obtener becas" 
+          msg: "Error al obtener becas" 
         });
     }
   };
@@ -33,8 +33,8 @@ export class ServiciosBecas{
       const becas = await BecaModel.findByPk(parseInt(id), {
         attributes: { exclude: ["createdAt", "updatedAt"] },
       });
-      console.log(becas);
-      res.json({
+      // console.log(becas);
+      res.status(200).json({
         ok: true,
         Becas: becas,
       });
@@ -42,7 +42,7 @@ export class ServiciosBecas{
         console.error(error);
         res.status(500).json({ 
           ok: false,
-          mensaje: "Error al obtener beca por id" 
+          msg: "Error al obtener beca por id" 
         });
     }
   };
@@ -51,8 +51,8 @@ export class ServiciosBecas{
     try {
       // const {tipo, monto, fechaAsi, fechaExp, descripcion, id_estudiante} = req.body;
       const becas = await BecaModel.create(req.body);
-      console.log(becas);
-      res.json({
+      // console.log(becas);
+      res.status(201).json({
         ok:true,
         Becas: becas,
       });
@@ -60,7 +60,7 @@ export class ServiciosBecas{
         console.error(error);
         res.status(500).json({ 
           ok: true,
-          mensaje: "Error al crear la beca" 
+          msg: "Error al crear la beca" 
         });
     }
   };
@@ -74,7 +74,7 @@ export class ServiciosBecas{
       });
       // console.log(beca);
       if(!beca){
-        res.json({
+        res.status(404).json({
           ok: false,
           msg: "Error beca no encontrada"
         });
@@ -83,15 +83,15 @@ export class ServiciosBecas{
       await BecaModel.destroy({
         where: {id: id}
       });
-      res.json({
+      res.status(200).json({
         ok: true,
         Beca: beca,
       });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         res.status(500).json({ 
           ok: false,
-          mensaje: "Error al buscar beca por id" 
+          msg: "Error al buscar beca por id" 
         });
     }
   };
@@ -103,10 +103,11 @@ export class ServiciosBecas{
       const beca = await BecaModel.findByPk(parseInt(id), {
         attributes: { exclude: ["createdAt", "updatedAt"] },
       });
-      console.log(beca);
+      // console.log(beca);
       if(!beca){
-        res.json({
+        res.status(404).json({
           ok: false,
+          msg: "Beca no encontrada"
         });
         return;
       }
@@ -114,15 +115,16 @@ export class ServiciosBecas{
         req.body,
         { where: { id: id } }
       );
-      res.json({
+      res.status(200).json({
         ok: true,
+        msg: "Beca actualizada",
         Beca: beca,
       });
     } catch (error) {
         console.error(error);
         res.status(500).json({ 
           ok: false,
-          mensaje: "Error al buscar beca por id" 
+          msg: "Error al buscar beca por id" 
         });
     }
   };
