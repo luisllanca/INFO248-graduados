@@ -3,32 +3,6 @@ import { RouteComponentProps } from "react-router-dom";
 import "./home.css";
 import perfilImage from "../images/perfil.png";
 import LogoImage from "./LogoImage";
-import UserContext from './UserContext';
-
-// const userString = localStorage.getItem("user");
-// const user = userString ? JSON.parse(userString) : null;
-
-// interface Usuario {
-//   id: number,
-//   nombre: string,
-//   apellido: string,
-//   carrera: string,
-//   programa: string,
-//   id_usuario: number
-// }
-
-// const user : Usuario = {
-//   id: 4,
-//   nombre: "isidora",
-//   apellido: "hernandez",
-//   carrera: "informatica",
-//   programa: "magister",
-//   id_usuario: 6
-// }
-
-// const estString = localStorage.getItem("est");
-// const est = estString ? JSON.parse(estString) : null;
-
 
 type SomeComponentProps = RouteComponentProps;
 const Home: FC<SomeComponentProps> = ({ history }) => {
@@ -54,7 +28,7 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
       ? JSON.parse(localStorage.getItem("user")!)
       : localStorage.clear();
 
-  console.log(user);
+  // console.log(user);
 
   const [est, setEst] = useState<any>();
   const [comps, setComps] = useState<any>();
@@ -64,6 +38,7 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
       const responseEst = await fetch(`http://localhost:8080/estudiantes/user/${user.id}`);
       const dataEst = await responseEst.json();
       setEst(dataEst.Estudiante);
+      localStorage.setItem("est", JSON.stringify(dataEst.Estudiante));
   
       if (dataEst.Estudiante) {
         const responseComps = await fetch(`http://localhost:8080/comprobantes/estudiante/${dataEst.Estudiante.id}`);
@@ -75,18 +50,6 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
   
     fetchData();
   }, []);
-
-  // const comps =
-  //   localStorage.getItem("comps") !== "undefined"
-  //     ? JSON.parse(localStorage.getItem("comps")!)
-  //     : localStorage.clear();
-
-  // if (comps) {
-  //   console.log(comps);
-  // }
-  // if (!localStorage.getItem("est")){
-  //     location.reload();
-  // }
 
   function getTotal(comps: any[]) {
     let total = 0;

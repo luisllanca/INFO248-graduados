@@ -31,10 +31,6 @@ function getTotal(comps: any[]) {
     return `$${total}`;
 }
 
-const estudiante = localStorage.getItem("est") !== "undefined"
-  ? JSON.parse(localStorage.getItem("est")!)
-  : localStorage.clear();
-
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -172,6 +168,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const EnhancedTable = () => {
     const classes = useStyles();
+
+    const estudiante = localStorage.getItem("est") !== "undefined"
+      ? JSON.parse(localStorage.getItem("est")!)
+      : localStorage.clear();
 
     const [state, setState] = useState(false);
     const [compActual, setCompActual] = useState<any>();

@@ -1,13 +1,8 @@
 import React, { useState, useEffect, FC } from 'react'
 import { RouteComponentProps } from "react-router-dom";
-import CustomizedTable from "./CustomizedTable"
 import "./home.css";
 import LogoImage from "./LogoImage";
 import EnhancedTable from './EnhancedTable';
-
-const estudiante = localStorage.getItem("est") !== "undefined"
-  ? JSON.parse(localStorage.getItem("est")!)
-  : localStorage.clear();
 
 type SomeComponentProps = RouteComponentProps;
 const Comprobantes: FC<SomeComponentProps> = ({ history }) => {
@@ -35,7 +30,7 @@ const Comprobantes: FC<SomeComponentProps> = ({ history }) => {
       </div>
       <div className='title'>Historial de comprobantes</div>
       <div className='gridtablacomprobantes'>
-        <div className='containerTabla'>{estudiante && <EnhancedTable/>}</div>
+        <div className='containerTabla'><EnhancedTable/></div>
         <div className='contenedor-botones3'>
           <button type="submit" className='ingresar_button' onClick={subirComp}>Ir a Subir comprobante</button>
         </div>
