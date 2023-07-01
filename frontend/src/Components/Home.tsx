@@ -1,18 +1,37 @@
 import React, { useState, useEffect, FC, useContext } from 'react'
 import { RouteComponentProps } from "react-router-dom";
-import CustomizedTable from "./CustomizedTable"
 import "./home.css";
 import perfilImage from "../images/perfil.png";
 import LogoImage from "./LogoImage";
 import UserContext from './UserContext';
 
-// const user =
-//   localStorage.getItem("user") !== "undefined"
-//     ? JSON.parse(localStorage.getItem("user")!)
-//     : localStorage.clear();
+const user =
+    localStorage.getItem("user") !== "undefined"
+      ? JSON.parse(localStorage.getItem("user")!)
+      : localStorage.clear();
 
-const userString = localStorage.getItem("user");
-const user = userString ? JSON.parse(userString) : null;
+console.log(user);
+
+// const userString = localStorage.getItem("user");
+// const user = userString ? JSON.parse(userString) : null;
+
+// interface Usuario {
+//   id: number,
+//   nombre: string,
+//   apellido: string,
+//   carrera: string,
+//   programa: string,
+//   id_usuario: number
+// }
+
+// const user : Usuario = {
+//   id: 4,
+//   nombre: "isidora",
+//   apellido: "hernandez",
+//   carrera: "informatica",
+//   programa: "magister",
+//   id_usuario: 6
+// }
 
 // const estString = localStorage.getItem("est");
 // const est = estString ? JSON.parse(estString) : null;
@@ -30,49 +49,56 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
   };
 
   const histComp = () => {
-    history.push("/Comprobantes");
+    history.push("/comprobantes");
   }
 
   const subirComp = () => {
     history.push("/subirComprobante");
   }
+
   const [est, setEst] = useState<any>();
+  const [comps, setComps] = useState<any>();
 
   useEffect(() => {
-    const fetchEstData = async () => {
-      const data = await fetch(`http://localhost:8080/estudiante/${user.id}`)
-        .then((res) => res.json());
-      setEst(data.Estudiante);
-      localStorage.setItem("est", JSON.stringify(data.Estudiante));
-    }
+    const fetchData = async () => {
+      const responseEst = await fetch(`http://localhost:8080/estudiantes/user/${user.id_usuario}`);
+      const dataEst = await responseEst.json();
+      setEst(dataEst.Estudiante);
+  
+      if (dataEst.Estudiante) {
+        const responseComps = await fetch(`http://localhost:8080/comprobantes/estudiante/${dataEst.Estudiante.id}`);
+        const dataComps = await responseComps.json();
+        setComps(dataComps.Comprobantes);
+        console.log(dataComps.Comprobantes);
+      }
+    };
+  
+    fetchData();
+  }, []);
 
-    fetchEstData();
+  // const comps =
+  //   localStorage.getItem("comps") !== "undefined"
+  //     ? JSON.parse(localStorage.getItem("comps")!)
+  //     : localStorage.clear();
 
-  }, [])
-
-  const comps =
-    localStorage.getItem("comps") !== "undefined"
-      ? JSON.parse(localStorage.getItem("comps")!)
-      : localStorage.clear();
-
-  if (comps) {
-    console.log(comps);
-  }
-  if (!localStorage.getItem("est")){
-      location.reload();
-  }
-
-  // function getTotal(comps: any[]) {
-  //   let total = 0;
-  //   comps.forEach(comp => total += comp.monto);
-  //   return `$${total}`;
+  // if (comps) {
+  //   console.log(comps);
+  // }
+  // if (!localStorage.getItem("est")){
+  //     location.reload();
   // }
 
-  // function getTotalcomps(comps: any[]) {
-  //   let total = 0;
-  //   comps.forEach(comp => total += 1);
-  //   return `${total}`;
-  // }
+  function getTotal(comps: any[]) {
+    let total = 0;
+    comps.forEach(comp => total += comp.monto);
+    return `$${total}`;
+  }
+
+  function getTotalComps(comps: any[]) {
+    let total = 0;
+    comps.forEach(comp => total += 1);
+    return `${total}`;
+  }
   return (
     <>
       <div className="grid">
@@ -86,7 +112,7 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
           <img src={perfilImage} alt="Foto perfil" />
         </div>
         <div className="datos">
-          <div>{user.nombre} {user.apellido}</div>
+          {user && <div>{user.nombre} {user.apellido}</div>}
           {est && <div>{est.programa} en {est.carrera}</div>}
         </div>
       </div>
@@ -96,11 +122,11 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
           <div className='estadofin'>Resumen Financiero</div>
           <div className='resumen3'>
             <div className='resumen1'>Monto total abonado: </div>
-            <div className='datocuadro'>xd</div>
+            <div className='datocuadro'>{comps ? getTotal(comps) : "$0"}</div>
           </div>
           <div className='resumen3'>
             <div className='resumen1'>Total comprobantes ingresados:</div>
-            <div className='datocuadro'>xd</div>
+            <div className='datocuadro'>{comps ? getTotalComps(comps) : "0"}</div>
           </div>
         </div>
         <div className="botones">

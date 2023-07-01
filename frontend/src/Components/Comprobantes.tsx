@@ -3,6 +3,7 @@ import { RouteComponentProps } from "react-router-dom";
 import CustomizedTable from "./CustomizedTable"
 import "./home.css";
 import LogoImage from "./LogoImage";
+import EnhancedTable from './EnhancedTable';
 
 const estudiante = localStorage.getItem("est") !== "undefined"
   ? JSON.parse(localStorage.getItem("est")!)
@@ -34,7 +35,7 @@ const Comprobantes: FC<SomeComponentProps> = ({ history }) => {
       </div>
       <div className='title'>Historial de comprobantes</div>
       <div className='gridtablacomprobantes'>
-        <div className='containerTabla'>{estudiante && <CustomizedTable/>}</div>
+        <div className='containerTabla'>{estudiante && <EnhancedTable/>}</div>
         <div className='contenedor-botones3'>
           <button type="submit" className='ingresar_button' onClick={subirComp}>Ir a Subir comprobante</button>
         </div>

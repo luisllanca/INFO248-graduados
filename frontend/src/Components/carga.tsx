@@ -11,8 +11,26 @@ import UserContext from './UserContext';
 //     ? JSON.parse(localStorage.getItem("user")!)
 //     : localStorage.clear();
 
-const userString = localStorage.getItem("user");
-const user = userString ? JSON.parse(userString) : null;
+// const userString = localStorage.getItem("user");
+// const user = userString ? JSON.parse(userString) : null;
+
+// interface Usuario {
+//   id: number,
+//   nombre: string,
+//   apellido: string,
+//   carrera: string,
+//   programa: string,
+//   id_usuario: number
+// }
+
+// const user : Usuario = {
+//   id: 4,
+//   nombre: "isidora",
+//   apellido: "hernandez",
+//   carrera: "informatica",
+//   programa: "magister",
+//   id_usuario: 6
+// }
 
 type SomeComponentProps = RouteComponentProps;
 const carga: FC<SomeComponentProps> = ({ history }) => {

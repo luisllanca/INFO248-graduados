@@ -180,14 +180,14 @@
   width: 300px;
 }
 
-.containerTabla {
+/* .containerTabla {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 90%;
   width: 90%;
   margin-top: 10px;
-}
+} */
 
 .gridtablacomprobantes{
   align-items: center;

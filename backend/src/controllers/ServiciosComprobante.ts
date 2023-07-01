@@ -82,7 +82,7 @@ export class ServiciosComprobantes {
 //Corregir esta, validar
   async createComprobante(req: Request, res: Response){
     try {
-      const {monto, tipo, img, id_estudiante} = req.body;
+      const {id_estudiante, tipo, monto, img} = req.body;
 
       const estudiante = await EstudianteModel.findByPk(id_estudiante);
       if(!estudiante){
@@ -92,8 +92,10 @@ export class ServiciosComprobantes {
         });
         return;
       }
+
       const fechaActual = new Date();
       fechaActual.setUTCHours(fechaActual.getUTCHours() - 4);
+
       const comprobante = await ComprobanteModel.create({
         fecha: fechaActual,
         tipo: tipo,
@@ -101,7 +103,7 @@ export class ServiciosComprobantes {
         img: img,
         id_estudiante: id_estudiante
       });
-      // console.log(comprobantes);
+      await comprobante.save();
       res.json({
         ok: true,
         msg: "Comprobante creado",

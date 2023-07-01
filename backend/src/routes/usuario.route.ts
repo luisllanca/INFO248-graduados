@@ -7,12 +7,12 @@ const usuario = new ServiciosUsuario();
 
 rutasUsuario.get("/", (req: Request, res: Response) => usuario.getUsuarios(req, res));
 
-rutasUsuario.get("/login", (req: Request, res: Response) => usuario.loguearse(req, res));
-
 rutasUsuario.get("/:id", (req: Request, res: Response) => usuario.getUsuarioId(req, res));
 
 
 // rutasUsuario.get("/estudiante/:id", (req: Request, res: Response) => usuario.getUsuarioEstudianteById(req, res));
+
+rutasUsuario.post("/login", (req: Request, res: Response) => usuario.loguearse(req, res));
 
 rutasUsuario.post("/registrar",  [
     check("nombre", "El nombre es obligatorio").notEmpty().isString(),

@@ -3,6 +3,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import axios from 'axios';
 import { ToastContainer, toast, Flip } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 import "./home.css";
 import LogoImage from "./LogoImage";
 
@@ -35,7 +36,7 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
 
   const subirComp = (data: any) => {
     let params = {
-      id: est.id,
+      id_estudiante: est.id,
       tipo: data.tipo,
       monto: data.monto,
       img: "xd.png"
@@ -44,7 +45,7 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
     // console.log(params);
 
     axios
-      .post("http://localhost:8080/estudiante/subirComprobante", params)
+      .post("http://localhost:8080/comprobantes", params)
       .then(function (response) {
         if (response.data.success === false) {
           toast.error(response.data.error, {
@@ -70,7 +71,7 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
           });
           setTimeout(() => {
             history.push("/comprobantes");
-          }, 3000);
+          }, 1000);
         }
       })
 
@@ -108,7 +109,7 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
             </div>
             <div className="select">
               <select id="select"{...register("tipo", { required: true })}>
-                <option value="">Select...</option>
+                <option value="">Seleccione...</option>
                 <option value="Arancel">Arancel</option>
                 <option value="Matricula">Matrícula</option>
               </select>

@@ -16,12 +16,12 @@ function App() {
       <BrowserRouter>
       <Switch>
         <PrivateRoute exact path="/" component={Home}/>
-        <PrivateRoute exact path="/carga" component={carga}/>
+        {/* <PrivateRoute exact path="/carga" component={carga}/> */}
         <PrivateRoute exact path="/comprobantes" component={Comprobantes}/>
         <PrivateRoute exact path="/subirComprobante" component={SubirComprobante}/>
         <RestrictedRoute exact path="/login" component={Login} />
         <Route exact path="/register" component={SignUp} />
-        </Switch>
+      </Switch>
     </BrowserRouter>
   );
 }

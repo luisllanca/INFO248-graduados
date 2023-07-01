@@ -55,10 +55,10 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
           // 
           // // console.log(currentUser);
           localStorage.setItem("auth", response.data.token);
-          localStorage.setItem("user", JSON.stringify(response.data.usuario));
+          localStorage.setItem("user", JSON.stringify(response.data.Usuario));
           // console.log(JSON.stringify(response.data.usuario));
           setTimeout(() => {
-            history.push("/carga");
+            history.push("/");
           }, 1000);
         }
         

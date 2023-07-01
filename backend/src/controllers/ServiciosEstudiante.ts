@@ -49,6 +49,28 @@ export class ServiciosEstudiantes {
     }
   };
 
+  async getEstudianteByUser(req: Request, res: Response){
+    // console.log(req.params);
+    try {
+      const idUser = req.params.id;
+      const estudiante = await EstudianteModel.findOne({
+        where: { id_usuario: idUser },
+      });
+
+      res.status(200).json({
+        ok: true,
+        Estudiante: estudiante,
+      });
+      console.log(estudiante);
+    } catch (error) {
+      console.error(error);
+        res.status(500).json({ 
+            ok: false, 
+            msg: "Error al obtener estudiante por id de usuario" 
+        });
+    }
+  };
+
 // //Corregir esta, validar
 //   async createEstudiante(req: Request, res: Response){
 //     try {

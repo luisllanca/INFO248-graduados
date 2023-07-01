@@ -1,0 +1,19 @@
+{
+  "name": "info248-graduados",
+  "version": "1.0.0",
+  "description": "Este grupo está conformado por:  \r 1. Isidora Hernández  \r 2. Luis Llanca  \r 3. Felipe Prieto\r 4. Benjamín Cifuentes  \r 5. Alejandro Villagrán  \r 6. Rodolfo Seguel  \r 7. Hernán Cornejo\r 8. Cristián Cárdenas\r 9. Tomás Manriquez\r 10. Sebastián Paredes\r 11. Matías Martinez",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luisllanca/INFO248-graduados.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luisllanca/INFO248-graduados/issues"
+  },
+  "homepage": "https://github.com/luisllanca/INFO248-graduados#readme"
+}
