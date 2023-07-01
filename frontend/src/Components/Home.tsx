@@ -5,13 +5,6 @@ import perfilImage from "../images/perfil.png";
 import LogoImage from "./LogoImage";
 import UserContext from './UserContext';
 
-const user =
-    localStorage.getItem("user") !== "undefined"
-      ? JSON.parse(localStorage.getItem("user")!)
-      : localStorage.clear();
-
-console.log(user);
-
 // const userString = localStorage.getItem("user");
 // const user = userString ? JSON.parse(userString) : null;
 
@@ -56,12 +49,19 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
     history.push("/subirComprobante");
   }
 
+  const user =
+    localStorage.getItem("user") !== "undefined"
+      ? JSON.parse(localStorage.getItem("user")!)
+      : localStorage.clear();
+
+  console.log(user);
+
   const [est, setEst] = useState<any>();
   const [comps, setComps] = useState<any>();
 
   useEffect(() => {
     const fetchData = async () => {
-      const responseEst = await fetch(`http://localhost:8080/estudiantes/user/${user.id_usuario}`);
+      const responseEst = await fetch(`http://localhost:8080/estudiantes/user/${user.id}`);
       const dataEst = await responseEst.json();
       setEst(dataEst.Estudiante);
   
