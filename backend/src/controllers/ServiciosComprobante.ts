@@ -50,6 +50,35 @@ export class ServiciosComprobantes {
     }
   };
 
+  async getComprobanteEstudianteById(req: Request, res: Response){
+    try {
+      const id_estudiante = req.params.id;
+      const estudiante = await EstudianteModel.findByPk(id_estudiante);
+      if(!estudiante){
+        res.json({
+          ok: false,
+          msg: "Estudiante no encontrado"
+        });
+        return;
+      }
+      const comprobante = await ComprobanteModel.findAll({
+        where: { id_estudiante: id_estudiante },
+      });
+      // console.log(comprobantes);
+      res.json({
+        ok: true,
+        msg: "Comprobantes obtenidos de estudiante con exito",
+        Comprobantes: comprobante,
+      });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error" 
+        });
+    }
+  };
+
 //Corregir esta, validar
   async createComprobante(req: Request, res: Response){
     try {

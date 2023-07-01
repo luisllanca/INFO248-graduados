@@ -8,11 +8,14 @@ rutasComprobante.get("/", (req: Request, res: Response) => comprobantes.getCompr
 
 rutasComprobante.get("/:id", (req: Request, res: Response) => comprobantes.getComprobanteId(req, res));
 
+rutasComprobante.get("/estudiante/:id", (req: Request, res: Response) => comprobantes.getComprobanteEstudianteById(req, res));
+
 rutasComprobante.post("/", (req: Request, res: Response) => comprobantes.createComprobante(req, res));
 
 rutasComprobante.delete("/:id", (req: Request, res: Response) => comprobantes.deleteComprobanteId(req, res));
 
 rutasComprobante.put("/:id", (req: Request, res: Response) => comprobantes.updateComprobanteById(req, res));
+
 
 export default rutasComprobante;
 

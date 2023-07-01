@@ -1,96 +1,21 @@
-//Crear rutas más adelante.
 import { Router, Request, Response } from "express";
-// import { PersonalAdminisitrativo } from "../controllers/Usuario/PersonalAdministrativo";
-// import { inicializarData } from "../seed/inicializarData";
-import EstudianteModel from "../models/EstudianteModel";
-import UsuarioModel from "../models/UsuarioModel";
-import { ServiciosEstudiante } from "../controllers/ServiciosEstudiante";
-import { ServiciosComprobantes } from "../controllers/ServiciosComprobanteANTIGUO";
+import { ServiciosEstudiantes} from "../controllers/ServiciosEstudiante";
 
 const rutasEstudiante = Router();
-const estudiante = new ServiciosEstudiante();
-const comprobante = new ServiciosComprobantes();
+const comprobantes = new ServiciosEstudiantes();
 
-rutasEstudiante.get(
-  "/:idUser",
-  async (req: Request, res: Response) => {
-    try {
-      const {idUser} = req.params;
-      console.log(idUser);
+rutasEstudiante.get("/", (req: Request, res: Response) => comprobantes.getEstudiantes(req, res));
 
-      const est = await estudiante.obtenerUsuario(idUser);
+rutasEstudiante.get("/:id", (req: Request, res: Response) => comprobantes.getEstudianteId(req, res));
 
-      res.json({
-        Estudiante: est,
-      });
-    }
-    catch(error) {
-      console.error(error);
-      res.status(500).json({ mensaje: "Error al obtener estudiante" });
-    }
-  }
-);
+// rutasEstudiante.get("/estudiante/:id", (req: Request, res: Response) => comprobantes.getEstudianteEstudianteById(req, res));
 
-rutasEstudiante.get(
-  "/:id/comprobantes",
-  async (req: Request, res: Response) => {
-    try {
-      const {id} = req.params;
-      console.log(id);
+// rutasEstudiante.post("/", (req: Request, res: Response) => comprobantes.createEstudiante(req, res));
 
-      const comp = await estudiante.verComprobantes(id);
+// rutasEstudiante.delete("/:id", (req: Request, res: Response) => comprobantes.deleteEstudianteId(req, res));
 
-      res.json({
-        Comps: comp,
-      });
-    }
-    catch(error) {
-      console.error(error);
-      res.status(500).json({ mensaje: "Error al obtener estudiante" });
-    }
-  }
-);
+// rutasEstudiante.put("/:id", (req: Request, res: Response) => comprobantes.updateEstudianteById(req, res));
 
-rutasEstudiante.post(
-  "/subirComprobante",
-  async (req: Request, res: Response) => {
-    try {
-      const { id, tipo, monto, img } = req.body;
-
-      const comprobant = await comprobante.subirComprobante(
-        id,
-        tipo,
-        monto,
-        img
-      ); //falta subir comprobante
-      res.json({
-        Comprobante: "Subido exitosamente",
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ mensaje: "Error al subir comprobante" });
-    }
-  }
-);
-
-rutasEstudiante.delete(
-  "/eliminarComprobante/:id",
-  async (req: Request, res: Response) => {
-    try {
-      const { id } = req.params;
-      console.log(id);
-
-      const comprobant = await comprobante.eliminarComprobante(
-        id
-      );
-      res.json({
-        Comprobante: `Comprobante ${id} eliminado correctamente`,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ mensaje: "Error al eliminar comprobante" });
-    }
-  }
-);
 
 export default rutasEstudiante;
+

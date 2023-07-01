@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 // import { PersonalAdminisitrativo } from "../controllers/Usuario/PersonalAdministrativo";
 // import { inicializarData } from "../seed/inicializarData";
-import { ServiciosEstudiante } from "../controllers/ServiciosEstudiante";
+import { ServiciosEstudiante } from "../controllers/ServiciosEstudianteANTIGUO";
 import { ServiciosComprobantes } from "../controllers/ServiciosComprobanteANTIGUO";
 import { ServicioFinanciero } from "../controllers/ServicioFinanciero";
 const rutasPersonalAdminisitrativo = Router();
