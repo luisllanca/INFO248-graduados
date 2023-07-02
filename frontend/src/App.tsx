@@ -11,6 +11,7 @@ import Comprobantes from "./Components/Comprobantes";
 import SubirComprobante from "./Components/SubirComprobante";
 import UserContext from "./Components/UserContext";
 import carga from "./Components/carga";
+import HomeAdmin from "./Components/HomeAdmin";
 function App() {
   return (
       <BrowserRouter>
@@ -20,6 +21,7 @@ function App() {
         <PrivateRoute exact path="/comprobantes" component={Comprobantes}/>
         <PrivateRoute exact path="/subirComprobante" component={SubirComprobante}/>
         <RestrictedRoute exact path="/login" component={Login} />
+        <PrivateRoute exact path="/admin" component={HomeAdmin}/>
         <Route exact path="/register" component={SignUp} />
       </Switch>
     </BrowserRouter>
