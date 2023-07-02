@@ -20,23 +20,23 @@ CREATE DATABASE IF NOT EXISTS `egresados` /*!40100 DEFAULT CHARACTER SET utf8mb4
 USE `egresados`;
 
 -- Volcando estructura para tabla egresados.becas
-CREATE TABLE IF NOT EXISTS `becas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tipo` varchar(50) NOT NULL,
-  `monto` int(11) NOT NULL,
-  `fechaAsi` datetime NOT NULL,
-  `fechaExp` datetime NOT NULL,
-  `id_estudiante` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_estudiante` (`id_estudiante`),
-  CONSTRAINT `FK_becas_estudiantes` FOREIGN KEY (`id_estudiante`) REFERENCES `estudiantes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- CREATE TABLE IF NOT EXISTS `becas` (
+--   `id` int(11) NOT NULL AUTO_INCREMENT,
+--   `tipo` varchar(50) NOT NULL,
+--   `monto` int(11) NOT NULL,
+--   `fechaAsi` datetime NOT NULL,
+--   `fechaExp` datetime NOT NULL,
+--   `id_estudiante` int(11) NOT NULL,
+--   PRIMARY KEY (`id`),
+--   KEY `id_estudiante` (`id_estudiante`),
+--   CONSTRAINT `FK_becas_estudiantes` FOREIGN KEY (`id_estudiante`) REFERENCES `estudiantes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+-- ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla egresados.becas: ~3 rows (aproximadamente)
-REPLACE INTO `becas` (`id`, `tipo`, `monto`, `fechaAsi`, `fechaExp`, `id_estudiante`) VALUES
-	(1, 'gratuidad', 100, '2023-05-15 18:32:03', '2023-05-15 18:32:07', 1),
-	(2, 'Profesores', 100, '2023-05-15 18:32:03', '2023-05-15 18:32:07', 2),
-	(3, 'gratuidad', 100, '2023-05-15 18:32:03', '2023-05-15 18:32:07', 3);
+-- -- Volcando datos para la tabla egresados.becas: ~3 rows (aproximadamente)
+-- REPLACE INTO `becas` (`id`, `tipo`, `monto`, `fechaAsi`, `fechaExp`, `id_estudiante`) VALUES
+-- 	(1, 'gratuidad', 100, '2023-05-15 18:32:03', '2023-05-15 18:32:07', 1),
+-- 	(2, 'Profesores', 100, '2023-05-15 18:32:03', '2023-05-15 18:32:07', 2),
+-- 	(3, 'gratuidad', 100, '2023-05-15 18:32:03', '2023-05-15 18:32:07', 3);
 
 -- Volcando estructura para tabla egresados.comprobantes
 CREATE TABLE IF NOT EXISTS `comprobantes` (
@@ -96,18 +96,26 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) DEFAULT NULL,
   `apellido` varchar(50) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
+  `rol` varchar(50) DEFAULT NULL,
+  -- `password` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla egresados.usuarios: ~5 rows (aproximadamente)
-REPLACE INTO `usuarios` (`id`, `nombre`, `apellido`, `password`, `email`) VALUES
-	(1, 'matias', 'martinez', '123413', 'matias.martinez@correo.cl'),
-	(2, 'juan', 'manriquez', '12341', 'juan@corre.cl'),
-	(3, 'sebastian', 'paredes', '123455532', 'sebastian@correo.cl'),
-	(4, 'yannete', 'muñoz', 'ghtd', 'yannete@secretaria.cl'),
-	(5, 'mathew', 'vernier', 'gjja133', 'mathew@administrativo.cl');
+-- REPLACE INTO `usuarios` (`id`, `nombre`, `apellido`, `password`, `email`) VALUES
+-- 	(1, 'matias', 'martinez', '123413', 'matias.martinez@correo.cl'),
+-- 	(2, 'juan', 'manriquez', '12341', 'juan@corre.cl'),
+-- 	(3, 'sebastian', 'paredes', '123455532', 'sebastian@correo.cl'),
+-- 	(4, 'yannete', 'muñoz', 'ghtd', 'yannete@secretaria.cl'),
+-- 	(5, 'mathew', 'vernier', 'gjja133', 'mathew@administrativo.cl');
+
+REPLACE INTO `usuarios` (`id`, `nombre`, `apellido`, `rol`,`email`) VALUES
+	(1, 'matias', 'martinez', `estudiante`,'matias.martinez@correo.cl'),
+	(2, 'juan', 'manriquez', `estudiante`,'juan@corre.cl'),
+	(3, 'sebastian', 'paredes',`estudiante`, 'sebastian@correo.cl'),
+	(4, 'yannete', 'muñoz', `admin`,'yannete@secretaria.cl'),
+	(5, 'mathew', 'vernier', `admin`,'mathew@administrativo.cl');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
