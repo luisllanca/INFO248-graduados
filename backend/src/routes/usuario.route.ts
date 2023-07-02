@@ -18,16 +18,12 @@ rutasUsuario.get("/:id", (req: Request, res: Response) => usuario.getUsuarioId(r
 rutasUsuario.post("/login",  [
   check("email", "el email es obligatoria").notEmpty().isString(),
   fieldsValidator,
-],(req: Request, res: Response) => {
-  
-  usuario.loguearse(req, res)
-  }
-);
+],(req: Request, res: Response) => usuario.loguearse(req, res));
 
 rutasUsuario.post("/registrar",  [
     check("nombre", "El nombre es obligatorio").notEmpty().isString(),
     check("apellido", "El apellido es obligatorio").notEmpty().isString(),
-    check("password", "El password es obligatorio").notEmpty().isString(),
+    check("rol", "El rol es obligatorio").notEmpty().isString(),
     check("email", "el email es obligatoria").notEmpty().isString(),
     fieldsValidator,
   ],(req: Request, res: Response) => usuario.createUsuario(req, res));
@@ -35,7 +31,7 @@ rutasUsuario.post("/registrar",  [
 rutasUsuario.post("/registrar/estudiante",  [
   check("nombre", "El nombre es obligatorio").notEmpty().isString(),
   check("apellido", "El apellido es obligatorio").notEmpty().isString(),
-  check("password", "El password es obligatorio").notEmpty().isString(),
+  check("rol", "El rol es obligatorio").notEmpty().isString(),
   check("email", "el email es obligatoria").notEmpty().isString(),
   check("rut", "el email es obligatoria").notEmpty().isString(),
   check("programa", "el email es obligatoria").notEmpty().isString(),

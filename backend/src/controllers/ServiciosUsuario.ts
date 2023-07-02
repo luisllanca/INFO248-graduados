@@ -52,7 +52,7 @@ export class ServiciosUsuario {
 
   async createUsuario(req: Request, res: Response){
     try {
-      const {nombre, apellido, password, email} = req.body;
+      const {nombre, apellido, rol, email} = req.body;
 
       const usuarioExistente = await UsuarioModel.findOne({
         where: { email: email },
@@ -67,6 +67,7 @@ export class ServiciosUsuario {
       const usuario = await UsuarioModel.create({
         nombre,
         apellido,
+        rol,
         email
       });
       console.log(usuario)
@@ -87,7 +88,7 @@ export class ServiciosUsuario {
 
   async createUsuarioEstudiante(req: Request, res: Response){
     try {
-      const {nombre, apellido, email, programa, carrera, rut} = req.body;
+      const {nombre, apellido, rol, email, programa, carrera, rut} = req.body;
       const usuarioExistente = await UsuarioModel.findOne({
         where: { email: email },
       });
@@ -112,6 +113,7 @@ export class ServiciosUsuario {
       const usuario = await UsuarioModel.create({
         nombre,
         apellido,
+        rol,
         email
       });
       const id_usuario = usuario.id;
