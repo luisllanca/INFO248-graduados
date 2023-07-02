@@ -79,7 +79,7 @@ export class ServiciosComprobantes {
     }
   };
 
-//Corregir esta, validar
+//Como se hace con la fecha? decidir esto
   async createComprobante(req: Request, res: Response){
     try {
       const {id_estudiante, tipo, monto, img} = req.body;

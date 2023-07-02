@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import { ServiciosUsuario} from "../controllers/ServiciosUsuario";
 import {fieldsValidator} from "../middlewares/validator";
 import {check} from "express-validator"
+
 const rutasUsuario = Router();
 const usuario = new ServiciosUsuario();
 
@@ -40,6 +41,8 @@ rutasUsuario.post("/registrar/estudiante",  [
 ],(req: Request, res: Response) => usuario.createUsuarioEstudiante(req, res));
 
 // rutasUsuario.delete("/:id", (req: Request, res: Response) => usuario.deleteUsuarioId(req, res));
+
+rutasUsuario.put("/:id",(req: Request, res: Response) => usuario.updateUsuarioById(req, res));
 
 // rutasUsuario.put("/:id", (req: Request, res: Response) => usuario.updateUsuarioById(req, res));
 

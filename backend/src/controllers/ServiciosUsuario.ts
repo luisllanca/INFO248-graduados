@@ -71,7 +71,7 @@ export class ServiciosUsuario {
         email
       });
       // console.log(usuarios);
-      res.json({
+      res.status(200).json({
         ok: true,
         msg: "Usuario registrado correctamente",
         Usuario: usuario,
@@ -88,7 +88,6 @@ export class ServiciosUsuario {
   async createUsuarioEstudiante(req: Request, res: Response){
     try {
       const {nombre, apellido, password, email, programa, carrera, rut} = req.body;
-
       const usuarioExistente = await UsuarioModel.findOne({
         where: { email: email },
       });
@@ -124,7 +123,7 @@ export class ServiciosUsuario {
         carrera
       });
       // console.log(usuarios);
-      res.json({
+      res.status(200).json({
         ok: true,
         msg: "Usuario de estudiante registrado correctamente",
         Usuario: usuario,
@@ -167,7 +166,43 @@ export class ServiciosUsuario {
     }
   }
 
-//   async deleteUsuarioId(req: Request, res: Response){
+  async updateUsuarioById(req: Request, res: Response){
+    // console.log(req.params);
+    try {
+      const id = req.params.id;
+      let usuario = await UsuarioModel.findByPk(parseInt(id), {
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
+      // console.log(usuario);
+      if(!usuario){
+        res.status(404).json({
+          ok: false,
+          msg: "Error al buscar usuario por id" 
+        });
+        return;
+      }
+      await UsuarioModel.update(
+        req.body,
+        { where: { id: id } }
+      );
+      usuario = await UsuarioModel.findByPk(parseInt(id), {
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
+      res.status(200).json({
+        ok: true,
+        msg: "Usuario actualizado",
+        Usuario: usuario,
+      });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ 
+          ok: false,
+          msg: "Error" 
+        });
+    }
+  };
+
+  //   async deleteUsuarioId(req: Request, res: Response){
 //     try {
 //       const id = req.params.id;
 //       const usuario = await UsuarioModel.findByPk(parseInt(id), {
@@ -197,37 +232,6 @@ export class ServiciosUsuario {
 //         });
 //     }
 //   };
-// // Corregir 
-//   async updateUsuarioById(req: Request, res: Response){
-//     // console.log(req.params);
-//     try {
-//       const id = req.params.id;
-//       const usuario = await UsuarioModel.findByPk(parseInt(id), {
-//         attributes: { exclude: ["createdAt", "updatedAt"] },
-//       });
-//       console.log(usuario);
-//       if(!usuario){
-//         res.json({
-//           ok: false,
-//           msg:"Error al buscar usuario por id" 
-//         });
-//       }
-//       await UsuarioModel.update(
-//         req.body,
-//         { where: { id: id } }
-//       );
-//       res.json({
-//         ok: true,
-//         msg: "Usuario actualizado",
-//         Usuario: usuario,
-//       });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ 
-//           ok: false,
-//           msg: "Error" 
-//         });
-//     }
-//   };
+// Corregir 
 
 }
