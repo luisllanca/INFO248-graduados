@@ -3,22 +3,14 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import "./popup.css"; // Importa los estilos CSS
 
-interface PopupFormEstudianteProps {
-  correo: string;
-  rol: string;
-  
-}
-
-const PopupFormEstudiante: React.FC<PopupFormEstudianteProps> = (props) => {
-  const { correo, rol } = props;
-  console.log(correo)
+const PopupFormEstudiante = () => {
+  const history = useHistory();
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [rut, setRut] = useState("");
   const [programa, setPrograma] = useState("");
   const [carrera, setCarrera] = useState("");
-
-  const history = useHistory();
+  const correo = localStorage.getItem("correo")
 
   async function crearUsuarioEstudiante() {
     
@@ -30,8 +22,7 @@ const PopupFormEstudiante: React.FC<PopupFormEstudianteProps> = (props) => {
         email: correo,
         rut: rut,
         programa: programa,
-        carrera: carrera,
-        
+        carrera: carrera
       };
   
       await axios.post('http://localhost:8080/user/registrar/estudiante', requestBody)

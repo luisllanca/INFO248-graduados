@@ -70,6 +70,7 @@ export class ServiciosUsuario {
         password,
         email
       });
+      console.log(usuario)
       // console.log(usuarios);
       res.status(201).json({
         ok: true,

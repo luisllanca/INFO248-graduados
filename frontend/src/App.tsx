@@ -19,17 +19,16 @@ function App() {
   return (
       <BrowserRouter>
       <Switch>
-        <PrivateRoute exact path="/home" component={Home}/>
-        {/* <PrivateRoute exact path="/carga" component={carga}/> */}
-        <PrivateRoute exact path="/comprobantes" component={Comprobantes}/>
-        <PrivateRoute exact path="/subirComprobante" component={SubirComprobante}/>
-        <Route exact path="/login" component={Login} />
-        <PrivateRoute exact path="/admin" component={HomeAdmin}/>
-        <PrivateRoute exact path="/autenticacion" component={Autenticador} />
-        <PrivateRoute exact path="/registroEstudiante" component={PopupFormEstudiante} />
-        <PrivateRoute exact path="/registroAdmin" component={PopupFormAdmin} />
-        <Route exact path="/register" component={SignUp} />
-        <Route render={() => <Redirect to="/login" />} />
+      <PrivateRoute exact path="/home" component={Home}/>
+      {/* <PrivateRoute exact path="/carga" component={carga}/> */}
+      <PrivateRoute exact path="/comprobantes" component={Comprobantes}/>
+      <PrivateRoute exact path="/subirComprobante" component={SubirComprobante}/>
+      <RestrictedRoute exact path="/login" component={Login} />
+      <PrivateRoute exact path="/autenticacion" component={Autenticador} />
+      <PrivateRoute exact path="/admin" component={HomeAdmin}/>
+      <PrivateRoute exact path="/registroEstudiante" component={PopupFormEstudiante} />
+      <PrivateRoute exact path="/registroAdmin" component={PopupFormAdmin} />
+      <Route render={() => <Redirect to="/login" />} />
       </Switch>
     </BrowserRouter>
   );

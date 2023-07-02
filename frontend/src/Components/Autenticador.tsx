@@ -30,20 +30,24 @@ const Autenticador: React.FC = () => {
       }, 100); // Intervalo de verificación en milisegundos
     });
   };
+  
   const getEmail = async () => {
     if(user){
       const mail = user.email
-    
+  
     var id = ""
     var rol = ""
+    var correoql = ""
     
     waitUntilVariableIsSet();
     await fetch(`https://dev-lpmhwti1uwtsgfok.us.auth0.com/api/v2/users-by-email?email=${mail}`, requestOptions)
       .then(response => response.json())
       .then(result => {
         id = result[0].user_id
+        correoql = result[0].email
       })
       .catch(error => console.log('error', error));
+    localStorage.setItem("correo",correoql)
     
     //correo y id obtenida
     await fetch(`https://dev-lpmhwti1uwtsgfok.us.auth0.com/api/v2/users/${id}/roles`, requestOptions)
@@ -53,7 +57,6 @@ const Autenticador: React.FC = () => {
       })
       .catch(error => console.log('error', error));
     //Obtenidos roles
-    
     try {
       const email = mail
       const response = await axios.post("http://localhost:8080/user/login",{email});
@@ -71,7 +74,7 @@ const Autenticador: React.FC = () => {
           history.push('/home');
         } 
         else if (rol === "Administrador") {
-          history.push('/admin')
+          history.push('/admin');
           console.log("Admin");
         }
       }
@@ -85,6 +88,8 @@ const Autenticador: React.FC = () => {
         }
         else{
           history.push('/registroAdmin')
+          
+            
         }
 
         // El usuario no existe y entonces se debe crear, retornado el formulario popup y etc

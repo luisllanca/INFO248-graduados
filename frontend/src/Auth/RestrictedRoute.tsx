@@ -11,7 +11,10 @@ const RestrictedRoute: React.FC<RestrictedRouteProps> = ({
   component: Component,
   ...rest
 }) => {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const [isLoading, setIsLoading] = useState(true);
+
+  
 
   return (
     <Route
