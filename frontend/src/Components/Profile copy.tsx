@@ -111,16 +111,16 @@ const Profile: React.FC = () => {
     }
   }, []);
   
-  if (!existe && isAuthenticated && user){
-    //Se crean los usuarios con formularios
-    if(rol === "Estudiante"){
-      return <PopupFormEstudiante correo={correo} rol={rol}/>;
-    }
-    else{
-      console.log("yey")
-      return <PopupFormAdmin></PopupFormAdmin>
-    }
-  }
+  // if (!existe && isAuthenticated && user){
+  //   //Se crean los usuarios con formularios
+  //   if(rol === "Estudiante"){
+  //     return <PopupFormEstudiante correo={correo} rol={rol}/>;
+  //   }
+  //   else{
+  //     console.log("yey")
+  //     return <PopupFormAdmin></PopupFormAdmin>
+  //   }
+  // }
    
     return <div>Cargando...</div>;
 
