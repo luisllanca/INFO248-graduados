@@ -9,10 +9,21 @@ import LogoImage from "./LogoImage";
 import perfilImage from "../images/perfil.png";
 import UserContext from "./UserContext";
 import "./Login.css"; // Agregamos el archivo CSS personalizado
-
+import { useAuth0 } from '@auth0/auth0-react';
 type SomeComponentProps = RouteComponentProps;
 
 const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
+  const { loginWithRedirect, isAuthenticated, isLoading} = useAuth0();
+  
+  const handleLogin = () => {
+    // Llamar a la función de Auth0 para iniciar sesión
+    loginWithRedirect();
+    
+  };
+  
+
+
+
   const [est, setEst] = useState<any>();
   const {
     register,
@@ -20,7 +31,7 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
     formState: { errors },
   } = useForm();
 
-  const login = (data: any) => {
+  /* const login = (data: any) => {
     console.log(data);
     let params = {
       email: data.email,
@@ -67,7 +78,7 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
       .catch(function(error) {
         console.log(error);
       });
-  };
+  }; */
 
   return (
     <>
@@ -83,59 +94,20 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
           <img src={perfilImage} alt="Foto de perfil" width="162" height="162" />
         </div>
       </div>
-      <form autoComplete="off" onSubmit={handleSubmit(login)}>
-                  <div className="mb-3 mt-4">
-                    <input
-                      placeholder="Correo"
-                      type="email"
-                      className="form-control shadow-none"
-                      id="exampleFormControlInput1"
-                      {...register("email", {
-                        required: "¡Se requiere un correo!",
-                      })}
-                    />
-                    {errors.email && (
-                      <p className="text-danger" style={{ fontSize: 14 }}>
-                        {errors.email.message}
-                      </p>
-                    )}
-                  </div>
-                  <div className="mb-3">
-                    <input
-                      placeholder="Contraseña"
-                      type="password"
-                      className="form-control shadow-none"
-                      id="exampleFormControlInput2"
-                      {...register("password", {
-                        required: "¡Se requiere una contraseña!",
-                      })}
-                    />
-                    {errors.password && (
-                      <p className="text-danger" style={{ fontSize: 14 }}>
-                        {errors.password.message}
-                      </p>
-                    )}
-                  </div>
+      
                   <div className="text-center mt-4">
                     <div className="contenedor-botones">
                       <button
                         className="ingresar_button"
                         type="submit"
+                        onClick={() => loginWithRedirect()}
                       >
                         Ingresar
                       </button>
                     </div>
-                    <p className="card-text pb-2 text-dark">
-                      ¿No posees una cuenta?{" "}
-                      <Link
-                        style={{ textDecoration: "none", color: "#e67e22" }}
-                        to={"/register"}
-                      >
-                        Registrar
-                      </Link>
-                    </p>
+                    
                   </div>
-                </form>
+                
     </div>
     </>
   );

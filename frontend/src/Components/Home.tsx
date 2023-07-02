@@ -12,7 +12,7 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
     history.push("/login");
   };
   const inicio = () => {
-    history.push("/")
+    history.push("/home")
   };
 
   const histComp = () => {
@@ -35,6 +35,7 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      
       const responseEst = await fetch(`http://localhost:8080/estudiantes/user/${user.id}`);
       const dataEst = await responseEst.json();
       setEst(dataEst.Estudiante);

@@ -16,10 +16,13 @@ rutasUsuario.get("/:id", (req: Request, res: Response) => usuario.getUsuarioId(r
 // rutasUsuario.post("/login", (req: Request, res: Response) => usuario.loguearse(req, res));
 
 rutasUsuario.post("/login",  [
-  check("password", "El password es obligatorio").notEmpty().isString(),
   check("email", "el email es obligatoria").notEmpty().isString(),
   fieldsValidator,
-],(req: Request, res: Response) => usuario.loguearse(req, res));
+],(req: Request, res: Response) => {
+  
+  usuario.loguearse(req, res)
+  }
+);
 
 rutasUsuario.post("/registrar",  [
     check("nombre", "El nombre es obligatorio").notEmpty().isString(),

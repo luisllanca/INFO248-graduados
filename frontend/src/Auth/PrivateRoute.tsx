@@ -1,14 +1,49 @@
-import React from "react";
-import { Redirect, Route } from "react-router-dom";
+// PrivateRoute.tsx
+import React, { useEffect, useState } from 'react';
+import { Route, Redirect, RouteProps } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
-const PrivateRoute = (props:any) => {
-  // const isAuth  = false
+interface PrivateRouteProps extends RouteProps {
+  component: React.ComponentType<any>;
+}
 
-  const token = localStorage.getItem("auth");
+const PrivateRoute: React.FC<PrivateRouteProps> = ({
+  component: Component,
+  ...rest
+}) => {
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const [isLoading, setIsLoading] = useState(true);
 
-  console.log("token", token);
+  useEffect(() => {
+    const fetchAuthentication = async () => {
+      try {
+        await getAccessTokenSilently();
+        setIsLoading(false);
+      } catch (error) {
+        // Manejo de errores en caso de fallo al obtener el token de acceso
+        console.error('Error al obtener el token de acceso:', error);
+        setIsLoading(false);
+      }
+    };
 
-  return <>{token ? <Route {...props} /> : <Redirect to="/login" />}</>;
+    fetchAuthentication();
+  }, [getAccessTokenSilently]);
+
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        isLoading ? (
+          // Puedes mostrar un indicador de carga mientras se obtiene la autenticación
+          <div>Loading...</div>
+        ) : isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/login" />
+        )
+      }
+    />
+  );
 };
 
 export default PrivateRoute;

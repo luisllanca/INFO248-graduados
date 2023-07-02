@@ -1,15 +1,30 @@
-import React from "react";
-import { Redirect, Route } from "react-router-dom";
+// RestrictedRoute.tsx
+import React, { useEffect, useState } from 'react';
+import { Route, Redirect, RouteProps } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
-const RestrictedRoute = (props:any) => {
-  // const isAuth  = false
+interface RestrictedRouteProps extends RouteProps {
+  component: React.ComponentType<any>;
+}
 
-  const token = localStorage.getItem('auth');
+const RestrictedRoute: React.FC<RestrictedRouteProps> = ({
+  component: Component,
+  ...rest
+}) => {
+  const { isAuthenticated } = useAuth0();
 
-  console.log("token",token);
- 
-  return <>{!token ? <Route {...props} /> : <Redirect to="/" />}</>;
-
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        isAuthenticated ? (
+          <Redirect to="/autenticacion" />
+        ) : (
+          <Component {...props} />
+        )
+      }
+    />
+  );
 };
 
 export default RestrictedRoute;

@@ -127,7 +127,8 @@ export class ServiciosUsuario {
         ok: true,
         msg: "Usuario de estudiante registrado correctamente",
         Usuario: usuario,
-        Estudiante: estudiante
+        Estudiante: estudiante,
+        id: usuario.id
       });
     } catch (error) {
         console.error(error);
@@ -138,31 +139,35 @@ export class ServiciosUsuario {
     }
   };
   
-  async loguearse(req: Request, res:Response) {
-    try {
-      const {email, password} = req.body;
-      const usuario = await UsuarioModel.findOne({
-        where: { email: email, password: password},
+  async loguearse(req: Request, res: Response) {
+    try {console.log("Logeandoooooo")
+
+      // Verificar si el usuario ya existe en la base de datos
+      const { email } = req.body
+      console.log(email)
+      const usuarioExistente = await UsuarioModel.findOne({
+        where: { email: email},
       });
-      if(!usuario){
-        res.status(404).json({
-          ok: false,
-          msg: "Usuario no encontrado"
+
+      if (!usuarioExistente) {
+        console.log("El usuario no existe");
+        res.status(203).json({
+          msg: "No existe el usuario",
         });
-        return;
+        return null;
+      } 
+      else {
+        res.status(201).json({
+          ok: true,
+          msg: "Usuario logeado correctamente",
+          usuario: usuarioExistente
+          
+        });
+        return usuarioExistente;
+        console.log("Usuario logeado:", usuarioExistente);
       }
-      // console.log(usuarios);
-      res.status(200).json({
-        ok: true,
-        msg: "Usuario encontrado",
-        Usuario: usuario,
-      });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            ok: false,
-            msg: "Error" 
-        });
+      console.error("Error al logear usuario:", error);
     }
   }
 
