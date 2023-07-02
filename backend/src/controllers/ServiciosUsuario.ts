@@ -71,7 +71,7 @@ export class ServiciosUsuario {
         email
       });
       // console.log(usuarios);
-      res.status(200).json({
+      res.status(201).json({
         ok: true,
         msg: "Usuario registrado correctamente",
         Usuario: usuario,
@@ -123,7 +123,7 @@ export class ServiciosUsuario {
         carrera
       });
       // console.log(usuarios);
-      res.status(200).json({
+      res.status(201).json({
         ok: true,
         msg: "Usuario de estudiante registrado correctamente",
         Usuario: usuario,

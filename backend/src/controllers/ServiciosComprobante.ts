@@ -13,7 +13,7 @@ export class ServiciosComprobantes {
       const comprobantes = await ComprobanteModel.findAll({
         attributes: { exclude: ["createdAt", "updatedAt"] },
       });
-      console.log(comprobantes);
+      // console.log(comprobantes);
       // const response = await JSON.parse(JSON.stringify(comprobantes));
       res.status(200).json({
         ok: true,
@@ -86,7 +86,7 @@ export class ServiciosComprobantes {
 
       const estudiante = await EstudianteModel.findByPk(id_estudiante);
       if(!estudiante){
-        res.json({
+        res.status(404).json({
           ok: false,
           msg: "Estudiante no encontrado"
         });
@@ -104,7 +104,7 @@ export class ServiciosComprobantes {
         id_estudiante: id_estudiante
       });
       await comprobante.save();
-      res.json({
+      res.status(201).json({
         ok: true,
         msg: "Comprobante creado",
         Comprobantes: comprobante,
@@ -124,9 +124,9 @@ export class ServiciosComprobantes {
       const comprobante = await ComprobanteModel.findByPk(parseInt(id), {
         attributes: { exclude: ["createdAt", "updatedAt"] },
       });
-      console.log(comprobante);
+      // console.log(comprobante);
       if(!comprobante){
-        res.json({
+        res.status(404).json({
           ok: false,
           msg: "Comprobante no encontrado"
         });
@@ -135,7 +135,7 @@ export class ServiciosComprobantes {
       await ComprobanteModel.destroy({
         where: {id: id}
       });
-      res.json({
+      res.status(200).json({
         ok: true,
         msg: "Comprobante borrado con exito",
         Comprobante: comprobante,
@@ -153,12 +153,12 @@ export class ServiciosComprobantes {
     // console.log(req.params);
     try {
       const id = req.params.id;
-      const comprobante = await ComprobanteModel.findByPk(parseInt(id), {
+      let comprobante = await ComprobanteModel.findByPk(parseInt(id), {
         attributes: { exclude: ["createdAt", "updatedAt"] },
       });
-      console.log(comprobante);
+      // console.log(comprobante);
       if(!comprobante){
-        res.json({
+        res.status(404).json({
           ok: false,
           msg:"Error al buscar comprobante por id" 
         });
@@ -167,7 +167,11 @@ export class ServiciosComprobantes {
         req.body,
         { where: { id: id } }
       );
-      res.json({
+      comprobante = await ComprobanteModel.findByPk(parseInt(id), {
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      });
+
+      res.status(200).json({
         ok: true,
         msg: "Comprobante actualizado",
         Comprobante: comprobante,
