@@ -6,7 +6,8 @@ class UsuarioModel extends Model {
   public id!: number;
   public nombre!: string;
   public apellido!: string;
-  public password!: string;
+  // public password!: string;
+  public rol!: string;
   public email!: string;
   public rut!: string;
 }
@@ -27,7 +28,7 @@ UsuarioModel.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    password: {
+    rol: {
       type: DataTypes.STRING,
       allowNull: false,
     },

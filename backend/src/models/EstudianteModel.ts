@@ -1,12 +1,12 @@
 import { Model, DataTypes } from "sequelize";
 import ComprobanteModel from "./ComprobanteModel";
-import BecaModel from "./BecaModel";
+// import BecaModel from "./BecaModel";
 import UsuarioModel from "./UsuarioModel";
 import db from "./connection";
 
 class EstudianteModel extends Model {
-  public comprobantes!: ComprobanteModel[];
-  public becas!: BecaModel[];
+  // public comprobantes!: ComprobanteModel[];
+  // public becas!: BecaModel[];
   public usuario!: UsuarioModel;
   public id!: number;
   public rut!: string;
@@ -50,8 +50,8 @@ EstudianteModel.hasMany(ComprobanteModel, {
   foreignKey: "id_estudiante", // Cambia "id_estudiante" por el nombre correcto de la clave foránea en tu base de datos
   as: "comprobantes",
 });
-EstudianteModel.hasMany(BecaModel, {
-  foreignKey: "id_estudiante", // Cambia "id_estudiante" por el nombre correcto de la clave foránea en tu base de datos
-  as: "becas",
-});
+// EstudianteModel.hasMany(BecaModel, {
+//   foreignKey: "id_estudiante", // Cambia "id_estudiante" por el nombre correcto de la clave foránea en tu base de datos
+//   as: "becas",
+// });
 export default EstudianteModel;

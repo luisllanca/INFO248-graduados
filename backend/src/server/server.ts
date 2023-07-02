@@ -26,7 +26,7 @@ class Server {
     this.app.use("/gestion", rutasGestion);
     this.app.use("/user", rutasUsuario);
     this.app.use("/estudiantes", rutasEstudiante);
-    this.app.use("/becas", rutasBecas);
+    // this.app.use("/becas", rutasBecas);
     this.app.use("/comprobantes", rutasComprobantes);
   }
 

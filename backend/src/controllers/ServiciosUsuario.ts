@@ -67,7 +67,6 @@ export class ServiciosUsuario {
       const usuario = await UsuarioModel.create({
         nombre,
         apellido,
-        password,
         email
       });
       console.log(usuario)
@@ -88,7 +87,7 @@ export class ServiciosUsuario {
 
   async createUsuarioEstudiante(req: Request, res: Response){
     try {
-      const {nombre, apellido, password, email, programa, carrera, rut} = req.body;
+      const {nombre, apellido, email, programa, carrera, rut} = req.body;
       const usuarioExistente = await UsuarioModel.findOne({
         where: { email: email },
       });
@@ -113,7 +112,6 @@ export class ServiciosUsuario {
       const usuario = await UsuarioModel.create({
         nombre,
         apellido,
-        password,
         email
       });
       const id_usuario = usuario.id;
