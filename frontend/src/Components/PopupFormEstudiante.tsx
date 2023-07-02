@@ -11,14 +11,14 @@ const PopupFormEstudiante = () => {
   const [programa, setPrograma] = useState("");
   const [carrera, setCarrera] = useState("");
   const correo = localStorage.getItem("correo")
-
+  const rol = "a"
   async function crearUsuarioEstudiante() {
     
     try {
       const requestBody = {
         nombre: nombre,
         apellido: apellido,
-        password: "xd jano ql te dije que sin contraseña ",
+        rol:rol,
         email: correo,
         rut: rut,
         programa: programa,
@@ -36,6 +36,7 @@ const PopupFormEstudiante = () => {
         const user = {
           nombre: nombre,
           apellido: apellido,
+          rol:rol,
           correo: correo,
           id: id_res
         };
