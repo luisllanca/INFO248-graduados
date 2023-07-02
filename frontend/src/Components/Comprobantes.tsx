@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FC } from 'react'
 import { RouteComponentProps } from "react-router-dom";
-import "./home.css";
+import "./styles/home.css";
 import LogoImage from "./LogoImage";
 import EnhancedTable from './EnhancedTable';
 

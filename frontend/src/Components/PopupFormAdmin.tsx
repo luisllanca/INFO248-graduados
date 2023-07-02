@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./popup.css"; // Importa los estilos CSS
+import "./styles/popup.css"; // Importa los estilos CSS
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
 

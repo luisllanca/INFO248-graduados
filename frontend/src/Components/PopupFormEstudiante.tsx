@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import "./popup.css"; // Importa los estilos CSS
+import "./styles/popup.css"; // Importa los estilos CSS
 
 const PopupFormEstudiante = () => {
   const history = useHistory();

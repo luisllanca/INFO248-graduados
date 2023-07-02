@@ -253,10 +253,10 @@ const EnhancedTable = () => {
           <DialogContentText>¿Está seguro que desea borrar este comprobante?</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleDeleteClose(true)} className="btn btn-success">
+          <Button onClick={() => handleDeleteClose(true)} className="btn-success">
               Aceptar
           </Button>
-          <Button onClick={() => handleDeleteClose(false)} className="btn btn-danger">
+          <Button onClick={() => handleDeleteClose(false)} className="btn-danger">
               Cancelar
           </Button>
         </DialogActions>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, FC, useContext } from 'react'
 import { RouteComponentProps } from "react-router-dom";
 import CustomizedTable from "./CustomizedTable"
-import "./home.css";
+import "./styles/home.css";
 import perfilImage from "../images/perfil.png";
 import LogoImage from "./LogoImage";
 import UserContext from './UserContext';

@@ -1,7 +1,5 @@
 import React, { useState, useEffect} from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import PopupFormEstudiante from "./PopupFormEstudiante";
-import PopupFormAdmin from "./PopupFormAdmin";
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 var myHeaders = new Headers();

@@ -1,6 +1,6 @@
-import React, { useState, useEffect, FC, useContext } from 'react'
+import React, { useState, useEffect, FC } from 'react'
 import { RouteComponentProps } from "react-router-dom";
-import "./home.css";
+import "./styles/home.css";
 import perfilImage from "../images/perfil.png";
 import LogoImage from "./LogoImage";
 
@@ -11,6 +11,7 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
     localStorage.clear();
     history.push("/login");
   };
+  
   const inicio = () => {
     history.push("/home")
   };
