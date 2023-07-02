@@ -6,7 +6,7 @@ dotenv.config();
 const dbGest = new Sequelize(
   process.env.NAMEDB || "egresados",
   process.env.USERDB || "root",
-  process.env.PASSWORD || "benja123",
+  process.env.PASSWORD || "test",
   {
     host: process.env.HOSTDB || "localhost",
     dialect: "mysql",

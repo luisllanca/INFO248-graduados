@@ -111,11 +111,11 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 -- 	(5, 'mathew', 'vernier', 'gjja133', 'mathew@administrativo.cl');
 
 REPLACE INTO `usuarios` (`id`, `nombre`, `apellido`, `rol`,`email`) VALUES
-	(1, 'matias', 'martinez', `estudiante`,'matias.martinez@correo.cl'),
-	(2, 'juan', 'manriquez', `estudiante`,'juan@corre.cl'),
-	(3, 'sebastian', 'paredes',`estudiante`, 'sebastian@correo.cl'),
-	(4, 'yannete', 'muñoz', `admin`,'yannete@secretaria.cl'),
-	(5, 'mathew', 'vernier', `admin`,'mathew@administrativo.cl');
+	(1, 'matias', 'martinez', 'estudiante','matias.martinez@correo.cl'),
+	(2, 'juan', 'manriquez', 'estudiante','juan@corre.cl'),
+	(3, 'sebastian', 'paredes','estudiante', 'sebastian@correo.cl'),
+	(4, 'yannete', 'muñoz', 'admin','yannete@secretaria.cl'),
+	(5, 'mathew', 'vernier', 'admin','mathew@administrativo.cl');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
