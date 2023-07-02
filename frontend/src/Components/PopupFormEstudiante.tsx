@@ -11,7 +11,7 @@ const PopupFormEstudiante = () => {
   const [programa, setPrograma] = useState("");
   const [carrera, setCarrera] = useState("");
   const correo = localStorage.getItem("correo")
-  const rol = "a"
+  const rol = localStorage.getItem("rol")
   async function crearUsuarioEstudiante() {
     
     try {

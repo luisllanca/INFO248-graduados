@@ -8,12 +8,8 @@ const PopupFormAdmin  = () => {
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const history = useHistory();
-
-
-  // Comprueba si hay datos en el estado de la ubicación
-  
-
-  // Recuperar correo
+  // Recuperar correo y rol
+  const rol = localStorage.getItem("rol")
   const correo = localStorage.getItem("correo")
   
   async function crearUsuarioAdmin() {
@@ -21,7 +17,7 @@ const PopupFormAdmin  = () => {
       const requestBody = {
         nombre: nombre,
         apellido: apellido,
-        password: "xd jano ql te dije que sin contraseña",
+        rol: rol,
         email: correo
       };
   

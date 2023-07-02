@@ -80,14 +80,13 @@ const Autenticador: React.FC = () => {
       if (response.status === 203) {
         //Se crean los usuarios con formularios
         console.log(rol)
-        console.log("ayuda diosito")
+        localStorage.setItem("rol", rol);
+
         if(rol === "Estudiante"){
           history.push('/registroEstudiante')
         }
         else{
           history.push('/registroAdmin')
-          
-            
         }
 
         // El usuario no existe y entonces se debe crear, retornado el formulario popup y etc
