@@ -16,6 +16,7 @@ export class ServiciosPersonalAdministrativo{
       res.status(200).json({
         ok: true,
         PersonalAdministrativo: personalAdministrativo,
+        msg: "Personales administrativos obtenidos correctamente"
       });
     } catch (error) {
         console.error(error);
@@ -37,12 +38,13 @@ export class ServiciosPersonalAdministrativo{
       res.status(200).json({
         ok: true,
         PersonalAdministrativo: personalAdministrativo,
+        msg: "Personal administrativo obtenido correctamente"
       });
     } catch (error) {
         console.error(error);
         res.status(500).json({ 
           ok: false,
-          msg: "Error al obtener beca por id" 
+          msg: "Error al obtener Personal administrativo por id" 
         });
     }
   };

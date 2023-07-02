@@ -1,6 +1,7 @@
 import { ServicioEncriptacion } from "../clases_negocio/ServicioSeguridad/ServicioEncriptacion";
 import EstudianteModel from "../models/EstudianteModel";
 import UsuarioModel from "../models/UsuarioModel";
+
 import { Request, Response } from "express";
 
 export class ServiciosUsuario {
@@ -35,7 +36,7 @@ export class ServiciosUsuario {
       const usuarios = await UsuarioModel.findByPk(parseInt(id), {
         attributes: { exclude: ["createdAt", "updatedAt"] },
       });
-      console.log(usuarios);
+      // console.log(usuarios);
       res.status(200).json({
         ok: true,
         Usuarios: usuarios,
@@ -74,6 +75,60 @@ export class ServiciosUsuario {
         ok: true,
         msg: "Usuario registrado correctamente",
         Usuario: usuario,
+      });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error al crear el usuario" 
+        });
+    }
+  };
+
+  async createUsuarioEstudiante(req: Request, res: Response){
+    try {
+      const {nombre, apellido, password, email, programa, carrera, rut} = req.body;
+
+      const usuarioExistente = await UsuarioModel.findOne({
+        where: { email: email },
+      });
+      if(usuarioExistente){
+        res.status(400).json({
+          ok: false,
+          msg: "El usuario ya esta registrado"
+        });
+        return;
+      }
+      const estudianteExistente = await EstudianteModel.findOne({
+        where: { rut: rut },
+      });
+      if(estudianteExistente){
+        res.status(400).json({
+          ok: false,
+          msg: "El estudiante ya esta registrado"
+        });
+        return;
+      }
+
+      const usuario = await UsuarioModel.create({
+        nombre,
+        apellido,
+        password,
+        email
+      });
+      const id_usuario = usuario.id;
+      const estudiante = await EstudianteModel.create({
+        id_usuario,
+        rut,
+        programa,
+        carrera
+      });
+      // console.log(usuarios);
+      res.json({
+        ok: true,
+        msg: "Usuario de estudiante registrado correctamente",
+        Usuario: usuario,
+        Estudiante: estudiante
       });
     } catch (error) {
         console.error(error);
