@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `comprobantes` (
   `fecha` datetime NOT NULL,
   `tipo` varchar(50) NOT NULL,
   `monto` int(11) NOT NULL,
-  `img` varchar(50) NOT NULL,
+  `img` LONGTEXT NOT NULL,
   `id_estudiante` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `id_estudiante` (`id_estudiante`),

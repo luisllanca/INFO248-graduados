@@ -12,7 +12,7 @@ import HomeAdmin from "./Components/HomeAdmin";
 import PopupFormEstudiante from "./Components/PopupFormEstudiante";
 import PopupFormAdmin from "./Components/PopupFormAdmin";
 import Autenticador from "./Components/Autenticador";
-
+import PestañaComprobante from "./Components/pestañaComprobante";
 function App() {
   return (
       <BrowserRouter>
@@ -25,6 +25,7 @@ function App() {
       <PrivateRoute exact path="/admin" component={HomeAdmin}/>
       <PrivateRoute exact path="/registroEstudiante" component={PopupFormEstudiante} />
       <PrivateRoute exact path="/registroAdmin" component={PopupFormAdmin} />
+      <PrivateRoute exact path="/pestañaComprobante" component={PestañaComprobante} />
       <Route render={() => <Redirect to="/login" />} />
       </Switch>
     </BrowserRouter>

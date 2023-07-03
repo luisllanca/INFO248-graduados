@@ -7,7 +7,7 @@ export default class ComprobanteModel extends Model {
   public fecha!: Date;
   public tipo!: string;
   public monto!: number;
-  public img!: string;
+  public img!: string | null; // Cambiado a tipo 'string'
   public estudiante!: EstudianteModel;
 }
 
@@ -31,8 +31,8 @@ ComprobanteModel.init(
       allowNull: false,
     },
     img: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.TEXT, // Cambiado a 'TEXT'
+      allowNull: true,
     },
     id_estudiante: {
       type: DataTypes.INTEGER,

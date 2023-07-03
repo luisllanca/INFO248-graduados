@@ -13,9 +13,20 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  function fileToBase64(file: File): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        const base64 = base64String.split(",")[1]; // Eliminar el encabezado "data:image/jpeg;base64,"
+        resolve(base64);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
   const [showErrors, setShowErrors] = useState(false);
-  
+  const [file, setFile] = useState<File | null>(null);
   const est =
   localStorage.getItem("est") !== "undefined"
     ? JSON.parse(localStorage.getItem("est")!)
@@ -42,46 +53,55 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
     console.log(showErrors);
 
   }, [errors]);
-
-  const subirComp = (data: any) => {
-    let params = {
-      id_estudiante: est.id,
-        tipo: data.tipo,
-        monto: data.monto,
-        img: "xd.png"
-      }
-  
-      // console.log(params);
-      if(compActual === null) {
-        // Opción de subir un comprobante
-        axios
-          .post("http://localhost:8080/comprobantes", params)
-          .then(function (response) {
-            setTimeout(() => {
-              localStorage.removeItem("compActual");
-              history.push("/comprobantes");
-            }, 1000);
-          })
-    
-          .catch(function (error) {
-            console.log(error);
-          });
-      } else {
-        // Opción de editar un comprobante
-        axios
-          .put(`http://localhost:8080/comprobantes/${compActual.id}`, params)
-          .then(function (response) {
-            setTimeout(() => {
-              localStorage.removeItem("compActual");
-              history.push("/comprobantes");
-            }, 1000);
-          })
-    
-          .catch(function (error) {
-            console.log(error);
-          });
-      }
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setFile(event.target.files[0]);
+    }
   };
+  const subirComp = (data: any) => {
+    if (file){
+      fileToBase64(file)
+      .then((base64String) => {
+      let params = {
+        id_estudiante: est.id,
+          tipo: data.tipo,
+          monto: data.monto,
+          img: base64String
+        }
+    
+        // console.log(params);
+        if(compActual === null) {
+          // Opción de subir un comprobante
+          axios
+            .post("http://localhost:8080/comprobantes", params)
+            .then(function (response) {
+              setTimeout(() => {
+                localStorage.removeItem("compActual");
+                history.push("/comprobantes");
+              }, 1000);
+            })
+      
+            .catch(function (error) {
+              console.log(error);
+            });
+        } else {
+          // Opción de editar un comprobante
+          axios
+            .put(`http://localhost:8080/comprobantes/${compActual.id}`, params)
+            .then(function (response) {
+              setTimeout(() => {
+                localStorage.removeItem("compActual");
+                history.push("/comprobantes");
+              }, 1000);
+            })
+      
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
+      })
+  };
+}
 
   return (
     <>
@@ -93,7 +113,11 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
       </div>
       <div className='title'>{compActual ? "Editar comprobante" : "Subir comprobante"}</div>
       <div className='gridcomprobante'>
-        <div className='draganddrop'>hola</div>
+      <div className="file-upload">
+            <input type="file" accept="image/*" onChange={handleFileChange} />
+            {file && <p>Archivo seleccionado: {file.name}</p>}
+          </div>
+        
         <form autoComplete="off">
           <div className='gridmonto'>
             <div className="select">
