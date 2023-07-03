@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 import { RouteComponentProps } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
@@ -15,19 +15,22 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
   } = useForm();
 
   const [showErrors, setShowErrors] = useState(false);
-
+  
   const est =
   localStorage.getItem("est") !== "undefined"
     ? JSON.parse(localStorage.getItem("est")!)
     : localStorage.clear();
 
-  const logout = () => {
-    localStorage.clear();
-    history.push("/login");
-  };
-
+  const compActual =
+  localStorage.getItem("compActual") !== "undefined"
+    ? JSON.parse(localStorage.getItem("compActual")!)
+    : localStorage.clear();
+    
+  console.log(compActual);
+    
   const home = () => {
-    history.push("/");
+    localStorage.removeItem("compActual");
+    history.push("/home");
   };
 
   useEffect(() => {
@@ -49,18 +52,35 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
       }
   
       // console.log(params);
-  
-      axios
-        .post("http://localhost:8080/comprobantes", params)
-        .then(function (response) {
-          setTimeout(() => {
-            history.push("/comprobantes");
-          }, 1000);
-        })
-  
-        .catch(function (error) {
-          console.log(error);
-        });
+      if(compActual === null) {
+        // Opción de subir un comprobante
+        axios
+          .post("http://localhost:8080/comprobantes", params)
+          .then(function (response) {
+            setTimeout(() => {
+              localStorage.removeItem("compActual");
+              history.push("/comprobantes");
+            }, 1000);
+          })
+    
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+        // Opción de editar un comprobante
+        axios
+          .put(`http://localhost:8080/comprobantes/${compActual.id}`, params)
+          .then(function (response) {
+            setTimeout(() => {
+              localStorage.removeItem("compActual");
+              history.push("/comprobantes");
+            }, 1000);
+          })
+    
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
   };
 
   return (
@@ -71,7 +91,7 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
         <div className='logout-container'> <LogoutButton></LogoutButton>   </div>
         <LogoImage />
       </div>
-      <div className='title'>Subir comprobante</div>
+      <div className='title'>{compActual ? "Editar comprobante" : "Subir comprobante"}</div>
       <div className='gridcomprobante'>
         <div className='draganddrop'>hola</div>
         <form autoComplete="off">
@@ -103,7 +123,6 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
                 {...register("tipo", {
                   required: "Ingrese el tipo",
                 })}
-
                 >
                 <option value="">Seleccione...</option>
                 <option value="Arancel">Arancel</option>

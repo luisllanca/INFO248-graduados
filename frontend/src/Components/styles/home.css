@@ -249,7 +249,7 @@
 
 .load {
   border: 16px solid #f3f3f3; /* Color del borde */
-  border-top: 16px solid #3498db; /* Color del borde superior */
+  border-top: 16px solid #e8833a; /* Color del borde superior */
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -260,4 +260,16 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.campo {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.tituloFormulario {
+  margin-bottom: 15px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 30px;
+  align-items: center;
 }

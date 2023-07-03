@@ -18,6 +18,7 @@ import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 function getFecha(fecha : string) {
     var info = fecha.split('-');
@@ -167,6 +168,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const EnhancedTable = () => {
     const classes = useStyles();
+    const history = useHistory();
 
     const estudiante = localStorage.getItem("est") !== "undefined"
       ? JSON.parse(localStorage.getItem("est")!)
@@ -184,7 +186,10 @@ const EnhancedTable = () => {
     const handleEditOpen = (comp : any) => {
       setCompActual(comp);
       console.log(comp);
-      // Falta esto xd
+      localStorage.setItem("compActual", JSON.stringify(comp));
+      setTimeout(() => {
+        history.push("/subirComprobante");
+      }, 1000);
     };
 
     const handleDeleteOpen = (comp: any) => {

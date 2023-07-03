@@ -78,7 +78,7 @@ const PopupFormEstudiante = () => {
   return (
     <div className="popup-container">
       <div className="popup-content">
-        <h2>Formulario estudiante</h2>
+      <div className="tituloFormulario">Formulario Estudiantes</div>
         <form autoComplete="off">
           <div className="campo">
             <label>Nombre:</label>
@@ -165,7 +165,7 @@ const PopupFormEstudiante = () => {
               {showErrors && errors.carrera && (errors.carrera.message)}
             </p>
           </div>
-          <button type="submit" onClick={handleSubmit(registrar)}>Enviar</button>
+          <button type="submit" className= "ingresar_button" onClick={handleSubmit(registrar)}>Enviar</button>
         </form>
       </div>
     </div>
