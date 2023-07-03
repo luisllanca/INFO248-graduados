@@ -68,13 +68,14 @@ const Autenticador: React.FC = () => {
         console.log(userJson)
         localStorage.setItem("user", userJson);
         
-        if (rol === "Estudiante") {
-          history.push('/home');
-        } 
-        else if (rol === "Administrador") {
-          history.push('/admin');
-          console.log("Admin");
-        }
+        history.push('/home');
+        // if (rol === "Estudiante") {
+        //   history.push('/home');
+        // } 
+        // else if (rol === "Administrador") {
+        //   history.push('/admin');
+        //   console.log("Admin");
+        // }
       }
         
       if (response.status === 203) {
@@ -101,7 +102,7 @@ const Autenticador: React.FC = () => {
   }
   };
   if (isLoading) {
-    return <div>Cargando...</div>;
+    return (<div>Cargando...</div>);
   }
   
   if (isAuthenticated && !dataLoaded && user) {

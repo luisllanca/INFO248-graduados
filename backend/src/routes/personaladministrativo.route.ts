@@ -8,6 +8,8 @@ rutasPersonalAdministrativo.get("/", (req: Request, res: Response) => personalAd
 
 rutasPersonalAdministrativo.get("/:id", (req: Request, res: Response) => personalAdministrativo.getPersonalAdministrativoId(req, res));
 
+rutasPersonalAdministrativo.get("/user/:id", (req: Request, res: Response) => personalAdministrativo.getAdminByUser(req, res));
+
 // rutasPersonalAdministrativo.get("/estudiante/:id", (req: Request, res: Response) => personalAdministrativo.getPersonalAdministrativoEstudianteById(req, res));
 
 // rutasPersonalAdministrativo.post("/", (req: Request, res: Response) => personalAdministrativo.createPersonalAdministrativo(req, res));
@@ -18,4 +20,3 @@ rutasPersonalAdministrativo.get("/:id", (req: Request, res: Response) => persona
 
 
 export default rutasPersonalAdministrativo;
-

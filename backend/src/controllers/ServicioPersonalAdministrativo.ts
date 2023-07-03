@@ -48,6 +48,28 @@ export class ServiciosPersonalAdministrativo{
         });
     }
   };
+
+  async getAdminByUser(req: Request, res: Response){
+    // console.log(req.params);
+    try {
+      const idUser = req.params.id;
+      const admin = await PersonalAdministrativoModel.findOne({
+        where: { id_usuario: idUser },
+      });
+
+      res.status(200).json({
+        ok: true,
+        Admin: admin,
+      });
+      console.log(admin);
+    } catch (error) {
+      console.error(error);
+        res.status(500).json({ 
+            ok: false, 
+            msg: "Error al obtener admin por id de usuario" 
+        });
+    }
+  };
 //Corregir esta, validar
 //   async createPersonalAdministrativo(req: Request, res: Response){
 //     try {

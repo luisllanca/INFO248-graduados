@@ -1,6 +1,6 @@
 import express, { Application } from "express";
 import cors from "cors";
-import rutasGestion from "../routes/personaladministrativo.route";
+import rutasAdmin from "../routes/personaladministrativo.route";
 import rutasUsuario from "../routes/usuario.route";
 import rutasEstudiante from "../routes/estudiante.route";
 import rutasBecas from "../routes/beca.route";
@@ -23,7 +23,7 @@ class Server {
   }
 
   routes() {
-    this.app.use("/gestion", rutasGestion);
+    this.app.use("/admin", rutasAdmin);
     this.app.use("/user", rutasUsuario);
     this.app.use("/estudiantes", rutasEstudiante);
     // this.app.use("/becas", rutasBecas);
