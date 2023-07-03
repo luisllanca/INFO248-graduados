@@ -4,6 +4,11 @@ module.exports = {
     testPathIgnorePatterns: [
       "/node_modules/",
       "/ignore-tests/",
-      "/dist/"
+      "/dist/",
+      // "/*comprobantes.route.test.ts",
+      // "/*estudiante.route.test.ts",
+      // "/*personaladministrativo.route.test.ts",
+      
+
     ]
   };
