@@ -38,11 +38,11 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
       if(user.rol === "Estudiante") {
         const responseEst = await fetch(`http://localhost:8080/estudiantes/user/${user.id}`);
         const dataEst = await responseEst.json();
-        setUserChild(dataEst.Estudiante);
-        localStorage.setItem("est", JSON.stringify(dataEst.Estudiante));
+        setUserChild(dataEst.Estudiantes);
+        localStorage.setItem("est", JSON.stringify(dataEst.Estudiantes));
     
-        if (dataEst.Estudiante) {
-          const responseComps = await fetch(`http://localhost:8080/comprobantes/estudiante/${dataEst.Estudiante.id}`);
+        if (dataEst.Estudiantes) {
+          const responseComps = await fetch(`http://localhost:8080/comprobantes/estudiante/${dataEst.Estudiantes.id}`);
           const dataComps = await responseComps.json();
           setComps(dataComps.Comprobantes);
           console.log(dataComps.Comprobantes);
@@ -50,8 +50,8 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
       } else {
         const responseAdmin = await fetch(`http://localhost:8080/admin/user/${user.id}`);
         const dataAdmin = await responseAdmin.json();
-        setUserChild(dataAdmin.Admin);
-        console.log(dataAdmin.Admin);
+        setUserChild(dataAdmin.PersonalAdministrativo);
+        console.log(dataAdmin.PersonalAdministrativo);
       }
     };
   
