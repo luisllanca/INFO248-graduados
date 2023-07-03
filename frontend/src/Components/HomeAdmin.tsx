@@ -9,7 +9,7 @@ import axios from 'axios';
 import { ToastContainer, toast, Flip } from "react-toastify";
 import EnhancedTable from './EnhancedTable';
 import StudentTable from './tablaEstudiantes';
-
+import LogoutButton from './LogoutButton';
 const userString = localStorage.getItem("user");
 const user = userString ? JSON.parse(userString) : null;
 
@@ -29,7 +29,7 @@ const HomeAdmin: FC<SomeComponentProps> = ({ history }) => {
             <div className="grid">
                 <button type="submit" className="sisgeg" onClick={inicio}>SISGEG</button>
                 <div className="eslogan">Sistema seguimiento escuela graduados</div>
-                <div className='logout-container'><button type='submit' className='logout' onClick={logout}>Cerrar Sesion</button></div>
+                <div className='logout-container'> <LogoutButton></LogoutButton>   </div>
                 <LogoImage />
             </div>
             <div className='gridtablacomprobantes'>

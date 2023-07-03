@@ -3,7 +3,7 @@ import { RouteComponentProps } from "react-router-dom";
 import "./styles/home.css";
 import perfilImage from "../images/perfil.png";
 import LogoImage from "./LogoImage";
-
+import LogoutButton from './LogoutButton';
 type SomeComponentProps = RouteComponentProps;
 const Home: FC<SomeComponentProps> = ({ history }) => {
 
@@ -69,7 +69,7 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
       <div className="grid">
         <button type="submit" className="sisgeg" onClick={inicio}>SISGEG</button>
         <div className="eslogan">Sistema seguimiento escuela graduados</div>
-        <div className='logout-container'><button type='submit' className='logout' onClick={logout}>Cerrar Sesion</button></div>
+        <div className='logout-container'> <LogoutButton></LogoutButton>   </div>
         <LogoImage />
       </div>
       <div className="griddatos">
