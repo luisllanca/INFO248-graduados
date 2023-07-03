@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Redirect, RouteProps } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import "../Components/styles/home.css";
 
 interface PrivateRouteProps extends RouteProps {
   component: React.ComponentType<any>;
@@ -35,7 +36,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
       render={(props) =>
         isLoading ? (
           // Puedes mostrar un indicador de carga mientras se obtiene la autenticación
-          <div>Loading...</div>
+          <div className='load'></div>
         ) : isAuthenticated ? (
           <Component {...props} />
         ) : (

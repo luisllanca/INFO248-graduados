@@ -1,5 +1,6 @@
 import { ServicioEncriptacion } from "../clases_negocio/ServicioSeguridad/ServicioEncriptacion";
 import EstudianteModel from "../models/EstudianteModel";
+import PersonalAdministrativoModel from "../models/PersonalAdministrativoModel";
 import UsuarioModel from "../models/UsuarioModel";
 
 import { Request, Response } from "express";
@@ -130,6 +131,49 @@ export class ServiciosUsuario {
         Usuario: usuario,
         Estudiante: estudiante,
         id: usuario.id
+      });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error al crear el usuario" 
+        });
+    }
+  };
+
+  async createUsuarioAdmin(req: Request, res: Response){
+    try {
+      const {nombre, apellido, rol, email, cargo} = req.body;
+      const usuarioExistente = await UsuarioModel.findOne({
+        where: { email: email },
+      });
+      if(usuarioExistente){
+        res.status(400).json({
+          ok: false,
+          msg: "El usuario ya esta registrado"
+        });
+        return;
+      }
+
+      const usuario = await UsuarioModel.create({
+        nombre,
+        apellido,
+        rol,
+        email
+      });
+      const id_usuario = usuario.id;
+      console.log(id_usuario);
+      const admin = await PersonalAdministrativoModel.create({
+        cargo,
+        id_usuario
+      });
+
+      res.status(201).json({
+        ok: true,
+        msg: "Usuario de admin registrado correctamente",
+        Usuario: usuario,
+        Admin: admin,
+        id: id_usuario
       });
     } catch (error) {
         console.error(error);

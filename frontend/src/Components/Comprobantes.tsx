@@ -3,7 +3,7 @@ import { RouteComponentProps } from "react-router-dom";
 import "./styles/home.css";
 import LogoImage from "./LogoImage";
 import EnhancedTable from './EnhancedTable';
-
+import LogoutButton from './LogoutButton';
 type SomeComponentProps = RouteComponentProps;
 const Comprobantes: FC<SomeComponentProps> = ({ history }) => {
 
@@ -25,7 +25,7 @@ const Comprobantes: FC<SomeComponentProps> = ({ history }) => {
       <div className="grid">
         <button type="submit" className="sisgeg" onClick={home}>SISGEG</button>
         <div className="eslogan">Sistema seguimiento escuela graduados</div>
-        <div className='logout-container'><button type='submit' className='logout' onClick={logout}>Cerrar Sesion</button></div>
+        <div className='logout-container'> <LogoutButton></LogoutButton>   </div>
         <LogoImage />
       </div>
       <div className='title'>Historial de comprobantes</div>

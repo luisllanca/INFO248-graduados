@@ -5,7 +5,7 @@ import axios from 'axios';
 import "react-toastify/dist/ReactToastify.min.css";
 import "./styles/home.css";
 import LogoImage from "./LogoImage";
-
+import LogoutButton from './LogoutButton';
 type SomeComponentProps = RouteComponentProps;
 const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
   const {
@@ -68,7 +68,7 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
       <div className="grid">
         <button type="submit" className="sisgeg" onClick={home}>SISGEG</button>
         <div className="eslogan">Sistema seguimiento escuela graduados</div>
-        <div className='logout-container'><button type='submit' className='logout' onClick={logout}>Cerrar Sesion</button></div>
+        <div className='logout-container'> <LogoutButton></LogoutButton>   </div>
         <LogoImage />
       </div>
       <div className='title'>Subir comprobante</div>

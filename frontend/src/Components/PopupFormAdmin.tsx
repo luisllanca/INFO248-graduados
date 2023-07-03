@@ -1,39 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/popup.css"; // Importa los estilos CSS
 import { useHistory } from 'react-router-dom';
+import { useForm } from "react-hook-form";
 import axios from "axios";
 
 const PopupFormAdmin  = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
+  const [showErrors, setShowErrors] = useState(false);
   const history = useHistory();
   // Recuperar correo y rol
   const rol = localStorage.getItem("rol")
   const correo = localStorage.getItem("correo")
+
+  useEffect(() => {
+    if(errors.nombre || errors.apellido || errors.cargo) {
+      setShowErrors(true);
+    } else {
+      setShowErrors(false);
+    }
+
+  }, [errors]);
   
-  async function crearUsuarioAdmin() {
+  async function crearUsuarioAdmin(data : any) {
     try {
       const requestBody = {
-        nombre: nombre,
-        apellido: apellido,
-        rol: rol,
-        email: correo
+        nombre: data.nombre,
+        apellido: data.apellido,
+        rol:rol,
+        email: correo,
+        cargo: data.cargo,
       };
   
-      await axios.post('http://localhost:8080/user/registrar', requestBody)
+      await axios.post('http://localhost:8080/user/registrar/admin', requestBody)
       .then(response => {
-        
-        const id_res = response.data.id; // Reemplaza 'campo' con el nombre del campo que deseas extraer
+        const user = response.data.Usuario; // Reemplaza 'campo' con el nombre del campo que deseas extraer
         // Utiliza el campo específico
         // Guardar el id del usuario en localstorage
-        
-        const user = {
-          nombre: nombre,
-          apellido: apellido,
-          email: correo,
-          id: id_res
-        };
         
         const userJson = JSON.stringify(user);
         localStorage.setItem("user", userJson);
@@ -51,45 +58,74 @@ const PopupFormAdmin  = () => {
     }
   }
   
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) =>  {
-    event.preventDefault();
+  const registrar = (data: any) => {
     // Aquí puedes realizar la lógica para enviar los datos del formulario
-    console.log("Datos enviados:", { nombre, apellido});
+    console.log(`Datos enviados: ${data.nombre} ${data.apellido} ${data.cargo}`);
 
-    crearUsuarioAdmin();
-    history.push('/admin'); 
+    crearUsuarioAdmin(data);
+    setTimeout(() => {
+      history.push("/home");
+    }, 1000);
     // Luego de enviar los datos, puedes cerrar el popup o realizar otras acciones necesarias
     // Puedes restablecer los valores del formulario a su estado inicial
-  
-    setNombre("");
-    setApellido("");
-
   };
 
   return (
     <div className="popup-container">
       <div className="popup-content">
         <h2>Formulario administrativo</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="nombre">Nombre:</label>
+        <form autoComplete="off">
+          <div className="campo">
+            <label>Nombre:</label>
             <input
               type="text"
               id="nombre"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
+              placeholder="Nombre"
+              {...register("nombre", {
+                required: {
+                  value: true,
+                  message: "Ingrese un nombre"
+                }
+              })}
             />
+            <p className="text-danger" style={{ fontSize: 14 }}>
+              {showErrors && errors.nombre && (errors.nombre.message)}
+            </p>
           </div>
-          <div>
-            <label htmlFor="apellido">Apellido:</label>
+          <div className="campo">
+            <label>Apellido:</label>
             <input
               type="text"
               id="apellido"
-              value={apellido}
-              onChange={(e) => setApellido(e.target.value)}
+              placeholder="Apellido"
+              {...register("apellido", {
+                required: {
+                  value: true,
+                  message: "Ingrese un apellido"
+                }
+              })}
             />
+            <p className="text-danger" style={{ fontSize: 14 }}>
+              {showErrors && errors.apellido && (errors.apellido.message)}
+            </p>
           </div>
-          <button type="submit">Enviar</button>
+          <div className="campo">
+            <label>Cargo:</label>
+            <select 
+            id="cargo"
+            {...register("cargo", {
+              required: "Ingrese un cargo",
+            })}
+            >
+              <option value="">Seleccione...</option>
+              <option value="Secretaria">Secretaria</option>
+              <option value="Director de programa">Director de programa</option>
+            </select>
+            <p className="text-danger" style={{ fontSize: 14 }}>
+              {showErrors && errors.cargo && (errors.cargo.message)}
+            </p>
+          </div>
+          <button type="submit" onClick={handleSubmit(registrar)}>Enviar</button>
         </form>
       </div>
     </div>

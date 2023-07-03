@@ -18,7 +18,6 @@ import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
 import axios from 'axios';
-import { ToastContainer, toast, Flip } from "react-toastify";
 
 function getFecha(fecha : string) {
     var info = fecha.split('-');
@@ -30,10 +29,6 @@ function getTotal(comps: any[]) {
     comps.forEach(comp => total += comp.monto);
     return `$${total}`;
 }
-
-const estudiante = localStorage.getItem("est") !== "undefined"
-  ? JSON.parse(localStorage.getItem("est")!)
-  : localStorage.clear();
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -172,6 +167,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const EnhancedTable = () => {
     const classes = useStyles();
+
+    const estudiante = localStorage.getItem("est") !== "undefined"
+      ? JSON.parse(localStorage.getItem("est")!)
+      : localStorage.clear();
 
     const [state, setState] = useState(false);
     const [compActual, setCompActual] = useState<any>();

@@ -1,14 +1,12 @@
-import {
-  Model,
-  DataTypes,
-  InferAttributes,
-  InferCreationAttributes,
-  CreationOptional,
-} from "sequelize";
+import { Model, DataTypes } from "sequelize";
 import UsuarioModel from "./UsuarioModel";
 import db from "./connection";
 
-class PersonalAdministrativoModel extends Model {}
+class PersonalAdministrativoModel extends Model {
+  public usuario!: UsuarioModel;
+  public id!: number;
+  public cargo!: string;
+}
 
 PersonalAdministrativoModel.init(
   {
@@ -29,9 +27,11 @@ PersonalAdministrativoModel.init(
   {
     tableName: "personal_administrativo",
     sequelize: db,
+    timestamps: false
   }
 );
 PersonalAdministrativoModel.belongsTo(UsuarioModel, {
   foreignKey: "id_usuario",
+  as: "usuario",
 });
 export default PersonalAdministrativoModel;
