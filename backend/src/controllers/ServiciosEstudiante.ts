@@ -59,7 +59,7 @@ export class ServiciosEstudiantes {
 
       res.status(200).json({
         ok: true,
-        Estudiante: estudiante,
+        Estudiantes: estudiante,
       });
       console.log(estudiante);
     } catch (error) {
