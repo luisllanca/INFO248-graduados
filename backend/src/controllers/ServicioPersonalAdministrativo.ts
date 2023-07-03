@@ -53,15 +53,15 @@ export class ServiciosPersonalAdministrativo{
     // console.log(req.params);
     try {
       const idUser = req.params.id;
-      const admin = await PersonalAdministrativoModel.findOne({
+      const personalAdministrativo = await PersonalAdministrativoModel.findOne({
         where: { id_usuario: idUser },
       });
 
       res.status(200).json({
         ok: true,
-        Admin: admin,
+        PersonalAdministrativo: personalAdministrativo,
       });
-      console.log(admin);
+      console.log(personalAdministrativo);
     } catch (error) {
       console.error(error);
         res.status(500).json({ 

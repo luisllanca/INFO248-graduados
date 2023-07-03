@@ -138,7 +138,7 @@ export class ServiciosComprobantes {
       res.status(200).json({
         ok: true,
         msg: "Comprobante borrado con exito",
-        Comprobante: comprobante,
+        Comprobantes: comprobante,
       });
     } catch (error) {
         console.error(error);
@@ -174,7 +174,7 @@ export class ServiciosComprobantes {
       res.status(200).json({
         ok: true,
         msg: "Comprobante actualizado",
-        Comprobante: comprobante,
+        Comprobantes: comprobante,
       });
     } catch (error) {
         console.error(error);

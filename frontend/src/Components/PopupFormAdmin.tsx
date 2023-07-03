@@ -3,6 +3,8 @@ import "./styles/popup.css"; // Importa los estilos CSS
 import { useHistory } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import "./styles/home.css";
+
 
 const PopupFormAdmin  = () => {
   const {
@@ -73,10 +75,10 @@ const PopupFormAdmin  = () => {
   return (
     <div className="popup-container">
       <div className="popup-content">
-        <h2>Formulario administrativo</h2>
+        <div className="tituloFormulario">Formulario Administrativo</div>
         <form autoComplete="off">
           <div className="campo">
-            <label>Nombre:</label>
+            <label>Nombre: </label>
             <input
               type="text"
               id="nombre"
@@ -125,7 +127,7 @@ const PopupFormAdmin  = () => {
               {showErrors && errors.cargo && (errors.cargo.message)}
             </p>
           </div>
-          <button type="submit" onClick={handleSubmit(registrar)}>Enviar</button>
+          <button type="submit" className= "ingresar_button" onClick={handleSubmit(registrar)}>Enviar</button>
         </form>
       </div>
     </div>
