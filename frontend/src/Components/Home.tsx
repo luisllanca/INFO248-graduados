@@ -29,8 +29,6 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
       ? JSON.parse(localStorage.getItem("user")!)
       : localStorage.clear();
 
-  // console.log(user);
-
   const [userChild, setUserChild] = useState<any>();
   const [comps, setComps] = useState<any>();
 
@@ -72,75 +70,79 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
     return `${total}`;
   }
   
-  if(user.rol === "Estudiante"){
-    return (
-      <>
-        <div className="grid">
-          <button type="submit" className="sisgeg" onClick={inicio}>SISGEG</button>
-          <div className="eslogan">Sistema seguimiento escuela graduados</div>
-          <div className='logout-container'> <LogoutButton></LogoutButton>   </div>
-          <LogoImage />
-        </div>
-        <div className="griddatos">
-          <div className="contenedor-cuadrado">
-            <img src={perfilImage} alt="Foto perfil" />
+  if(user) {
+    if(user.rol === "Estudiante"){
+      return (
+        <>
+          <div className="grid">
+            <button type="submit" className="sisgeg" onClick={inicio}>SISGEG</button>
+            <div className="eslogan">Sistema seguimiento escuela graduados</div>
+            <div className='logout-container'> <LogoutButton></LogoutButton>   </div>
+            <LogoImage />
           </div>
-          <div className="datos">
-            {user && <div>{user.nombre} {user.apellido}</div>}
-            {userChild && <div>{userChild.programa} en {userChild.carrera}</div>}
+          <div className="griddatos">
+            <div className="contenedor-cuadrado">
+              <img src={perfilImage} alt="Foto perfil" />
+            </div>
+            <div className="datos">
+              {user && <div>{user.nombre} {user.apellido}</div>}
+              {userChild && <div>{userChild.programa} en {userChild.carrera}</div>}
+            </div>
           </div>
-        </div>
-        <div className="linea"></div>
-        <div className="gridresumen">
-          <div className="resumen">
-            <div className='estadofin'>Resumen Financiero</div>
-              <div className='resumen3'>
-                <div className='resumen1'>Monto total abonado: </div>
-                <div className='datocuadro'>{comps ? getTotal(comps) : "$0"}</div>
+          <div className="linea"></div>
+          <div className="gridresumen">
+            <div className="resumen">
+              <div className='estadofin'>Resumen Financiero</div>
+                <div className='resumen3'>
+                  <div className='resumen1'>Monto total abonado: </div>
+                  <div className='datocuadro'>{comps ? getTotal(comps) : "$0"}</div>
+                </div>
+                <div className='resumen3'>
+                  <div className='resumen1'>Total comprobantes ingresados:</div>
+                  <div className='datocuadro'>{comps ? getTotalComps(comps) : "0"}</div>
+                </div>
               </div>
-              <div className='resumen3'>
-                <div className='resumen1'>Total comprobantes ingresados:</div>
-                <div className='datocuadro'>{comps ? getTotalComps(comps) : "0"}</div>
+              <div className="botones">
+                <div className='estadofin'>Estado Financiero</div>
+                <div className='contenedor-botones'><button type="submit" className="boton" onClick={histComp}>Historial de comprobantes</button></div>
+                <div className='contenedor-botones'><button type="submit" className="boton" onClick={subirComp}>Subir comprobante</button></div>
               </div>
             </div>
-            <div className="botones">
-              <div className='estadofin'>Estado Financiero</div>
-              <div className='contenedor-botones'><button type="submit" className="boton" onClick={histComp}>Historial de comprobantes</button></div>
-              <div className='contenedor-botones'><button type="submit" className="boton" onClick={subirComp}>Subir comprobante</button></div>
+        </>
+        );
+    } else {
+      return (
+        <>
+          <div className="grid">
+            <button type="submit" className="sisgeg" onClick={inicio}>SISGEG</button>
+            <div className="eslogan">Sistema seguimiento escuela graduados</div>
+            <div className='logout-container'> <LogoutButton></LogoutButton>   </div>
+            <LogoImage />
+          </div>
+          <div className="griddatos">
+            <div className="contenedor-cuadrado">
+              <img src={perfilImage} alt="Foto perfil" />
+            </div>
+            <div className="datos">
+              {user && <div>{user.nombre} {user.apellido}</div>}
+              {userChild && <div>{userChild.cargo}</div>}
             </div>
           </div>
-      </>
-      );
-  } else {
-    return (
-      <>
-        <div className="grid">
-          <button type="submit" className="sisgeg" onClick={inicio}>SISGEG</button>
-          <div className="eslogan">Sistema seguimiento escuela graduados</div>
-          <div className='logout-container'> <LogoutButton></LogoutButton>   </div>
-          <LogoImage />
-        </div>
-        <div className="griddatos">
-          <div className="contenedor-cuadrado">
-            <img src={perfilImage} alt="Foto perfil" />
-          </div>
-          <div className="datos">
-            {user && <div>{user.nombre} {user.apellido}</div>}
-            {userChild && <div>{userChild.cargo}</div>}
-          </div>
-        </div>
-        <div className="linea"></div>
-        <div className="gridresumen">
-          <div className="resumen">
-            <div className="botones">
-              <div className='estadofin'>Estados de pago</div>
-              <div className='contenedor-botones'><button type="submit" className="boton" onClick={admin}>Pagos de arancel</button></div>
+          <div className="linea"></div>
+          <div className="gridresumen">
+            <div className="resumen">
+              <div className="botones">
+                <div className='estadofin'>Estados de pago</div>
+                <div className='contenedor-botones'><button type="submit" className="boton" onClick={admin}>Pagos de arancel</button></div>
+              </div>
             </div>
           </div>
-        </div>
-      </>
-      );
+        </>
+        );
+    }
   }
+
+  return null;
 };
 
 export default Home;

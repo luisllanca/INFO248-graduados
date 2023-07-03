@@ -4,8 +4,13 @@ import "./styles/home.css";
 const LogoutButton = () => {
   const { logout } = useAuth0();
 
+  const salir = () => {
+    localStorage.clear();
+    logout({ logoutParams: { returnTo: 'http://localhost:3000/login'} })
+  }
+
   return (
-    <button className='logout' onClick={() => logout({ logoutParams: { returnTo: 'http://localhost:3000/login'} })}>
+    <button className='logout' onClick={salir}>
       Cerrar sesión
     </button>
     

@@ -144,11 +144,6 @@ export class ServiciosUsuario {
   async createUsuarioAdmin(req: Request, res: Response){
     try {
       const {nombre, apellido, rol, email, cargo} = req.body;
-      console.log(nombre);
-      console.log(apellido);
-      console.log(rol);
-      console.log(email);
-      console.log(cargo);
       const usuarioExistente = await UsuarioModel.findOne({
         where: { email: email },
       });
@@ -172,8 +167,6 @@ export class ServiciosUsuario {
         cargo,
         id_usuario
       });
-
-      console.log(admin);
 
       res.status(201).json({
         ok: true,

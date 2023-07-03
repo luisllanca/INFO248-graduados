@@ -15,6 +15,8 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
     history.push("/login")
   };
 
+  console.log(localStorage);
+
   return (
     <>
     <div className="grid">

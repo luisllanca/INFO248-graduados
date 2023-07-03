@@ -20,13 +20,13 @@ rutasUsuario.post("/login",  [
   fieldsValidator,
 ],(req: Request, res: Response) => usuario.loguearse(req, res));
 
-rutasUsuario.post("/registrar",  [
+rutasUsuario.post("/registrar/admin",  [
     check("nombre", "El nombre es obligatorio").notEmpty().isString(),
     check("apellido", "El apellido es obligatorio").notEmpty().isString(),
     check("rol", "El rol es obligatorio").notEmpty().isString(),
     check("email", "el email es obligatoria").notEmpty().isString(),
     fieldsValidator,
-  ],(req: Request, res: Response) => usuario.createUsuario(req, res));
+  ],(req: Request, res: Response) => usuario.createUsuarioAdmin(req, res));
 
 rutasUsuario.post("/registrar/estudiante",  [
   check("nombre", "El nombre es obligatorio").notEmpty().isString(),

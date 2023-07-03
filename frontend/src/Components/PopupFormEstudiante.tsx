@@ -1,53 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { useForm } from "react-hook-form";
 import "./styles/popup.css"; // Importa los estilos CSS
 
 const PopupFormEstudiante = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const history = useHistory();
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
-  const [rut, setRut] = useState("");
-  const [programa, setPrograma] = useState("");
-  const [carrera, setCarrera] = useState("");
+  const [showErrors, setShowErrors] = useState(false);
   const correo = localStorage.getItem("correo")
   const rol = localStorage.getItem("rol")
-  async function crearUsuarioEstudiante() {
+
+  useEffect(() => {
+    if(errors.nombre || errors.apellido || errors.rut || errors.programa || errors.carrera) {
+      setShowErrors(true);
+    } else {
+      setShowErrors(false);
+    }
+    console.log(errors);
+
+  }, [errors]);
+
+  async function crearUsuarioEstudiante(data : any) {
     
     try {
       const requestBody = {
-        nombre: nombre,
-        apellido: apellido,
+        nombre: data.nombre,
+        apellido: data.apellido,
         rol:rol,
         email: correo,
-        rut: rut,
-        programa: programa,
-        carrera: carrera
+        rut: data.rut,
+        programa: data.programa,
+        carrera: data.carrera
       };
   
       await axios.post('http://localhost:8080/user/registrar/estudiante', requestBody)
       .then(response => {
         
-        const id_res = response.data.id; // Reemplaza 'campo' con el nombre del campo que deseas extraer
+        const user = response.data.Usuario; // Reemplaza 'campo' con el nombre del campo que deseas extraer
         const msg = response.data.msg
         // Utiliza el campo específico
         // Guardar el id del usuario en localstorage
         
-        const user = {
-          nombre: nombre,
-          apellido: apellido,
-          rol:rol,
-          correo: correo,
-          id: id_res
-        };
-        
         const userJson = JSON.stringify(user);
         localStorage.setItem("user", userJson);
-
-        //redirigir al home
-
-        
-      
         console.log(msg)
       })
       .catch(error => {
@@ -62,74 +63,109 @@ const PopupFormEstudiante = () => {
     }
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) =>  {
-    event.preventDefault();
+  const registrar = (data : any) =>  {
     // Envío de datos a la API local.
-    console.log("Datos enviados:", { nombre, apellido, rut, programa, carrera, correo });
+    console.log(`Datos enviados: ${data.nombre} ${data.apellido} ${data.rut} ${data.programa} ${data.carrera} ${correo}`);
     
     
-    crearUsuarioEstudiante();
-    history.push('/home'); 
+    crearUsuarioEstudiante(data);
+    setTimeout(() => {
+      history.push("/home");
+    }, 1000);
 
-    // Restablecer valores originales:
-    setNombre("");
-    setApellido("");
-    setRut("");
-    setPrograma("");
-    setCarrera("");
   };
 
   return (
     <div className="popup-container">
       <div className="popup-content">
         <h2>Formulario estudiante</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="nombre">Nombre:</label>
+        <form autoComplete="off">
+          <div className="campo">
+            <label>Nombre:</label>
             <input
               type="text"
               id="nombre"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
+              placeholder="Nombre"
+              {...register("nombre", {
+                required: {
+                  value: true,
+                  message: "Ingrese un nombre"
+                }
+              })}
             />
+            <p className="text-danger" style={{ fontSize: 14 }}>
+              {showErrors && errors.nombre && (errors.nombre.message)}
+            </p>
           </div>
-          <div>
-            <label htmlFor="apellido">Apellido:</label>
+          <div className="campo">
+            <label>Apellido:</label>
             <input
               type="text"
               id="apellido"
-              value={apellido}
-              onChange={(e) => setApellido(e.target.value)}
+              placeholder="Apellido"
+              {...register("apellido", {
+                required: {
+                  value: true,
+                  message: "Ingrese un apellido"
+                }
+              })}
             />
+            <p className="text-danger" style={{ fontSize: 14 }}>
+              {showErrors && errors.apellido && (errors.apellido.message)}
+            </p>
           </div>
-          <div>
-            <label htmlFor="rut">RUT:</label>
+          <div className="campo">
+            <label>RUT:</label>
             <input
               type="text"
               id="rut"
-              value={rut}
-              onChange={(e) => setRut(e.target.value)}
+              placeholder="12345678-9"
+              {...register("rut", {
+                required: {
+                  value: true,
+                  message: "Ingrese su rut"
+                }
+              })}
             />
+            <p className="text-danger" style={{ fontSize: 14 }}>
+              {showErrors && errors.rut && (errors.rut.message)}
+            </p>
           </div>
-          <div>
-            <label htmlFor="programa">Programa:</label>
+          <div className="campo">
+            <label>Programa:</label>
             <input
               type="text"
               id="programa"
-              value={programa}
-              onChange={(e) => setPrograma(e.target.value)}
+              placeholder="Programa"
+              {...register("programa", {
+                required: {
+                  value: true,
+                  message: "Ingrese su programa"
+                }
+              })}
             />
+            <p className="text-danger" style={{ fontSize: 14 }}>
+              {showErrors && errors.programa && (errors.programa.message)}
+            </p>
           </div>
-          <div>
-            <label htmlFor="carrera">Carrera:</label>
+          <div className="campo">
+            <label>Carrera:</label>
             <input
               type="text"
               id="carrera"
-              value={carrera}
-              onChange={(e) => setCarrera(e.target.value)}
+              placeholder="Carrera"
+              {...register("carrera", {
+                required: {
+                  value: true,
+                  message: "Ingrese su carrera"
+                }
+              })}
             />
+            <p className="text-danger" style={{ fontSize: 14 }}>
+              {showErrors && errors.carrera && (errors.carrera.message)}
+            </p>
           </div>
-          <button type="submit">Enviar</button>
+          <button type="submit" onClick={handleSubmit(registrar)}>Enviar</button>
         </form>
       </div>
     </div>
