@@ -5,8 +5,8 @@ import axios from 'axios';
 const PestañaComprobante = () => {
     const [fileUrl, setFileUrl] = useState("")
     const compActual =
-    localStorage.getItem("compActual") !== "undefined"
-    ? JSON.parse(localStorage.getItem("compActual")!)
+    localStorage.getItem("compImagen") !== "undefined"
+    ? JSON.parse(localStorage.getItem("compImagen")!)
     : localStorage.clear();
     
     console.log(compActual);

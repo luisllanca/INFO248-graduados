@@ -19,10 +19,7 @@ const Comprobantes: FC<SomeComponentProps> = ({ history }) => {
   const home = () => {
     history.push("/");
   }
-  const obtenerComprobante = () => {
-    
-    window.open('http://localhost:3000/pestañaComprobante', '_blank');
-  };
+  
   return (
     <>
       <div className="grid">

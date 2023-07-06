@@ -252,9 +252,9 @@ const EnhancedTable = () => {
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, comps.length - page * rowsPerPage);
 
   const obtenerComprobante = (comp: any) => {
-    setCompActual(comp);
-    console.log(comp);
-    localStorage.setItem("compActual", removeImgField(JSON.stringify(comp)));
+    //setCompActual(comp);
+    //console.log(comp);
+    localStorage.setItem("compImagen", removeImgField(JSON.stringify(comp)));
     window.open('http://localhost:3000/pestañaComprobante', '_blank');
   };
   
