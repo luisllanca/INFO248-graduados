@@ -13,8 +13,21 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+//css
 import { format } from 'date-fns';
+import { Theme, createStyles, makeStyles} from '@material-ui/core/styles';
+import FilePresentIcon from '@mui/icons-material/FilePresent';
 
+const removeImgField = (jsonString: string): string => {
+  try {
+    const jsonObject: { [key: string]: any } = JSON.parse(jsonString);
+    delete jsonObject.img;
+    return JSON.stringify(jsonObject);
+  } catch (error) {
+    console.error('Error parsing or modifying JSON:', error);
+    return jsonString;
+  }
+};
 interface Estudiante {
   id: number;
   id_usuario: number;
@@ -36,7 +49,20 @@ interface Comprobante {
   monto: number;
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    icon_file: {
+      marginRight: 15,
+      cursor: "pointer",
+      "&:hover": {
+        fill: "blue",
+      },
+    },
+  }),
+);
+
 function Row(props: { row: Estudiante; usuarios: Usuario[] }) {
+  const classes = useStyles();
   const { row, usuarios } = props;
   const [open, setOpen] = React.useState(false);
   const [comps, setComps] = useState<Comprobante[]>([]);
@@ -58,6 +84,13 @@ function Row(props: { row: Estudiante; usuarios: Usuario[] }) {
     const user = usuarios.find((usuario) => usuario.id === row.id_usuario);
     setUser(user);
   }, [row.id_usuario, usuarios]);
+
+  const obtenerComprobante = (comp: any) => {
+    //setCompActual(comp);
+    //console.log(comp);
+    localStorage.setItem("compImagen", removeImgField(JSON.stringify(comp)));
+    window.open('http://localhost:3000/pestañaComprobante', '_blank');
+  };
 
   return (
     <React.Fragment>
@@ -92,6 +125,7 @@ function Row(props: { row: Estudiante; usuarios: Usuario[] }) {
                     <TableCell>Fecha</TableCell>
                     <TableCell>Tipo</TableCell>
                     <TableCell align="right">Monto</TableCell>
+                    <TableCell align="right">Comprobante</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -102,6 +136,12 @@ function Row(props: { row: Estudiante; usuarios: Usuario[] }) {
                       </TableCell>
                       <TableCell>{comp.tipo}</TableCell>
                       <TableCell align="right">{comp.monto}</TableCell>
+                      <TableCell align="right"> 
+                        <FilePresentIcon className= {classes.icon_file}
+                            onClick={() => obtenerComprobante(comp)}
+                        />
+                      </TableCell>
+                      
                     </TableRow>
                   ))}
                 </TableBody>

@@ -26,7 +26,7 @@ function App() {
       <PrivateRoute exact path="/autenticacion" component={Autenticador} />
       <PrivateRouteHome exact path="/home" component={Home}/>
       <PrivateRouteRegistroEstudiante exact path="/registroEstudiante" component={PopupFormEstudiante} />
-      <PrivateRouteEstudiante exact path="/pestañaComprobante" component={PestañaComprobante} />
+      <PrivateRouteHome exact path="/pestañaComprobante" component={PestañaComprobante} />
       <PrivateRouteEstudiante exact path="/comprobantes" component={Comprobantes}/>
       <PrivateRouteEstudiante exact path="/subirComprobante" component={SubirComprobante}/>
       <PrivateRouteRegistroAdmin exact path="/registroAdmin" component={PopupFormAdmin} />

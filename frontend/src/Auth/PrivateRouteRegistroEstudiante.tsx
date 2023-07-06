@@ -20,6 +20,12 @@ const PrivateRouteRegistroAdmin: React.FC<PrivateRouteProps> = ({
       ? (localStorage.getItem("rol")!)
       : localStorage.clear();
 
+  const user =
+  localStorage.getItem("user") !== "undefined"
+    ? JSON.parse(localStorage.getItem("user")!)
+    : localStorage.clear();
+  
+
   useEffect(() => {
     const fetchAuthentication = async () => {
       try {
@@ -42,7 +48,7 @@ const PrivateRouteRegistroAdmin: React.FC<PrivateRouteProps> = ({
         isLoading ? (
           // Puedes mostrar un indicador de carga mientras se obtiene la autenticación
           <div className='load'></div>
-        ) : isAuthenticated && rol === 'Estudiante' ? (
+        ) : isAuthenticated && rol === 'Estudiante' && user == null ? (
           
           <Component {...props} />
         ) : (
