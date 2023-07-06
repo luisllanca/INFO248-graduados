@@ -17,8 +17,20 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
+import FilePresentIcon from '@mui/icons-material/FilePresent';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+
+const removeImgField = (jsonString: string): string => {
+  try {
+    const jsonObject: { [key: string]: any } = JSON.parse(jsonString);
+    delete jsonObject.img;
+    return JSON.stringify(jsonObject);
+  } catch (error) {
+    console.error('Error parsing or modifying JSON:', error);
+    return jsonString;
+  }
+};
 
 function getFecha(fecha : string) {
     var info = fecha.split('-');
@@ -48,6 +60,8 @@ interface Comprobante {
     fecha: string;
     monto: number;
 }
+
+
 
 function getComparator<Key extends keyof any>(
   order: Order,
@@ -152,6 +166,13 @@ const useStyles = makeStyles((theme: Theme) =>
         fill: "green",
       },
     },
+    icon_file: {
+      marginRight: 15,
+      cursor: "pointer",
+      "&:hover": {
+        fill: "blue",
+      },
+    },
     visuallyHidden: {
       border: 0,
       clip: 'rect(0 0 0 0)',
@@ -186,7 +207,7 @@ const EnhancedTable = () => {
     const handleEditOpen = (comp : any) => {
       setCompActual(comp);
       console.log(comp);
-      localStorage.setItem("compActual", JSON.stringify(comp));
+      localStorage.setItem("compActual", removeImgField(JSON.stringify(comp)));
       setTimeout(() => {
         history.push("/subirComprobante");
       }, 1000);
@@ -230,12 +251,26 @@ const EnhancedTable = () => {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, comps.length - page * rowsPerPage);
 
+  const obtenerComprobante = (comp: any) => {
+    setCompActual(comp);
+    console.log(comp);
+    localStorage.setItem("compActual", removeImgField(JSON.stringify(comp)));
+    window.open('http://localhost:3000/pestañaComprobante', '_blank');
+  };
+  
+
   useEffect(() => {
+    
     const fetchCompsData = async () => {
       const data = await fetch(`http://localhost:8080/comprobantes/estudiante/${estudiante.id}`)
         .then((res) => res.json());
+
+      const compsWithoutImg = data.Comprobantes.map((comp: any) => {
+        const { img, ...rest } = comp; // Excluir el campo "img"
+        return rest;
+      });
       setComps(data.Comprobantes);
-      localStorage.setItem("comps", JSON.stringify(data.Comprobantes));
+      localStorage.setItem("comps", JSON.stringify(compsWithoutImg));
     }
   
     fetchCompsData();
@@ -309,6 +344,10 @@ const EnhancedTable = () => {
                           <CreateIcon className={classes.icon_edit}
                             onClick={() => handleEditOpen(comp)}
                           />
+                          <FilePresentIcon className= {classes.icon_file}
+                            onClick={() => obtenerComprobante(comp)}
+                          />
+
                       </TableCell>
                       
                     </TableRow>

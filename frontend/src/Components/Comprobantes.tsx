@@ -36,9 +36,7 @@ const Comprobantes: FC<SomeComponentProps> = ({ history }) => {
         <div className='containerTabla'><EnhancedTable/></div>
         <div className='contenedor-botones3'>
           <button type="submit" className='ingresar_button' onClick={subirComp}>Ir a Subir comprobante</button>
-          <button className="obtener-comprobante-button" onClick={obtenerComprobante}>
-        Ver Comprobantes
-      </button>
+          
         </div>
       </div>
     </>

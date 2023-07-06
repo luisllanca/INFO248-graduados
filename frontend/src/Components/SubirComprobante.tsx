@@ -7,6 +7,9 @@ import "./styles/home.css";
 import LogoImage from "./LogoImage";
 import LogoutButton from './LogoutButton';
 type SomeComponentProps = RouteComponentProps;
+function getFileExtension(filename: string) {
+  return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
+}
 const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
   const {
     register,
@@ -60,13 +63,15 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
   };
   const subirComp = (data: any) => {
     if (file){
+      let extension = getFileExtension(file.name)
       fileToBase64(file)
       .then((base64String) => {
       let params = {
-        id_estudiante: est.id,
+          id_estudiante: est.id,
           tipo: data.tipo,
           monto: data.monto,
-          img: base64String
+          img: base64String,
+          extension: extension
         }
     
         // console.log(params);
@@ -114,8 +119,8 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
       <div className='title'>{compActual ? "Editar comprobante" : "Subir comprobante"}</div>
       <div className='gridcomprobante'>
       <div className="file-upload">
-            <input type="file" accept="image/*" onChange={handleFileChange} />
-            {file && <p>Archivo seleccionado: {file.name}</p>}
+            <input type="file" accept="image/*,.pdf" onChange={handleFileChange} />
+            {file && <p>Archivo seleccionado: {file.name} </p>}
           </div>
         
         <form autoComplete="off">

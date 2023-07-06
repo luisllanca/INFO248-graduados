@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS `comprobantes` (
   `tipo` varchar(50) NOT NULL,
   `monto` int(11) NOT NULL,
   `img` LONGTEXT NOT NULL,
+  `extension` varchar(50) NOT NULL,
   `id_estudiante` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `id_estudiante` (`id_estudiante`),
@@ -52,11 +53,11 @@ CREATE TABLE IF NOT EXISTS `comprobantes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla egresados.comprobantes: ~4 rows (aproximadamente)
-REPLACE INTO `comprobantes` (`id`, `fecha`, `tipo`, `monto`, `img`, `id_estudiante`) VALUES
-	(1, '2023-05-15 00:00:00', 'Arancel', 200000, 'aa.png', 1),
-	(2, '2023-05-15 18:26:19', 'Matricula', 200000, 'aa.png', 1),
-	(3, '2023-05-15 00:00:00', 'Arancel', 200000, 'aa.png', 2),
-	(4, '2023-05-15 18:28:29', 'Arancel', 250000, 'aa.png', 3);
+REPLACE INTO `comprobantes` (`id`, `fecha`, `tipo`, `monto`, `img`,`extension`, `id_estudiante`) VALUES
+	(1, '2023-05-15 00:00:00', 'Arancel', 200000, 'aa.png', 'png',1),
+	(2, '2023-05-15 18:26:19', 'Matricula', 200000, 'aa.png', 'png',1),
+	(3, '2023-05-15 00:00:00', 'Arancel', 200000, 'aa.png', 'png',2),
+	(4, '2023-05-15 18:28:29', 'Arancel', 250000, 'aa.png', 'png',3);
 
 -- Volcando estructura para tabla egresados.estudiantes
 CREATE TABLE IF NOT EXISTS `estudiantes` (

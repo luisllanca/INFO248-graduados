@@ -82,7 +82,7 @@ export class ServiciosComprobantes {
 //Como se hace con la fecha? decidir esto
   async createComprobante(req: Request, res: Response){
     try {
-      const {id_estudiante, tipo, monto, img} = req.body;
+      const {id_estudiante, tipo, monto, img, extension} = req.body;
 
       const estudiante = await EstudianteModel.findByPk(id_estudiante);
       if(!estudiante){
@@ -101,6 +101,7 @@ export class ServiciosComprobantes {
         tipo: tipo,
         monto: monto,
         img: img,
+        extension: extension,
         id_estudiante: id_estudiante
       });
       await comprobante.save();
