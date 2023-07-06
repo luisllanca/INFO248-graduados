@@ -141,7 +141,6 @@ function Row(props: { row: Estudiante; usuarios: Usuario[] }) {
                             onClick={() => obtenerComprobante(comp)}
                         />
                       </TableCell>
-                      
                     </TableRow>
                   ))}
                 </TableBody>
