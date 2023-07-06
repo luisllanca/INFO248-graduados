@@ -13,19 +13,22 @@ import PopupFormEstudiante from "./Components/PopupFormEstudiante";
 import PopupFormAdmin from "./Components/PopupFormAdmin";
 import Autenticador from "./Components/Autenticador";
 import PestañaComprobante from "./Components/pestañaComprobante";
+import PrivateRouteAdmin from "./Auth/PrivateRouteAdmin";
+import PrivateRouteEstudiante from "./Auth/PrivateRouteEstudiante";
+import PrivateRouteHome from "./Auth/PrivateRouteHome";
 function App() {
   return (
       <BrowserRouter>
       <Switch>
-      <PrivateRoute exact path="/home" component={Home}/>
-      <PrivateRoute exact path="/comprobantes" component={Comprobantes}/>
-      <PrivateRoute exact path="/subirComprobante" component={SubirComprobante}/>
       <RestrictedRoute exact path="/login" component={Login} />
       <PrivateRoute exact path="/autenticacion" component={Autenticador} />
-      <PrivateRoute exact path="/admin" component={HomeAdmin}/>
+      <PrivateRouteHome exact path="/home" component={Home}/>
       <PrivateRoute exact path="/registroEstudiante" component={PopupFormEstudiante} />
       <PrivateRoute exact path="/registroAdmin" component={PopupFormAdmin} />
-      <PrivateRoute exact path="/pestañaComprobante" component={PestañaComprobante} />
+      <PrivateRouteEstudiante exact path="/pestañaComprobante" component={PestañaComprobante} />
+      <PrivateRouteEstudiante exact path="/comprobantes" component={Comprobantes}/>
+      <PrivateRouteEstudiante exact path="/subirComprobante" component={SubirComprobante}/>
+      <PrivateRouteAdmin exact path="/admin" component={HomeAdmin}/>
       <Route render={() => <Redirect to="/login" />} />
       </Switch>
     </BrowserRouter>

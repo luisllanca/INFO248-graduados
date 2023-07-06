@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FC } from 'react'
-import { RouteComponentProps } from "react-router-dom";
+import { Redirect, RouteComponentProps } from "react-router-dom";
 import "./styles/home.css";
 import perfilImage from "../images/perfil.png";
 import LogoImage from "./LogoImage";
@@ -24,17 +24,19 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
     history.push("/admin");
   }
 
-  const user =
-    localStorage.getItem("user") !== "undefined"
-      ? JSON.parse(localStorage.getItem("user")!)
-      : localStorage.clear();
+  const user = localStorage.getItem("user") !== "undefined"
+  ? JSON.parse(localStorage.getItem("user")!)
+  : (() => {
+      localStorage.clear();
+      <Redirect to="/autenticacion" />
+      
+    })();
 
   const [userChild, setUserChild] = useState<any>();
   const [comps, setComps] = useState<any>();
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(user);
       if(user.rol === "Estudiante") {
         const responseEst = await fetch(`http://localhost:8080/estudiantes/user/${user.id}`);
         const dataEst = await responseEst.json();
