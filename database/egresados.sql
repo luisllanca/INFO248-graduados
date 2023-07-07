@@ -73,9 +73,9 @@ CREATE TABLE IF NOT EXISTS `estudiantes` (
 
 -- Volcando datos para la tabla egresados.estudiantes: ~3 rows (aproximadamente)
 REPLACE INTO `estudiantes` (`id`, `id_usuario`, `rut`, `programa`, `carrera`) VALUES
-	(1, 1, '17283', 'magister', 'Ingenieria Civil Informatica'),
-	(2, 2, '201443', 'magister', 'Ingenieria Civil Informatica'),
-	(3, 3, '20142', 'magister', 'Ingenieria Civil Informatica');
+	(1, 1, '12345678-9', 'Magíster', 'Ingeniería Civil Informática'),
+	(2, 2, '20144312-3', 'Magíster', 'Ingeniería Civil Informática'),
+	(3, 3, '20142123-2', 'Magíster', 'Ingeniería Civil Informática');
 
 -- Volcando estructura para tabla egresados.personal_administrativo
 CREATE TABLE IF NOT EXISTS `personal_administrativo` (
@@ -89,8 +89,8 @@ CREATE TABLE IF NOT EXISTS `personal_administrativo` (
 
 -- Volcando datos para la tabla egresados.personal_administrativo: ~2 rows (aproximadamente)
 REPLACE INTO `personal_administrativo` (`id`, `cargo`, `id_usuario`) VALUES
-	(1, 'secretaria', 4),
-	(2, 'director de programa', 5);
+	(1, 'Secretaria', 4),
+	(2, 'Director de programa', 5);
 
 -- Volcando estructura para tabla egresados.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
@@ -112,11 +112,11 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 -- 	(5, 'mathew', 'vernier', 'gjja133', 'mathew@administrativo.cl');
 
 REPLACE INTO `usuarios` (`id`, `nombre`, `apellido`, `rol`,`email`) VALUES
-	(1, 'matias', 'martinez', 'estudiante','matias.martinez@correo.cl'),
-	(2, 'juan', 'manriquez', 'estudiante','juan@corre.cl'),
-	(3, 'sebastian', 'paredes','estudiante', 'sebastian@correo.cl'),
-	(4, 'yannete', 'muñoz', 'admin','yannete@secretaria.cl'),
-	(5, 'mathew', 'vernier', 'admin','mathew@administrativo.cl');
+	(1, 'Matias', 'Martinez', 'Estudiante','matias.martinez@correo.cl'),
+	(2, 'Juan', 'Manriquez', 'Estudiante','juan@corre.cl'),
+	(3, 'Sebastian', 'Paredes','Estudiante', 'sebastian@correo.cl'),
+	(4, 'Yannete', 'Muñoz', 'Administrador','yannete@secretaria.cl'),
+	(5, 'Mathew', 'Vernier', 'Administrador','mathew@administrativo.cl');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
