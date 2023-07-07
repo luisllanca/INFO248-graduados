@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import "./styles/home.css";
+
 import axios from 'axios';
 
 const PestañaComprobante = () => {
@@ -34,12 +36,12 @@ const PestañaComprobante = () => {
     }, []);
 
     return (
-      <div>
+      <div className='pantalla'>
         {fileUrl ? (
           fileUrl.startsWith("data:image") ? (
             <img src={fileUrl} alt="Imagen" />
           ) : (
-            <embed src={fileUrl} type="application/pdf" width="100%" height="800px" />
+            <embed src={fileUrl} type="application/pdf" width="100%" height="100%" />
           )
         ) : (
           <p>Cargando...</p>

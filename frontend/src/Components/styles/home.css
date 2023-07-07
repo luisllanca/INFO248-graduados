@@ -130,6 +130,10 @@
   text-align: center;
 }
 
+.pantalla {
+  height: 100vh;
+}
+
 .draganddrop {
   border: 4px dashed #e8833a;
   background-color: #f072182a;

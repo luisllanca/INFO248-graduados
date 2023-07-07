@@ -10,6 +10,7 @@ type SomeComponentProps = RouteComponentProps;
 function getFileExtension(filename: string) {
   return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
 }
+
 const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
   const {
     register,
@@ -34,6 +35,11 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
   localStorage.getItem("est") !== "undefined"
     ? JSON.parse(localStorage.getItem("est")!)
     : localStorage.clear();
+    
+  const home = () => {
+    localStorage.removeItem("compActual");
+    history.push("/home");
+  };
 
   const compActual =
   localStorage.getItem("compActual") !== "undefined"
@@ -41,21 +47,18 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
     : localStorage.clear();
     
   console.log(compActual);
-    
-  const home = () => {
-    localStorage.removeItem("compActual");
-    history.push("/home");
-  };
 
   useEffect(() => {
-    if(errors.tipo || errors.monto) {
+    if(errors.tipo || errors.monto || errors.file) {
       setShowErrors(true);
+      // console.log(true);
     } else {
       setShowErrors(false);
+      // console.log(false);
     }
-    console.log(showErrors);
 
   }, [errors]);
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       setFile(event.target.files[0]);
@@ -118,10 +121,23 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
       </div>
       <div className='title'>{compActual ? "Editar comprobante" : "Subir comprobante"}</div>
       <div className='gridcomprobante'>
-      <div className="file-upload">
-            <input type="file" accept="image/*,.pdf" onChange={handleFileChange} />
-            {file && <p>Archivo seleccionado: {file.name} </p>}
-          </div>
+        <div className="file-upload">
+          <input 
+            type="file" 
+            accept="image/*,.pdf" 
+            {...register("file", {
+              required: {
+                value: true,
+                message: "Ingrese un archivo"
+              }
+            })}
+            onChange={handleFileChange} 
+              />
+          {file && <p>Archivo seleccionado: {file.name} </p>}
+          <p className="text-danger" style={{ fontSize: 14 }}>
+            {!file && errors.file && (errors.file.message)}
+          </p>
+        </div>
         
         <form autoComplete="off">
           <div className='gridmonto'>
