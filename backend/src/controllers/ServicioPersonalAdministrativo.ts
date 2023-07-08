@@ -1,6 +1,7 @@
 
 import PersonalAdministrativoModel from "../models/PersonalAdministrativoModel";
 import { Request, Response } from "express";
+import UsuarioModel from "../models/UsuarioModel";
 
 export class ServiciosPersonalAdministrativo{
   constructor(){
@@ -70,6 +71,35 @@ export class ServiciosPersonalAdministrativo{
         });
     }
   };
+
+  async editarDatosPersonales(req: Request, res: Response){
+    // console.log(req.params);
+    try {
+      const idUser = req.params.id;
+      const {nombre, apellido, cargo} = req.body;
+
+      await PersonalAdministrativoModel.update(
+        {cargo},
+        { where: { id_usuario: idUser } }
+      );
+
+      await UsuarioModel.update(
+        {nombre, apellido},
+        { where: { id: idUser } }
+      );
+
+      res.status(200).json({
+        ok: true
+      });
+    } catch (error) {
+      console.error(error);
+        res.status(500).json({ 
+            ok: false, 
+            msg: "Error al actualizar usuario" 
+        });
+    }
+  };
+
 //Corregir esta, validar
 //   async createPersonalAdministrativo(req: Request, res: Response){
 //     try {

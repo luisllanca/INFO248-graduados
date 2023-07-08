@@ -17,6 +17,7 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   function fileToBase64(file: File): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       const reader = new FileReader();
@@ -29,17 +30,11 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
       reader.readAsDataURL(file);
     });
   }
-  const [showErrors, setShowErrors] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
+
   const est =
   localStorage.getItem("est") !== "undefined"
     ? JSON.parse(localStorage.getItem("est")!)
     : localStorage.clear();
-    
-  const home = () => {
-    localStorage.removeItem("compActual");
-    history.push("/home");
-  };
 
   const compActual =
   localStorage.getItem("compActual") !== "undefined"
@@ -47,6 +42,16 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
     : localStorage.clear();
     
   console.log(compActual);
+
+  const [showErrors, setShowErrors] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [monto, setMonto] = useState<number>(compActual ? compActual.monto : 0);
+  const [tipo, setTipo] = useState<string>(compActual ? compActual.tipo : "");
+    
+  const home = () => {
+    localStorage.removeItem("compActual");
+    history.push("/home");
+  };
 
   useEffect(() => {
     if(errors.tipo || errors.monto || errors.file) {
@@ -61,9 +66,14 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
+      console.log(event.target.files[0]);
       setFile(event.target.files[0]);
     }
   };
+  const handleVolver = () => {
+    localStorage.removeItem("compActual");
+    history.goBack();
+  }
   const subirComp = (data: any) => {
     if (file){
       let extension = getFileExtension(file.name)
@@ -133,7 +143,6 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
             })}
             onChange={handleFileChange} 
               />
-          {file && <p>Archivo seleccionado: {file.name} </p>}
           <p className="text-danger" style={{ fontSize: 14 }}>
             {!file && errors.file && (errors.file.message)}
           </p>
@@ -157,6 +166,8 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
                     message: "El monto debe ser positivo",
                   },
                 })}
+                value={monto}
+                onChange={(e) => setMonto(e.target.valueAsNumber)}
               />
                 <p className="text-danger" style={{ fontSize: 14 }}>
                   {showErrors && errors.monto && (errors.monto.message)}
@@ -168,6 +179,8 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
                 {...register("tipo", {
                   required: "Ingrese el tipo",
                 })}
+                value={tipo}
+                onChange={(e) => setTipo(e.target.value)}
                 >
                 <option value="">Seleccione...</option>
                 <option value="Arancel">Arancel</option>
@@ -180,6 +193,13 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
           </div>
         </form>
         <div className="contenedor-botones2">
+          <button
+            className="ingresar_button"
+            type="submit"
+            onClick={handleVolver}
+          >
+            Volver
+          </button>
           <button
             className="ingresar_button"
             type="submit"

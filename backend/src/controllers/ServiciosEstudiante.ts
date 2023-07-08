@@ -1,6 +1,7 @@
 
 import EstudianteModel from "../models/EstudianteModel";
 import { Request, Response } from "express";
+import UsuarioModel from "../models/UsuarioModel";
 
 export class ServiciosEstudiantes {
 
@@ -67,6 +68,34 @@ export class ServiciosEstudiantes {
         res.status(500).json({ 
             ok: false, 
             msg: "Error al obtener estudiante por id de usuario" 
+        });
+    }
+  };
+
+  async editarDatosPersonales(req: Request, res: Response){
+    // console.log(req.params);
+    try {
+      const idUser = req.params.id;
+      const {nombre, apellido, programa, carrera} = req.body;
+
+      await EstudianteModel.update(
+        {programa, carrera},
+        { where: { id_usuario: idUser } }
+      );
+
+      await UsuarioModel.update(
+        {nombre, apellido},
+        { where: { id: idUser } }
+      );
+
+      res.status(200).json({
+        ok: true
+      });
+    } catch (error) {
+      console.error(error);
+        res.status(500).json({ 
+            ok: false, 
+            msg: "Error al actualizar usuario" 
         });
     }
   };

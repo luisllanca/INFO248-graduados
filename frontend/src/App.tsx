@@ -18,6 +18,7 @@ import PrivateRouteEstudiante from "./Auth/PrivateRouteEstudiante";
 import PrivateRouteHome from "./Auth/PrivateRouteHome";
 import PrivateRouteRegistroAdmin from "./Auth/PrivateRouteRegistroAdmin";
 import PrivateRouteRegistroEstudiante from "./Auth/PrivateRouteRegistroEstudiante";
+
 function App() {
   return (
       <BrowserRouter>

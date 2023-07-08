@@ -207,7 +207,7 @@ const EnhancedTable = () => {
     const handleEditOpen = (comp : any) => {
       setCompActual(comp);
       console.log(comp);
-      localStorage.setItem("compActual", removeImgField(JSON.stringify(comp)));
+      localStorage.setItem("compActual", JSON.stringify(comp));
       setTimeout(() => {
         history.push("/subirComprobante");
       }, 1000);
