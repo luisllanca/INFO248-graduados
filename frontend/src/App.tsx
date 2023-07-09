@@ -12,19 +12,26 @@ import HomeAdmin from "./Components/HomeAdmin";
 import PopupFormEstudiante from "./Components/PopupFormEstudiante";
 import PopupFormAdmin from "./Components/PopupFormAdmin";
 import Autenticador from "./Components/Autenticador";
+import PestañaComprobante from "./Components/pestañaComprobante";
+import PrivateRouteAdmin from "./Auth/PrivateRouteAdmin";
+import PrivateRouteEstudiante from "./Auth/PrivateRouteEstudiante";
+import PrivateRouteHome from "./Auth/PrivateRouteHome";
+import PrivateRouteRegistroAdmin from "./Auth/PrivateRouteRegistroAdmin";
+import PrivateRouteRegistroEstudiante from "./Auth/PrivateRouteRegistroEstudiante";
 
 function App() {
   return (
       <BrowserRouter>
       <Switch>
-      <PrivateRoute exact path="/home" component={Home}/>
-      <PrivateRoute exact path="/comprobantes" component={Comprobantes}/>
-      <PrivateRoute exact path="/subirComprobante" component={SubirComprobante}/>
       <RestrictedRoute exact path="/login" component={Login} />
       <PrivateRoute exact path="/autenticacion" component={Autenticador} />
-      <PrivateRoute exact path="/admin" component={HomeAdmin}/>
-      <PrivateRoute exact path="/registroEstudiante" component={PopupFormEstudiante} />
-      <PrivateRoute exact path="/registroAdmin" component={PopupFormAdmin} />
+      <PrivateRouteHome exact path="/home" component={Home}/>
+      <PrivateRouteRegistroEstudiante exact path="/registroEstudiante" component={PopupFormEstudiante} />
+      <PrivateRouteHome exact path="/pestañaComprobante" component={PestañaComprobante} />
+      <PrivateRouteEstudiante exact path="/comprobantes" component={Comprobantes}/>
+      <PrivateRouteEstudiante exact path="/subirComprobante" component={SubirComprobante}/>
+      <PrivateRouteRegistroAdmin exact path="/registroAdmin" component={PopupFormAdmin} />
+      <PrivateRouteAdmin exact path="/admin" component={HomeAdmin}/>
       <Route render={() => <Redirect to="/login" />} />
       </Switch>
     </BrowserRouter>

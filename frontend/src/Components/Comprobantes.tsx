@@ -17,9 +17,9 @@ const Comprobantes: FC<SomeComponentProps> = ({ history }) => {
   }
 
   const home = () => {
-    history.push("/");
+    history.push("/home");
   }
-
+  
   return (
     <>
       <div className="grid">
@@ -32,7 +32,9 @@ const Comprobantes: FC<SomeComponentProps> = ({ history }) => {
       <div className='gridtablacomprobantes'>
         <div className='containerTabla'><EnhancedTable/></div>
         <div className='contenedor-botones3'>
+          <button type="submit" className='ingresar_button' onClick={home}>Volver</button>
           <button type="submit" className='ingresar_button' onClick={subirComp}>Ir a Subir comprobante</button>
+          
         </div>
       </div>
     </>

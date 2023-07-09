@@ -20,6 +20,7 @@ rutasComprobante.post("/",  [
     check("monto", "El monto es obligatorio").notEmpty().isNumeric(),
     check("img", "La imagen es obligatoria").notEmpty().isString(),
     check("id_estudiante", "El id del estudiante es obligatorio").notEmpty().isNumeric(),
+    check("extension", "Debe haberse entregado una extension").notEmpty().isString(),
     fieldsValidator,
   ],(req: Request, res: Response) => comprobantes.createComprobante(req, res));
   

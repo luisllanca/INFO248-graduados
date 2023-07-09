@@ -10,6 +10,8 @@ rutasEstudiante.get("/:id", (req: Request, res: Response) => estudiantes.getEstu
 
 rutasEstudiante.get("/user/:id", (req: Request, res: Response) => estudiantes.getEstudianteByUser(req, res));
 
+rutasEstudiante.put("/datos/:id", (req: Request, res: Response) => estudiantes.editarDatosPersonales(req, res));
+
 // rutasEstudiante.get("/estudiante/:id", (req: Request, res: Response) => estudiantes.getEstudianteEstudianteById(req, res));
 
 // rutasEstudiante.post("/", (req: Request, res: Response) => estudiantes.createEstudiante(req, res));

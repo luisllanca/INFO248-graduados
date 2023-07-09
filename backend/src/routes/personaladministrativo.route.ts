@@ -10,6 +10,8 @@ rutasPersonalAdministrativo.get("/:id", (req: Request, res: Response) => persona
 
 rutasPersonalAdministrativo.get("/user/:id", (req: Request, res: Response) => personalAdministrativo.getAdminByUser(req, res));
 
+rutasPersonalAdministrativo.put("/datos/:id", (req: Request, res: Response) => personalAdministrativo.editarDatosPersonales(req, res));
+
 // rutasPersonalAdministrativo.get("/estudiante/:id", (req: Request, res: Response) => personalAdministrativo.getPersonalAdministrativoEstudianteById(req, res));
 
 // rutasPersonalAdministrativo.post("/", (req: Request, res: Response) => personalAdministrativo.createPersonalAdministrativo(req, res));

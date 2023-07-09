@@ -5,7 +5,7 @@ import rutasUsuario from "../routes/usuario.route";
 import rutasEstudiante from "../routes/estudiante.route";
 // import rutasBecas from "../routes/beca.route";
 import rutasComprobantes from "../routes/comprobantes.route";
-
+const bodyParser = require('body-parser');
 class Server {
   public app: Application;
   private port: string;
@@ -19,7 +19,9 @@ class Server {
 
   middlewares() {
     this.app.use(cors());
-    this.app.use(express.json());
+    //this.app.use(express.json());
+    this.app.use(bodyParser.json({limit: '10mb', extended: true}))
+    this.app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
   }
 
   routes() {

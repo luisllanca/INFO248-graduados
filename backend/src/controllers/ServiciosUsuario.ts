@@ -185,11 +185,12 @@ export class ServiciosUsuario {
   };
   
   async loguearse(req: Request, res: Response) {
-    try {console.log("Logeandoooooo")
+    try {
+      // console.log("Logeandoooooo")
 
       // Verificar si el usuario ya existe en la base de datos
       const { email } = req.body
-      console.log(email)
+      // console.log(email)
       const usuarioExistente = await UsuarioModel.findOne({
         where: { email: email},
       });
@@ -197,6 +198,7 @@ export class ServiciosUsuario {
       if (!usuarioExistente) {
         console.log("El usuario no existe");
         res.status(203).json({
+          ok: false,
           msg: "No existe el usuario",
         });
         return null;
@@ -209,10 +211,14 @@ export class ServiciosUsuario {
           
         });
         return usuarioExistente;
-        console.log("Usuario logeado:", usuarioExistente);
+        // console.log("Usuario logeado:", usuarioExistente);
       }
     } catch (error) {
-      console.error("Error al logear usuario:", error);
+        // console.error(error);
+        res.status(500).json({ 
+          ok: false,
+          msg: "Error" 
+        });
     }
   }
 

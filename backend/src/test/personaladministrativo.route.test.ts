@@ -35,3 +35,21 @@ describe(`GET /admin/user/${1}`, () => {
 
   });
 });
+
+const admin = { // para editar datos personales del admin
+  nombre: "Modificado",
+  apellido: "Por ",
+  cargo: "Jest",
+}
+var id_admin = 1; // La id del admin debe existir
+
+describe(`PUT /admin/datos/${id_admin}`, () => {
+  it("Deberia retornar el usuario de un admin en forma de json", async () => {
+    const res = await request(app).put(`/admin/datos/${id_admin}`).send(admin);
+    expect(res.body.ok).toBe(true);
+    expect(res.statusCode).toBe(200);
+    // expect(res.body).toHaveProperty("Estudiantes");
+    // console.log(res.body);
+
+  });
+});
