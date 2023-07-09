@@ -13,6 +13,7 @@ ReactDOM.render(
       authorizationParams={{
         redirect_uri: "http://localhost:3333/autenticacion",
       }}
+      useRefreshTokens={true}
     >
       <App />
     </Auth0Provider>
