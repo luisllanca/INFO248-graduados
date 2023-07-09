@@ -25,6 +25,7 @@ rutasUsuario.post("/registrar/admin",  [
     check("apellido", "El apellido es obligatorio").notEmpty().isString(),
     check("rol", "El rol es obligatorio").notEmpty().isString(),
     check("email", "el email es obligatoria").notEmpty().isString(),
+    check("cargo", "El cargo es obligatorio").notEmpty().isString(),
     fieldsValidator,
   ],(req: Request, res: Response) => usuario.createUsuarioAdmin(req, res));
 

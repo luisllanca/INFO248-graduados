@@ -8,6 +8,7 @@ module.exports = {
       // "/*comprobantes.route.test.ts",
       // "/*estudiante.route.test.ts",
       // "/*personaladministrativo.route.test.ts",
+      // "/*usuario.route.test.ts",
       
 
     ]
