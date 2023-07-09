@@ -14,9 +14,12 @@ describe("GET /estudiantes", () => {
   });
 });
 
-describe(`GET /estudiantes/${1}`, () => {
+var id_estudiante = 1; // La id del estudiante debe existir
+
+
+describe(`GET /estudiantes/${id_estudiante}`, () => {
   it("Deberia retornar un estudiante en forma de json", async () => {
-    const res = await request(app).get(`/estudiantes/${1}`);
+    const res = await request(app).get(`/estudiantes/${id_estudiante}`);
     expect(res.body.ok).toBe(true);
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("Estudiantes");
@@ -25,9 +28,9 @@ describe(`GET /estudiantes/${1}`, () => {
   });
 });
 
-describe(`GET /estudiantes/user/${1}`, () => {
+describe(`GET /estudiantes/user/${id_estudiante}`, () => {
   it("Deberia retornar el usuario de un estudiante en forma de json", async () => {
-    const res = await request(app).get(`/estudiantes/user/${1}`);
+    const res = await request(app).get(`/estudiantes/user/${id_estudiante}`);
     expect(res.body.ok).toBe(true);
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("Estudiantes");
@@ -38,11 +41,10 @@ describe(`GET /estudiantes/user/${1}`, () => {
 
 const estudiante = { // para editar datos personales del estudiante
   nombre: "Modificado",
-  apellido: "Por ",
-  programa: "Jest",
+  apellido: "PorJest ",
+  programa: "Magister",
   carrera: "Informatica"
 }
-var id_estudiante = 1; // La id del estudiante debe existir
 
 describe(`PUT /estudiantes/datos/${id_estudiante}`, () => {
   it("Deberia retornar el usuario de un estudiante en forma de json", async () => {

@@ -14,9 +14,10 @@ describe("GET /user", () => {
   });
 });
 
-describe(`GET /user/${1}`, () => {
+const id_user = 1;
+describe(`GET /user/${id_user}`, () => {
   it("Deberia retornar un user en forma de json", async () => {
-    const res = await request(app).get(`/user/${1}`);
+    const res = await request(app).get(`/user/${id_user}`);
     expect(res.body.ok).toBe(true);
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("Usuarios");
@@ -39,7 +40,7 @@ const userAdmin ={
 describe(`POST /user/registrar/admin`, () => {
   it("Deberia registrar usuario y retornarlo en forma de json", async () => {
     const res = await request(app).post(`/user/registrar/admin`).send(userAdmin);
-    console.log(res);
+    // console.log(res);
     // console.log(res.body);
     expect(res.body.ok).toBe(true);
     expect(res.statusCode).toBe(201);

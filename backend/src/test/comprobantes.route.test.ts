@@ -14,9 +14,11 @@ describe("GET /comprobantes", () => {
   });
 });
 
-describe(`GET /comprobantes/${1}`, () => {
+var id_comprobante = 1; //id comprobante a actualizar y eliminar
+
+describe(`GET /comprobantes/${id_comprobante}`, () => {
   it("Deberia retornar un comprobante en forma de json", async () => {
-    const res = await request(app).get(`/comprobantes/${1}`);
+    const res = await request(app).get(`/comprobantes/${id_comprobante}`);
     expect(res.body.ok).toBe(true);
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("Comprobantes");
@@ -25,9 +27,10 @@ describe(`GET /comprobantes/${1}`, () => {
   });
 });
 
-describe(`GET /comprobantes/estudiante/${2}`, () => {
+var id_estudiante = 1;
+describe(`GET /comprobantes/estudiante/${id_estudiante}`, () => {
   it("Deberia retornar un comprobante en forma de json", async () => {
-    const res = await request(app).get(`/comprobantes/estudiante/${2}`);
+    const res = await request(app).get(`/comprobantes/estudiante/${id_estudiante}`);
     expect(res.body.ok).toBe(true);
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("Comprobantes");
@@ -55,7 +58,6 @@ describe(`POST /comprobantes/`, () => {
   });
 });
 
-var id_comprobante = 13; //id comprobante a actualizar y eliminar
 
 const up_comprobante = { // actuailizacion de comprobante
   tipo:"Matricula",

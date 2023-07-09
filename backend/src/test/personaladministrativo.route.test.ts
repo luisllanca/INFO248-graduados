@@ -13,10 +13,12 @@ describe("GET /admin", () => {
     // console.log(res.body);
   });
 });
+var id_admin = 1; // La id del admin debe existir
 
-describe(`GET /admin/${1}`, () => {
+
+describe(`GET /admin/${id_admin}`, () => {
   it("Deberia retornar un admin en forma de json", async () => {
-    const res = await request(app).get(`/admin/${1}`);
+    const res = await request(app).get(`/admin/${id_admin}`);
     expect(res.body.ok).toBe(true);
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("PersonalAdministrativo");
@@ -25,9 +27,9 @@ describe(`GET /admin/${1}`, () => {
   });
 });
 
-describe(`GET /admin/user/${1}`, () => {
+describe(`GET /admin/user/${id_admin}`, () => {
   it("Deberia retornar un admin en forma de json", async () => {
-    const res = await request(app).get(`/admin/user/${1}`);
+    const res = await request(app).get(`/admin/user/${id_admin}`);
     expect(res.body.ok).toBe(true);
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("PersonalAdministrativo");
@@ -38,10 +40,9 @@ describe(`GET /admin/user/${1}`, () => {
 
 const admin = { // para editar datos personales del admin
   nombre: "Modificado",
-  apellido: "Por ",
-  cargo: "Jest",
+  apellido: "PorJest ",
+  cargo: "Secretaria",
 }
-var id_admin = 1; // La id del admin debe existir
 
 describe(`PUT /admin/datos/${id_admin}`, () => {
   it("Deberia retornar el usuario de un admin en forma de json", async () => {
