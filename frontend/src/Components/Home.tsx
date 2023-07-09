@@ -358,7 +358,13 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
                 <div className='contenedor-botones'></div>
                 <div className='contenedor-botones'></div>
               </div> 
-
+              
+              </> :
+              <div className="botones">
+                <div className='estadofin'>Estados de pago</div>
+                <div className='contenedor-botones'><button type="submit" className="boton" onClick={admin}>Pagos de arancel</button></div>
+              </div>
+              }
               <div className="botones">
                 <div className='estadofin'>Cuenta</div>
                 <div className='contenedor-botones'>
@@ -371,13 +377,6 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
                 <div className='contenedor-botones'></div>
                 
               </div> 
-              
-              </> :
-              <div className="botones">
-                <div className='estadofin'>Estados de pago</div>
-                <div className='contenedor-botones'><button type="submit" className="boton" onClick={admin}>Pagos de arancel</button></div>
-              </div>
-              }
             </div>
         </>
         );
