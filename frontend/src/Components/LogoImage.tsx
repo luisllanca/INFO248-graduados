@@ -1,15 +1,15 @@
-import React from 'react';
-
+import React from "react";
+import logo from "../images/info_logo.png";
 const LogoImage = () => {
   return (
     <div className="position-absolute top-0 end-0 p-3">
       <img
-        src="http://informatica.uach.cl/wp-content/uploads/2020/02/cropped-escudo-transparente.png"
+        src={logo}
         alt="Descripción de la imagen"
-        style={{ 
+        style={{
           width: "130px",
           marginRight: "15px",
-          marginTop: "5px", 
+          marginTop: "5px",
         }}
       />
     </div>

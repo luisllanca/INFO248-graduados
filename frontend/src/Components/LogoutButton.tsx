@@ -6,7 +6,7 @@ const LogoutButton = () => {
 
   const salir = () => {
     localStorage.clear();
-    logout({ logoutParams: { returnTo: "http://localhost:3333/login" } });
+    logout({ logoutParams: { returnTo: "https://localhost:3333/login" } });
   };
 
   return (

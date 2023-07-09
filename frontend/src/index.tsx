@@ -11,7 +11,7 @@ ReactDOM.render(
       domain="dev-lpmhwti1uwtsgfok.us.auth0.com"
       clientId="HTstXUMKgWFq1CpvYeff0dLMexjk5cSG"
       authorizationParams={{
-        redirect_uri: "http://localhost:3333/autenticacion",
+        redirect_uri: "https://localhost:3333/autenticacion",
       }}
       // useRefreshTokens={true}
     >

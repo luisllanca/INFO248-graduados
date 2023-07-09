@@ -262,7 +262,7 @@ const EnhancedTable = () => {
     //setCompActual(comp);
     //console.log(comp);
     localStorage.setItem("compImagen", removeImgField(JSON.stringify(comp)));
-    window.open("http://localhost:3333/pestañaComprobante", "_blank");
+    window.open("https://localhost:3333/pestañaComprobante", "_blank");
   };
 
   useEffect(() => {
