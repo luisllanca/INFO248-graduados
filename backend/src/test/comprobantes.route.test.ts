@@ -14,7 +14,8 @@ describe("GET /comprobantes", () => {
   });
 });
 
-var id_comprobante = 1; //id comprobante a actualizar y eliminar
+var id_comprobante = 5; //a visualizar
+
 
 describe(`GET /comprobantes/${id_comprobante}`, () => {
   it("Deberia retornar un comprobante en forma de json", async () => {
@@ -64,6 +65,7 @@ const up_comprobante = { // actuailizacion de comprobante
   monto: 1,
 }
 
+id_comprobante = 5; //id comprobante a actualizar y eliminar
 
 describe(`PUT /comprobantes/${id_comprobante}`, () => {
   it("Deberia retornar un comprobante en forma de json", async () => {
