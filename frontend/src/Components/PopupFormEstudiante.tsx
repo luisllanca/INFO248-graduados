@@ -44,7 +44,10 @@ const PopupFormEstudiante = () => {
       };
 
       await axios
-        .post("http://localhost:8888/user/registrar/estudiante", requestBody)
+        .post(
+          "http://146.83.216.251:8888/user/registrar/estudiante",
+          requestBody
+        )
         .then((response) => {
           const user = response.data.Usuario; // Reemplaza 'campo' con el nombre del campo que deseas extraer
           const msg = response.data.msg;

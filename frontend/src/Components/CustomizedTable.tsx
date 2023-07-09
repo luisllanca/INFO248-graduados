@@ -77,7 +77,7 @@ const CustomizedTable = () => {
     if (aceptar) {
       axios
         .delete(
-          `http://localhost:8888/estudiante/eliminarComprobante/${compActual.id}`
+          `http://146.83.216.251:8888/estudiante/eliminarComprobante/${compActual.id}`
         )
         .then(function (response) {
           if (response.data.success === false) {
@@ -118,7 +118,7 @@ const CustomizedTable = () => {
   useEffect(() => {
     const fetchCompsData = async () => {
       const data = await fetch(
-        `http://localhost:8888/estudiante/${estudiante.id}/comprobantes`
+        `http://146.83.216.251:8888/estudiante/${estudiante.id}/comprobantes`
       ).then((res) => res.json());
       setComps(data.Comps);
       localStorage.setItem("comps", JSON.stringify(data.Comps));

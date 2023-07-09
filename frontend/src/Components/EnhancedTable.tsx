@@ -224,7 +224,7 @@ const EnhancedTable = () => {
 
     if (aceptar) {
       axios
-        .delete(`http://localhost:8888/comprobantes/${compActual.id}`)
+        .delete(`http://146.83.216.251:8888/comprobantes/${compActual.id}`)
         .then(function (response) {
           window.location.reload();
         })
@@ -262,13 +262,13 @@ const EnhancedTable = () => {
     //setCompActual(comp);
     //console.log(comp);
     localStorage.setItem("compImagen", removeImgField(JSON.stringify(comp)));
-    window.open("https://localhost:3333/pestañaComprobante", "_blank");
+    window.open("https://146.83.216.251:3333/pestañaComprobante", "_blank");
   };
 
   useEffect(() => {
     const fetchCompsData = async () => {
       const data = await fetch(
-        `http://localhost:8888/comprobantes/estudiante/${estudiante.id}`
+        `http://146.83.216.251:8888/comprobantes/estudiante/${estudiante.id}`
       ).then((res) => res.json());
 
       const compsWithoutImg = data.Comprobantes.map((comp: any) => {

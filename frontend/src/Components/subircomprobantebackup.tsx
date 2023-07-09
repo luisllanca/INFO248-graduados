@@ -44,7 +44,7 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
     // console.log(params);
 
     axios
-      .post("http://localhost:8888/estudiante/subirComprobante", params)
+      .post("http://146.83.216.251:8888/estudiante/subirComprobante", params)
       .then(function (response) {
         if (response.data.success === false) {
           toast.error(response.data.error, {

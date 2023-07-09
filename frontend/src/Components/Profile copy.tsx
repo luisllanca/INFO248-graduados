@@ -44,9 +44,12 @@ const Profile: React.FC = () => {
   };
   const login = async () => {
     try {
-      const response = await axios.post("http://localhost:8888/user/login", {
-        correo,
-      });
+      const response = await axios.post(
+        "http://146.83.216.251:8888/user/login",
+        {
+          correo,
+        }
+      );
       if (response.status === 201) {
         // Señal de éxito: código 201
         // El usuario existe y entonces se puede redirigir al home, dependiendo si es estudiante o admin

@@ -24,7 +24,7 @@ const SignUp: FC<SomeComponentProps> = ({ history }) => {
     };
 
     axios
-      .post("http://localhost:8888/user/registrar", payload, {
+      .post("http://146.83.216.251:8888/user/registrar", payload, {
         headers: {
           "Content-Type": "application/json",
         },

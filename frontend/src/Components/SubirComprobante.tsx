@@ -89,7 +89,7 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
         if (compActual === null) {
           // Opción de subir un comprobante
           axios
-            .post("http://localhost:8888/comprobantes", params)
+            .post("http://146.83.216.251:8888/comprobantes", params)
             .then(function (response) {
               setTimeout(() => {
                 localStorage.removeItem("compActual");
@@ -103,7 +103,10 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
         } else {
           // Opción de editar un comprobante
           axios
-            .put(`http://localhost:8888/comprobantes/${compActual.id}`, params)
+            .put(
+              `http://146.83.216.251:8888/comprobantes/${compActual.id}`,
+              params
+            )
             .then(function (response) {
               setTimeout(() => {
                 localStorage.removeItem("compActual");

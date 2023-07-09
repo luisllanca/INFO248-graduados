@@ -71,7 +71,7 @@ function Row(props: { row: Estudiante; usuarios: Usuario[] }) {
   useEffect(() => {
     const fetchCompsData = async () => {
       const data = await fetch(
-        `http://localhost:8888/comprobantes/estudiante/${row.id}`
+        `http://146.83.216.251:8888/comprobantes/estudiante/${row.id}`
       ).then((res) => res.json());
       setComps(data.Comprobantes);
       localStorage.setItem("comps", JSON.stringify(data.Comprobantes));
@@ -90,7 +90,7 @@ function Row(props: { row: Estudiante; usuarios: Usuario[] }) {
     //setCompActual(comp);
     //console.log(comp);
     localStorage.setItem("compImagen", removeImgField(JSON.stringify(comp)));
-    window.open("https://localhost:3333/pestañaComprobante", "_blank");
+    window.open("https://146.83.216.251:3333/pestañaComprobante", "_blank");
   };
 
   return (
@@ -164,9 +164,9 @@ export default function CollapsibleTable() {
   useEffect(() => {
     const fetchStudentsData = async () => {
       const estudiantesData = await fetch(
-        "http://localhost:8888/estudiantes"
+        "http://146.83.216.251:8888/estudiantes"
       ).then((res) => res.json());
-      const usuariosData = await fetch("http://localhost:8888/user").then(
+      const usuariosData = await fetch("http://146.83.216.251:8888/user").then(
         (res) => res.json()
       );
 

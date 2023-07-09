@@ -29,7 +29,7 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
   useEffect(() => {
     const fetchEstData = async () => {
       const data = await fetch(
-        `http://localhost:8888/estudiante/${user.id}`
+        `http://146.83.216.251:8888/estudiante/${user.id}`
       ).then((res) => res.json());
       setEst(data.Estudiante);
       localStorage.setItem("est", JSON.stringify(data.Estudiante));

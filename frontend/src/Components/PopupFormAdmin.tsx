@@ -37,7 +37,7 @@ const PopupFormAdmin = () => {
       };
 
       await axios
-        .post("http://localhost:8888/user/registrar/admin", requestBody)
+        .post("http://146.83.216.251:8888/user/registrar/admin", requestBody)
         .then((response) => {
           const user = response.data.Usuario; // Reemplaza 'campo' con el nombre del campo que deseas extraer
           // Utiliza el campo específico

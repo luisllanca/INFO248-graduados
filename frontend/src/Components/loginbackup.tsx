@@ -24,7 +24,7 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
       password: data.password,
     };
     axios
-      .post("http://localhost:8888/user/login", params)
+      .post("http://146.83.216.251:8888/user/login", params)
       .then(function (response) {
         //   IF EMAIL ALREADY EXISTS
         if (response.data.success === false) {

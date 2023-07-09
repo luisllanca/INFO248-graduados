@@ -63,7 +63,7 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
     const fetchData = async () => {
       if (user.rol === "Estudiante") {
         const responseEst = await fetch(
-          `http://localhost:8888/estudiantes/user/${user.id}`
+          `http://146.83.216.251:8888/estudiantes/user/${user.id}`
         );
         const dataEst = await responseEst.json();
         setUserChild(dataEst.Estudiantes);
@@ -73,7 +73,7 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
 
         if (dataEst.Estudiantes) {
           const responseComps = await fetch(
-            `http://localhost:8888/comprobantes/estudiante/${dataEst.Estudiantes.id}`
+            `http://146.83.216.251:8888/comprobantes/estudiante/${dataEst.Estudiantes.id}`
           );
           const dataComps = await responseComps.json();
           setComps(dataComps.Comprobantes);
@@ -81,7 +81,7 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
         }
       } else {
         const responseAdmin = await fetch(
-          `http://localhost:8888/admin/user/${user.id}`
+          `http://146.83.216.251:8888/admin/user/${user.id}`
         );
         const dataAdmin = await responseAdmin.json();
         setUserChild(dataAdmin.PersonalAdministrativo);
@@ -120,7 +120,7 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
       console.log(params);
 
       axios
-        .put(`http://localhost:8888/estudiantes/datos/${user.id}`, params)
+        .put(`http://146.83.216.251:8888/estudiantes/datos/${user.id}`, params)
         .then(function (response) {
           user.nombre = params.nombre;
           user.apellido = params.apellido;
@@ -142,7 +142,7 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
       console.log(params);
 
       axios
-        .put(`http://localhost:8888/admin/datos/${user.id}`, params)
+        .put(`http://146.83.216.251:8888/admin/datos/${user.id}`, params)
         .then(function (response) {
           user.nombre = params.nombre;
           user.apellido = params.apellido;

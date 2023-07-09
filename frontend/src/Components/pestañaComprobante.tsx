@@ -15,7 +15,7 @@ const PestañaComprobante = () => {
   const id = compActual.id;
   useEffect(() => {
     axios
-      .get(`http://localhost:8888/comprobantes/${id}`)
+      .get(`http://146.83.216.251:8888/comprobantes/${id}`)
       .then((response) => {
         // Aquí puedes manejar la respuesta de la consulta
         var fileUrl = "";

@@ -69,9 +69,12 @@ const Autenticador: React.FC = () => {
       //Obtenidos roles
       try {
         const email = mail;
-        const response = await axios.post("http://localhost:8888/user/login", {
-          email,
-        });
+        const response = await axios.post(
+          "http://146.83.216.251:8888/user/login",
+          {
+            email,
+          }
+        );
 
         if (response.status === 201) {
           // Señal de éxito: código 201
