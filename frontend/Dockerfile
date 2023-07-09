@@ -16,8 +16,8 @@ COPY . /app
 # Construye el proyecto
 RUN npm run build
 
-# Expone el puerto 3000
-EXPOSE 3000
+# Expone el puerto 3333
+EXPOSE 3333
 
 # Define el comando de inicio de la aplicación
 CMD ["npm", "start"]

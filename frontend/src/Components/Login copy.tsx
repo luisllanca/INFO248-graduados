@@ -21,8 +21,8 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
       password: data.password,
     };
     axios
-      .post("http://localhost:8080/user/login", params)
-      .then(function(response) {
+      .post("http://localhost:8888/user/login", params)
+      .then(function (response) {
         //   IF EMAIL ALREADY EXISTS
         if (response.data.success === false) {
           toast.error(response.data.error, {
@@ -55,7 +55,7 @@ const Login: FC<SomeComponentProps> = ({ history }): JSX.Element => {
         }
       })
 
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   };

@@ -1,14 +1,14 @@
-import React, { ChangeEvent, FC, useEffect, useState } from 'react'
+import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from 'axios';
+import axios from "axios";
 import "react-toastify/dist/ReactToastify.min.css";
 import "./styles/home.css";
 import LogoImage from "./LogoImage";
-import LogoutButton from './LogoutButton';
+import LogoutButton from "./LogoutButton";
 type SomeComponentProps = RouteComponentProps;
 function getFileExtension(filename: string) {
-  return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
+  return filename.slice(((filename.lastIndexOf(".") - 1) >>> 0) + 2);
 }
 
 const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
@@ -32,36 +32,35 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
   }
 
   const est =
-  localStorage.getItem("est") !== "undefined"
-    ? JSON.parse(localStorage.getItem("est")!)
-    : localStorage.clear();
+    localStorage.getItem("est") !== "undefined"
+      ? JSON.parse(localStorage.getItem("est")!)
+      : localStorage.clear();
 
   const compActual =
-  localStorage.getItem("compActual") !== "undefined"
-    ? JSON.parse(localStorage.getItem("compActual")!)
-    : localStorage.clear();
-    
+    localStorage.getItem("compActual") !== "undefined"
+      ? JSON.parse(localStorage.getItem("compActual")!)
+      : localStorage.clear();
+
   console.log(compActual);
 
   const [showErrors, setShowErrors] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [monto, setMonto] = useState<number>(compActual ? compActual.monto : 0);
   const [tipo, setTipo] = useState<string>(compActual ? compActual.tipo : "");
-    
+
   const home = () => {
     localStorage.removeItem("compActual");
     history.push("/home");
   };
 
   useEffect(() => {
-    if(errors.tipo || errors.monto || errors.file) {
+    if (errors.tipo || errors.monto || errors.file) {
       setShowErrors(true);
       // console.log(true);
     } else {
       setShowErrors(false);
       // console.log(false);
     }
-
   }, [errors]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,83 +72,89 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
   const handleVolver = () => {
     localStorage.removeItem("compActual");
     history.goBack();
-  }
+  };
   const subirComp = (data: any) => {
-    if (file){
-      let extension = getFileExtension(file.name)
-      fileToBase64(file)
-      .then((base64String) => {
-      let params = {
+    if (file) {
+      let extension = getFileExtension(file.name);
+      fileToBase64(file).then((base64String) => {
+        let params = {
           id_estudiante: est.id,
           tipo: data.tipo,
           monto: data.monto,
           img: base64String,
-          extension: extension
-        }
-    
+          extension: extension,
+        };
+
         // console.log(params);
-        if(compActual === null) {
+        if (compActual === null) {
           // Opción de subir un comprobante
           axios
-            .post("http://localhost:8080/comprobantes", params)
+            .post("http://localhost:8888/comprobantes", params)
             .then(function (response) {
               setTimeout(() => {
                 localStorage.removeItem("compActual");
                 history.push("/comprobantes");
               }, 1000);
             })
-      
+
             .catch(function (error) {
               console.log(error);
             });
         } else {
           // Opción de editar un comprobante
           axios
-            .put(`http://localhost:8080/comprobantes/${compActual.id}`, params)
+            .put(`http://localhost:8888/comprobantes/${compActual.id}`, params)
             .then(function (response) {
               setTimeout(() => {
                 localStorage.removeItem("compActual");
                 history.push("/comprobantes");
               }, 1000);
             })
-      
+
             .catch(function (error) {
               console.log(error);
             });
         }
-      })
+      });
+    }
   };
-}
 
   return (
     <>
       <div className="grid">
-        <button type="submit" className="sisgeg" onClick={home}>SISGEG</button>
+        <button type="submit" className="sisgeg" onClick={home}>
+          SISGEG
+        </button>
         <div className="eslogan">Sistema seguimiento escuela graduados</div>
-        <div className='logout-container'> <LogoutButton></LogoutButton>   </div>
+        <div className="logout-container">
+          {" "}
+          <LogoutButton></LogoutButton>{" "}
+        </div>
         <LogoImage />
       </div>
-      <div className='title'>{compActual ? "Editar comprobante" : "Subir comprobante"}</div>
-      <div className='gridcomprobante'>
+      <div className="title">
+        {compActual ? "Editar comprobante" : "Subir comprobante"}
+      </div>
+      <div className="gridcomprobante">
         <div className="file-upload">
-          <input 
-            type="file" 
-            accept="image/*,.pdf" 
+          <input
+            type="file"
+            accept="image/*,.pdf"
             {...register("file", {
               required: {
                 value: true,
-                message: "Ingrese un archivo"
-              }
+                message: "Ingrese un archivo",
+              },
             })}
-            onChange={handleFileChange} 
-              />
+            onChange={handleFileChange}
+          />
           <p className="text-danger" style={{ fontSize: 14 }}>
-            {!file && errors.file && (errors.file.message)}
+            {!file && errors.file && errors.file.message}
           </p>
         </div>
-        
+
         <form autoComplete="off">
-          <div className='gridmonto'>
+          <div className="gridmonto">
             <div className="select">
               <input
                 placeholder="Monto"
@@ -159,7 +164,7 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
                 {...register("monto", {
                   required: {
                     value: true,
-                    message: "Ingrese un monto"
+                    message: "Ingrese un monto",
                   },
                   min: {
                     value: 1,
@@ -169,26 +174,26 @@ const SubirComprobante: FC<SomeComponentProps> = ({ history }): JSX.Element => {
                 value={monto}
                 onChange={(e) => setMonto(e.target.valueAsNumber)}
               />
-                <p className="text-danger" style={{ fontSize: 14 }}>
-                  {showErrors && errors.monto && (errors.monto.message)}
-                </p>
+              <p className="text-danger" style={{ fontSize: 14 }}>
+                {showErrors && errors.monto && errors.monto.message}
+              </p>
             </div>
             <div className="select">
-              <select 
+              <select
                 id="select"
                 {...register("tipo", {
                   required: "Ingrese el tipo",
                 })}
                 value={tipo}
                 onChange={(e) => setTipo(e.target.value)}
-                >
+              >
                 <option value="">Seleccione...</option>
                 <option value="Arancel">Arancel</option>
                 <option value="Matricula">Matrícula</option>
               </select>
-                <p className="text-danger" style={{ fontSize: 14 }}>
-                  {showErrors && errors.tipo && (errors.tipo.message)}
-                </p>
+              <p className="text-danger" style={{ fontSize: 14 }}>
+                {showErrors && errors.tipo && errors.tipo.message}
+              </p>
             </div>
           </div>
         </form>

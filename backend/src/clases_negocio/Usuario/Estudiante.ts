@@ -1,7 +1,7 @@
 import type { Comprobante } from "../Comprobante";
 import type { Beca } from "../Beca";
 import { Usuario } from "./Usuario";
-import { ServicioCuenta } from "../../controllers/ServicioCuenta";
+//import { ServicioCuenta } from "../../controllers/ServicioCuenta";
 export class Estudiante extends Usuario {
   rut: string;
   carrera: string;

@@ -1,22 +1,22 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import * as React from "react";
+import { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 //css
-import { format } from 'date-fns';
-import { Theme, createStyles, makeStyles} from '@material-ui/core/styles';
-import FilePresentIcon from '@mui/icons-material/FilePresent';
+import { format } from "date-fns";
+import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+import FilePresentIcon from "@mui/icons-material/FilePresent";
 
 const removeImgField = (jsonString: string): string => {
   try {
@@ -24,7 +24,7 @@ const removeImgField = (jsonString: string): string => {
     delete jsonObject.img;
     return JSON.stringify(jsonObject);
   } catch (error) {
-    console.error('Error parsing or modifying JSON:', error);
+    console.error("Error parsing or modifying JSON:", error);
     return jsonString;
   }
 };
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme: Theme) =>
         fill: "blue",
       },
     },
-  }),
+  })
 );
 
 function Row(props: { row: Estudiante; usuarios: Usuario[] }) {
@@ -70,13 +70,14 @@ function Row(props: { row: Estudiante; usuarios: Usuario[] }) {
 
   useEffect(() => {
     const fetchCompsData = async () => {
-      const data = await fetch(`http://localhost:8080/comprobantes/estudiante/${row.id}`)
-        .then((res) => res.json());
+      const data = await fetch(
+        `http://localhost:8888/comprobantes/estudiante/${row.id}`
+      ).then((res) => res.json());
       setComps(data.Comprobantes);
       localStorage.setItem("comps", JSON.stringify(data.Comprobantes));
       console.log(data.Comprobantes);
-    }
-    
+    };
+
     fetchCompsData();
   }, [row.id]);
 
@@ -89,12 +90,12 @@ function Row(props: { row: Estudiante; usuarios: Usuario[] }) {
     //setCompActual(comp);
     //console.log(comp);
     localStorage.setItem("compImagen", removeImgField(JSON.stringify(comp)));
-    window.open('http://localhost:3000/pestañaComprobante', '_blank');
+    window.open("http://localhost:3333/pestañaComprobante", "_blank");
   };
 
   return (
     <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -107,7 +108,9 @@ function Row(props: { row: Estudiante; usuarios: Usuario[] }) {
         <TableCell component="th" scope="row">
           {row.id}
         </TableCell>
-        <TableCell align="right">{user ? `${user.nombre} ${user.apellido}` : '-'}</TableCell>
+        <TableCell align="right">
+          {user ? `${user.nombre} ${user.apellido}` : "-"}
+        </TableCell>
         <TableCell align="right">{row.rut}</TableCell>
         <TableCell align="right">{row.programa}</TableCell>
         <TableCell align="right">{row.carrera}</TableCell>
@@ -132,13 +135,14 @@ function Row(props: { row: Estudiante; usuarios: Usuario[] }) {
                   {comps.map((comp) => (
                     <TableRow key={comp.id}>
                       <TableCell component="th" scope="row">
-                        {format(new Date(comp.fecha), 'dd/MM/yyyy')}
+                        {format(new Date(comp.fecha), "dd/MM/yyyy")}
                       </TableCell>
                       <TableCell>{comp.tipo}</TableCell>
                       <TableCell align="right">{comp.monto}</TableCell>
-                      <TableCell align="right"> 
-                        <FilePresentIcon className= {classes.icon_file}
-                            onClick={() => obtenerComprobante(comp)}
+                      <TableCell align="right">
+                        <FilePresentIcon
+                          className={classes.icon_file}
+                          onClick={() => obtenerComprobante(comp)}
                         />
                       </TableCell>
                     </TableRow>
@@ -159,14 +163,21 @@ export default function CollapsibleTable() {
 
   useEffect(() => {
     const fetchStudentsData = async () => {
-      const estudiantesData = await fetch('http://localhost:8080/estudiantes').then((res) => res.json());
-      const usuariosData = await fetch('http://localhost:8080/user').then((res) => res.json());
+      const estudiantesData = await fetch(
+        "http://localhost:8888/estudiantes"
+      ).then((res) => res.json());
+      const usuariosData = await fetch("http://localhost:8888/user").then(
+        (res) => res.json()
+      );
 
       const estudiantes = estudiantesData.Estudiantes;
       const usuarios = usuariosData.Usuarios;
 
-      const estudiantesUsuarios = usuarios.filter((usuario: { id: any; }) => {
-        return estudiantes.some((estudiante: { id_usuario: any; }) => estudiante.id_usuario === usuario.id);
+      const estudiantesUsuarios = usuarios.filter((usuario: { id: any }) => {
+        return estudiantes.some(
+          (estudiante: { id_usuario: any }) =>
+            estudiante.id_usuario === usuario.id
+        );
       });
 
       setStudents(estudiantes);

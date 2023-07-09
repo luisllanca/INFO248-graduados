@@ -5,7 +5,7 @@ services:
       context: ./backend
       dockerfile: ./Dockerfile
     ports:
-      - 8080:8080
+      - 8888:8888
     networks:
       - red
   frontend:
@@ -13,7 +13,7 @@ services:
        context: ./frontend
        dockerfile: ./Dockerfile
      ports:
-       - 3000:3000
+       - 3333:3333
      networks:
        - red
   db_egresados:

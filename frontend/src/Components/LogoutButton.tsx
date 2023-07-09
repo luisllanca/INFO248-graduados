@@ -6,14 +6,13 @@ const LogoutButton = () => {
 
   const salir = () => {
     localStorage.clear();
-    logout({ logoutParams: { returnTo: 'http://localhost:3000/login'} })
-  }
+    logout({ logoutParams: { returnTo: "http://localhost:3333/login" } });
+  };
 
   return (
-    <button className='logout' onClick={salir}>
+    <button className="logout" onClick={salir}>
       Cerrar sesión
     </button>
-    
   );
 };
 

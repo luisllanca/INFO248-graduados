@@ -23,17 +23,18 @@ const SignUp: FC<SomeComponentProps> = ({ history }) => {
       email: data.email,
     };
 
-    axios.post("http://localhost:8080/user/registrar", payload, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(response => {
+    axios
+      .post("http://localhost:8888/user/registrar", payload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
         console.log(response.data);
         toast.success("Registro exitoso");
         reset();
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         toast.error("Ocurrió un error al registrar");
       });
@@ -147,15 +148,14 @@ const SignUp: FC<SomeComponentProps> = ({ history }) => {
                     )}
                   </div>
                   <div className="text-center mt-4 ">
-
-        <button
-          className="btn btn-outline-primary text-center shadow-none mb-3"
-          type="submit"
-          onClick={handleFormSubmit}
-          onSubmit={handleSubmit(submitData)}
-        >
-          Enviar
-        </button>
+                    <button
+                      className="btn btn-outline-primary text-center shadow-none mb-3"
+                      type="submit"
+                      onClick={handleFormSubmit}
+                      onSubmit={handleSubmit(submitData)}
+                    >
+                      Enviar
+                    </button>
                     <p className="card-text">
                       ¿Ya tienes una cuenta?{" "}
                       <Link style={{ textDecoration: "none" }} to={"/login"}>

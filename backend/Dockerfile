@@ -10,6 +10,6 @@ COPY . /app
 
 RUN npm run build
 
-EXPOSE 8080
+EXPOSE 8888
 
 CMD ["node", "dist/app.js"]

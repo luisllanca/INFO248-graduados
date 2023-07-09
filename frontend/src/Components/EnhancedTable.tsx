@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from 'react'
-import { Theme, createStyles, makeStyles} from '@material-ui/core/styles';
+import React, { useState, useEffect } from "react";
+import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { Button } from '@material-ui/core';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Paper from '@material-ui/core/Paper';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CreateIcon from '@material-ui/icons/Create';
-import FilePresentIcon from '@mui/icons-material/FilePresent';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { Button } from "@material-ui/core";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableRow from "@material-ui/core/TableRow";
+import TableSortLabel from "@material-ui/core/TableSortLabel";
+import Paper from "@material-ui/core/Paper";
+import DeleteIcon from "@material-ui/icons/Delete";
+import CreateIcon from "@material-ui/icons/Create";
+import FilePresentIcon from "@mui/icons-material/FilePresent";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const removeImgField = (jsonString: string): string => {
   try {
@@ -27,20 +27,20 @@ const removeImgField = (jsonString: string): string => {
     delete jsonObject.img;
     return JSON.stringify(jsonObject);
   } catch (error) {
-    console.error('Error parsing or modifying JSON:', error);
+    console.error("Error parsing or modifying JSON:", error);
     return jsonString;
   }
 };
 
-function getFecha(fecha : string) {
-    var info = fecha.split('-');
-    return `${info[2].substring(0,2)}/${info[1]}/${info[0]}`;
-  }
-  
+function getFecha(fecha: string) {
+  var info = fecha.split("-");
+  return `${info[2].substring(0, 2)}/${info[1]}/${info[0]}`;
+}
+
 function getTotal(comps: any[]) {
-    let total = 0;
-    comps.forEach(comp => total += comp.monto);
-    return `$${total}`;
+  let total = 0;
+  comps.forEach((comp) => (total += comp.monto));
+  return `$${total}`;
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -53,23 +53,24 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0;
 }
 
-type Order = 'asc' | 'desc';
+type Order = "asc" | "desc";
 
 interface Comprobante {
-    tipo: string;
-    fecha: string;
-    monto: number;
+  tipo: string;
+  fecha: string;
+  monto: number;
 }
-
-
 
 function getComparator<Key extends keyof any>(
   order: Order,
-  orderBy: Key,
-): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
-    return order === 'desc'
-        ? (a, b) => descendingComparator(a, b, orderBy)
-        : (a, b) => -descendingComparator(a, b, orderBy);
+  orderBy: Key
+): (
+  a: { [key in Key]: number | string },
+  b: { [key in Key]: number | string }
+) => number {
+  return order === "desc"
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
 function stableSort<T>(array: T[], comparator: (a: T, b: T) => number) {
@@ -88,50 +89,49 @@ interface HeadCell {
 }
 
 const headCells: HeadCell[] = [
-  { id: 'fecha', label: 'Fecha' },
-  { id: 'tipo', label: 'Tipo' },
-  { id: 'monto', label: 'Monto' },
+  { id: "fecha", label: "Fecha" },
+  { id: "tipo", label: "Tipo" },
+  { id: "monto", label: "Monto" },
 ];
 
 interface EnhancedTableProps {
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Comprobante) => void;
+  onRequestSort: (
+    event: React.MouseEvent<unknown>,
+    property: keyof Comprobante
+  ) => void;
   order: Order;
   orderBy: string;
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {
   const { order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property: keyof Comprobante) => (event: React.MouseEvent<unknown>) => {
-    onRequestSort(event, property);
-  };
+  const createSortHandler =
+    (property: keyof Comprobante) => (event: React.MouseEvent<unknown>) => {
+      onRequestSort(event, property);
+    };
 
   return (
     <TableHead>
       <TableRow>
-        <TableCell
-            key={"Comprobante"}
-            align={'center'}
-          >
-            Comprobantes
+        <TableCell key={"Comprobante"} align={"center"}>
+          Comprobantes
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={'right'}
+            align={"right"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
+              direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
             >
               {headCell.label}
             </TableSortLabel>
           </TableCell>
         ))}
-        <TableCell
-        key="options"
-        ></TableCell>
+        <TableCell key="options"></TableCell>
       </TableRow>
     </TableHead>
   );
@@ -140,18 +140,18 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: '100%',
+      width: "100%",
     },
     paper: {
-      width: '100%',
+      width: "100%",
       marginBottom: theme.spacing(2),
     },
     table: {
       minWidth: 750,
     },
     tableLeft: {
-        width: 250,
-      },
+      width: 250,
+    },
     icon_delete: {
       marginRight: 15,
       cursor: "pointer",
@@ -175,68 +175,72 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     visuallyHidden: {
       border: 0,
-      clip: 'rect(0 0 0 0)',
+      clip: "rect(0 0 0 0)",
       height: 1,
       margin: -1,
-      overflow: 'hidden',
+      overflow: "hidden",
       padding: 0,
-      position: 'absolute',
+      position: "absolute",
       top: 20,
       width: 1,
     },
-  }),
+  })
 );
 
 const EnhancedTable = () => {
-    const classes = useStyles();
-    const history = useHistory();
+  const classes = useStyles();
+  const history = useHistory();
 
-    const estudiante = localStorage.getItem("est") !== "undefined"
+  const estudiante =
+    localStorage.getItem("est") !== "undefined"
       ? JSON.parse(localStorage.getItem("est")!)
       : localStorage.clear();
 
-    const [state, setState] = useState(false);
-    const [compActual, setCompActual] = useState<any>();
-    const [comps, setComps] = useState<Array<any>>([]);
+  const [state, setState] = useState(false);
+  const [compActual, setCompActual] = useState<any>();
+  const [comps, setComps] = useState<Array<any>>([]);
 
-    const [order, setOrder] = useState<Order>('asc');
-    const [orderBy, setOrderBy] = useState<keyof Comprobante>('fecha');
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [order, setOrder] = useState<Order>("asc");
+  const [orderBy, setOrderBy] = useState<keyof Comprobante>("fecha");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-    const handleEditOpen = (comp : any) => {
-      setCompActual(comp);
-      console.log(comp);
-      localStorage.setItem("compActual", JSON.stringify(comp));
-      setTimeout(() => {
-        history.push("/subirComprobante");
-      }, 1000);
-    };
+  const handleEditOpen = (comp: any) => {
+    setCompActual(comp);
+    console.log(comp);
+    localStorage.setItem("compActual", JSON.stringify(comp));
+    setTimeout(() => {
+      history.push("/subirComprobante");
+    }, 1000);
+  };
 
-    const handleDeleteOpen = (comp: any) => {
-        setState(true);
-        setCompActual(comp);
-      };
-  
-    const handleDeleteClose = (aceptar: boolean) => {
-      setState(false);
+  const handleDeleteOpen = (comp: any) => {
+    setState(true);
+    setCompActual(comp);
+  };
 
-      if(aceptar) {
-        axios
-      .delete(`http://localhost:8080/comprobantes/${compActual.id}`)
-      .then(function(response) {
+  const handleDeleteClose = (aceptar: boolean) => {
+    setState(false);
+
+    if (aceptar) {
+      axios
+        .delete(`http://localhost:8888/comprobantes/${compActual.id}`)
+        .then(function (response) {
           window.location.reload();
-      })
+        })
 
-      .catch(function(error) {
-        console.log(error);
-      });
-      }
-    };
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  };
 
-  const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Comprobante) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
+  const handleRequestSort = (
+    event: React.MouseEvent<unknown>,
+    property: keyof Comprobante
+  ) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
@@ -244,26 +248,28 @@ const EnhancedTable = () => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, comps.length - page * rowsPerPage);
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, comps.length - page * rowsPerPage);
 
   const obtenerComprobante = (comp: any) => {
     //setCompActual(comp);
     //console.log(comp);
     localStorage.setItem("compImagen", removeImgField(JSON.stringify(comp)));
-    window.open('http://localhost:3000/pestañaComprobante', '_blank');
+    window.open("http://localhost:3333/pestañaComprobante", "_blank");
   };
-  
 
   useEffect(() => {
-    
     const fetchCompsData = async () => {
-      const data = await fetch(`http://localhost:8080/comprobantes/estudiante/${estudiante.id}`)
-        .then((res) => res.json());
+      const data = await fetch(
+        `http://localhost:8888/comprobantes/estudiante/${estudiante.id}`
+      ).then((res) => res.json());
 
       const compsWithoutImg = data.Comprobantes.map((comp: any) => {
         const { img, ...rest } = comp; // Excluir el campo "img"
@@ -271,15 +277,13 @@ const EnhancedTable = () => {
       });
       setComps(data.Comprobantes);
       localStorage.setItem("comps", JSON.stringify(compsWithoutImg));
-    }
-  
+    };
+
     fetchCompsData();
-  
   }, []);
 
   return (
     <div className={classes.root}>
-
       <Dialog
         open={state}
         onClose={() => handleDeleteClose(false)}
@@ -289,14 +293,22 @@ const EnhancedTable = () => {
           {"Borrar comprobante"}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText>¿Está seguro que desea borrar este comprobante?</DialogContentText>
+          <DialogContentText>
+            ¿Está seguro que desea borrar este comprobante?
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleDeleteClose(true)} className="btn-success">
-              Aceptar
+          <Button
+            onClick={() => handleDeleteClose(true)}
+            className="btn-success"
+          >
+            Aceptar
           </Button>
-          <Button onClick={() => handleDeleteClose(false)} className="btn-danger">
-              Cancelar
+          <Button
+            onClick={() => handleDeleteClose(false)}
+            className="btn-danger"
+          >
+            Cancelar
           </Button>
         </DialogActions>
       </Dialog>
@@ -306,7 +318,7 @@ const EnhancedTable = () => {
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size={'medium'}
+            size={"medium"}
             aria-label="enhanced table"
           >
             <EnhancedTableHead
@@ -321,43 +333,51 @@ const EnhancedTable = () => {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow
-                      hover
-                      key={index}
-                    >
-                      <TableCell align="center">Comprobante {index+1}</TableCell>
-                      <TableCell align="right">{typeof comp.fecha === "string" ? getFecha(comp.fecha) : comp.fecha}</TableCell>
+                    <TableRow hover key={index}>
+                      <TableCell align="center">
+                        Comprobante {index + 1}
+                      </TableCell>
+                      <TableCell align="right">
+                        {typeof comp.fecha === "string"
+                          ? getFecha(comp.fecha)
+                          : comp.fecha}
+                      </TableCell>
                       <TableCell align="right">{comp.tipo}</TableCell>
                       <TableCell align="right">${comp.monto}</TableCell>
-                      <TableCell 
-                        align="center" 
-                        component="th" 
-                        id={labelId} 
+                      <TableCell
+                        align="center"
+                        component="th"
+                        id={labelId}
                         scope="row"
                         className={classes.tableLeft}
-                        >
-                          <DeleteIcon className={classes.icon_delete}
-                            onClick={() => handleDeleteOpen(comp)}
+                      >
+                        <DeleteIcon
+                          className={classes.icon_delete}
+                          onClick={() => handleDeleteOpen(comp)}
                           //   checked={isItemSelected}
                           //   inputProps={{ 'aria-labelledby': labelId }}
-                          />
-                          <CreateIcon className={classes.icon_edit}
-                            onClick={() => handleEditOpen(comp)}
-                          />
-                          <FilePresentIcon className= {classes.icon_file}
-                            onClick={() => obtenerComprobante(comp)}
-                          />
-
+                        />
+                        <CreateIcon
+                          className={classes.icon_edit}
+                          onClick={() => handleEditOpen(comp)}
+                        />
+                        <FilePresentIcon
+                          className={classes.icon_file}
+                          onClick={() => obtenerComprobante(comp)}
+                        />
                       </TableCell>
-                      
                     </TableRow>
                   );
                 })}
-                <TableRow>
-                  <TableCell colSpan={2} />
-                  <TableCell align="right"><b>Total pagado</b></TableCell>
-                  <TableCell align="right"><b>{getTotal(comps)}</b></TableCell>
-                </TableRow>
+              <TableRow>
+                <TableCell colSpan={2} />
+                <TableCell align="right">
+                  <b>Total pagado</b>
+                </TableCell>
+                <TableCell align="right">
+                  <b>{getTotal(comps)}</b>
+                </TableCell>
+              </TableRow>
               {emptyRows > 0 && (
                 <TableRow style={{ height: 53 * emptyRows }}>
                   <TableCell colSpan={6} />
@@ -378,6 +398,6 @@ const EnhancedTable = () => {
       </Paper>
     </div>
   );
-}
+};
 
 export default EnhancedTable;

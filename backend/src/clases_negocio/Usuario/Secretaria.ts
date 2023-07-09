@@ -1,5 +1,5 @@
 import { PersonalAdministrativo } from "./PersonalAdministrativo";
-import { ServiciosEdicion } from "../../controllers/ServiciosEdicion";
+//import { ServiciosEdicion } from "../../controllers/ServiciosEdicion";
 import { ServiciosVisualizacion } from "../ServicioVisualizacion/ServiciosVisualizacion";
 import type { Estudiante } from "./Estudiante";
 import type { Beca } from "../Beca";
@@ -7,7 +7,7 @@ import { FiltradoEstudiante } from "../ServicioVisualizacion/FiltradoEstudiante"
 
 export class Secretaria
   extends PersonalAdministrativo
-  implements ServiciosEdicion, ServiciosVisualizacion, FiltradoEstudiante
+  implements ServiciosVisualizacion, FiltradoEstudiante
 {
   constructor(
     id: number,

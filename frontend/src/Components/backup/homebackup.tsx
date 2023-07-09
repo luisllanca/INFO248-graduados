@@ -1,6 +1,6 @@
-import React, { useState, useEffect, FC } from 'react'
+import React, { useState, useEffect, FC } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import CustomizedTable from "../CustomizedTable"
+import CustomizedTable from "../CustomizedTable";
 import "./home.css";
 import perfilImage from "../images/perfil.png";
 
@@ -11,7 +11,6 @@ const user =
 
 type SomeComponentProps = RouteComponentProps;
 const Home: FC<SomeComponentProps> = ({ history }) => {
-
   const logout = () => {
     localStorage.clear();
     history.push("/login");
@@ -19,25 +18,25 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
 
   const histComp = () => {
     history.push("/Comprobantes");
-  }
+  };
 
   const subirComp = () => {
     history.push("/subirComprobante");
-  }
+  };
 
   const [est, setEst] = useState<any>();
 
   useEffect(() => {
     const fetchEstData = async () => {
-      const data = await fetch(`http://localhost:8080/estudiante/${user.id}`)
-        .then((res) => res.json());
+      const data = await fetch(
+        `http://localhost:8888/estudiante/${user.id}`
+      ).then((res) => res.json());
       setEst(data.Estudiante);
       localStorage.setItem("est", JSON.stringify(data.Estudiante));
-    }
+    };
 
     fetchEstData();
-
-  }, [])
+  }, []);
 
   const comps =
     localStorage.getItem("comps") !== "undefined"
@@ -70,12 +69,23 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
       <div className="contenedor">
         <div className="perfil">
           <div className="img_perfil">
-            <img src={perfilImage} alt="Foto de perfil" width="162" height="162" />
+            <img
+              src={perfilImage}
+              alt="Foto de perfil"
+              width="162"
+              height="162"
+            />
           </div>
 
           <div className="datos_perfil">
-            <p>{user.nombre} {user.apellido}</p>
-            {est && <p>{est.programa} en {est.carrera}</p>}
+            <p>
+              {user.nombre} {user.apellido}
+            </p>
+            {est && (
+              <p>
+                {est.programa} en {est.carrera}
+              </p>
+            )}
           </div>
         </div>
 
@@ -87,7 +97,6 @@ const Home: FC<SomeComponentProps> = ({ history }) => {
             Subir comprobante
           </button>
         </div>
-
       </div>
     </>
   );
