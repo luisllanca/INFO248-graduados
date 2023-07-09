@@ -81,7 +81,7 @@
 
 .gridresumen {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   margin-left: 2rem;
 }
 
@@ -101,6 +101,7 @@
   display: grid;
   grid-template-rows: auto 30px 30px;
   gap: 1em;
+  
 }
 
 .boton{
@@ -255,6 +256,7 @@
 .resumen3 {
   display: grid;
   grid-template-columns: 450px auto;
+  
 }
 
 .datocuadro {
@@ -281,6 +283,22 @@
   height: 30px;
   font-size: 18px;
   margin-right: 150px;
+}
+
+.cambiarcontra {
+  text-align: center;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e8833a;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  width: 20%;
+  height: 30px;
+  font-size: 18px;
+  margin-right: 30px;
 }
 
 .logout-container {
