@@ -73,8 +73,12 @@ function Row(props: { row: Estudiante; usuarios: Usuario[] }) {
       const data = await fetch(
         `http://146.83.216.251:8888/comprobantes/estudiante/${row.id}`
       ).then((res) => res.json());
+      const compsWithoutImg = data.Comprobantes.map((comp: any) => {
+        const { img, ...rest } = comp; // Excluir el campo "img"
+        return rest;
+      });
       setComps(data.Comprobantes);
-      localStorage.setItem("comps", JSON.stringify(data.Comprobantes));
+      localStorage.setItem("comps", JSON.stringify(compsWithoutImg));
       console.log(data.Comprobantes);
     };
 
